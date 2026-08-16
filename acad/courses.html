@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courses - SOLVATECH Academy</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+    <link rel="stylesheet" href="../css/services.css" />
+    <link rel="stylesheet" href="acad.css" />
+
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <script src="../js/config.js"></script>
+    <script src="../js/head-config.js"></script>
+    <script src="../js/global.js"></script>
+    <script src="../js/services.js"></script>
+    <script src="acad.js"></script>
+</head>
+<body>
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-ring"><div class="ring"></div><div class="ring"></div><div class="ring"></div></div>
+        <h3 id="loadingTitle">SOLVATECH</h3>
+        <p id="loadingMessage">Loading your courses...</p>
+        <div class="loader-progress"><div class="bar" id="loaderBar"></div></div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-notification" id="customToast"><i class="fa-solid fa-circle-check"></i><div class="toast-msg" id="toastMsg">Ready.</div></div>
+
+    <div class="page-content">
+        <header class="navbar">
+            <div class="container nav-container">
+                <a href="acad.html" class="logo" onclick="location.href='acad.html'; return false;">
+                    <img src="academy-hero.png" alt="SOLVATECH" class="logo-img" style="border-radius:50%; width:40px; height:40px; object-fit:cover;" />
+                    <span class="logo-icon">◆</span> SOLVATECH
+                </a>
+                <div id="accountBadge">S</div>
+                <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="acad.html">HOME</a></li>
+                        <li><a href="courses.html" class="active">COURSES</a></li>
+                        <li><a href="settings.html">SETTINGS</a></li>
+                        <li><a href="#" id="logoutLink">LOGOUT</a></li>
+                    </ul>
+                    <div class="drawer-footer"><p>© 2026 SOLVATECH</p></div>
+                </nav>
+            </div>
+        </header>
+
+        <section class="services-page-grid">
+            <div class="container" style="max-width: 700px; margin: 0 auto;">
+
+                <!-- ============================================================
+                PAGE HEADER (AVAILABLE COURSES)
+                ============================================================ -->
+                <div style="text-align: center; margin-bottom: 2.5rem;">
+                    <span class="section-tag">MY COURSES</span>
+                    <h2 class="section-title gradient" style="font-size: 2.5rem;">AVAILABLE COURSES</h2>
+                    <p class="section-subtitle" style="margin-top:0.3rem;">Levels are only visible when unlocked.</p>
+                </div>
+
+                <!-- ============================================================
+                DYNAMIC COURSE CONTAINER
+                ============================================================ -->
+                <div id="coursesContainer">
+                    
+                    <!-- LEVELS LIST (Hidden by default via inline style) -->
+                    <div id="levelList" style="display: none;">
+                        
+                        <!-- ================= LEVEL 1 ================= -->
+                        <div class="level-card" id="level-1">
+                            <div class="level-image" onclick="toggleLevel('level-1')">
+                                <img src="level-1.png" alt="Level 1" onerror="this.style.display='none'" />
+                            </div>
+                            <h4>Level 01: BASE_CORE</h4>
+                            <p class="desc">Learn HTML, CSS, and how the web works.</p>
+                            <div class="status-row">
+                                <div class="badge-row">
+                                    <span class="status" id="status-1">🔒 Locked</span>
+                                    <button class="action-btn" id="action-1">🔒 Contact admin</button>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-header">
+                                        <span>Payment Status</span>
+                                        <span class="progress-text" id="progress-text-1">Not Started</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-bar" id="progress-bar-1" style="width:0%; background:#888;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level-details">
+                                <div class="content-box">
+                                    <div class="section">
+                                        <p>📚 What You'll Learn</p>
+                                        <ul>
+                                            <li>HTML Tags &amp; Semantic Structure</li>
+                                            <li>CSS Styling &amp; Flexbox Basics</li>
+                                            <li>Understanding How the Web Works</li>
+                                        </ul>
+                                    </div>
+                                    <div class="section">
+                                        <p>⚙️ How You'll Learn (AI-Powered)</p>
+                                        <ul>
+                                            <li>Learn via AI-generated modules on your phone</li>
+                                            <li>AI-guided code exercises</li>
+                                            <li>Build your first personal portfolio page</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= LEVEL 2 ================= -->
+                        <div class="level-card" id="level-2">
+                            <div class="level-image" onclick="toggleLevel('level-2')">
+                                <img src="level-2.png" alt="Level 2" onerror="this.style.display='none'" />
+                            </div>
+                            <h4>Level 02: WEB_FOUNDATION</h4>
+                            <p class="desc">Master responsive design, CSS Grid, and JavaScript basics.</p>
+                            <div class="status-row">
+                                <div class="badge-row">
+                                    <span class="status" id="status-2">🔒 Locked</span>
+                                    <button class="action-btn" id="action-2">🔒 Contact admin</button>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-header">
+                                        <span>Payment Status</span>
+                                        <span class="progress-text" id="progress-text-2">Not Started</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-bar" id="progress-bar-2" style="width:0%; background:#888;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level-details">
+                                <div class="content-box">
+                                    <div class="section">
+                                        <p>📚 What You'll Learn</p>
+                                        <ul>
+                                            <li>Responsive Web Design (Mobile First)</li>
+                                            <li>CSS Grid &amp; Advanced Layouts</li>
+                                            <li>JavaScript Fundamentals</li>
+                                        </ul>
+                                    </div>
+                                    <div class="section">
+                                        <p>⚙️ How You'll Learn (AI-Powered)</p>
+                                        <ul>
+                                            <li>AI-driven project simulations on your phone</li>
+                                            <li>AI peer code reviews</li>
+                                            <li>Build a fully responsive landing page</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= LEVEL 3 ================= -->
+                        <div class="level-card" id="level-3">
+                            <div class="level-image" onclick="toggleLevel('level-3')">
+                                <img src="level-3.png" alt="Level 3" onerror="this.style.display='none'" />
+                            </div>
+                            <h4>Level 03: WEB_LOGIC</h4>
+                            <p class="desc">Dive into DOM manipulation, advanced JS, and API fetching.</p>
+                            <div class="status-row">
+                                <div class="badge-row">
+                                    <span class="status" id="status-3">🔒 Locked</span>
+                                    <button class="action-btn" id="action-3">🔒 Contact admin</button>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-header">
+                                        <span>Payment Status</span>
+                                        <span class="progress-text" id="progress-text-3">Not Started</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-bar" id="progress-bar-3" style="width:0%; background:#888;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level-details">
+                                <div class="content-box">
+                                    <div class="section">
+                                        <p>📚 What You'll Learn</p>
+                                        <ul>
+                                            <li>DOM Manipulation &amp; Event Listeners</li>
+                                            <li>Advanced JavaScript Logic</li>
+                                            <li>Fetching Data from APIs</li>
+                                        </ul>
+                                    </div>
+                                    <div class="section">
+                                        <p>⚙️ How You'll Learn (AI-Powered)</p>
+                                        <ul>
+                                            <li>Interactive AI coding challenges</li>
+                                            <li>AI-assisted debugging exercises</li>
+                                            <li>Build an interactive To-Do list app</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= LEVEL 4 ================= -->
+                        <div class="level-card" id="level-4">
+                            <div class="level-image" onclick="toggleLevel('level-4')">
+                                <img src="level-4.png" alt="Level 4" onerror="this.style.display='none'" />
+                            </div>
+                            <h4>Level 04: WEB_ENGINEERING</h4>
+                            <p class="desc">Build scalable components with React and manage state effectively.</p>
+                            <div class="status-row">
+                                <div class="badge-row">
+                                    <span class="status" id="status-4">🔒 Locked</span>
+                                    <button class="action-btn" id="action-4">🔒 Contact admin</button>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-header">
+                                        <span>Payment Status</span>
+                                        <span class="progress-text" id="progress-text-4">Not Started</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-bar" id="progress-bar-4" style="width:0%; background:#888;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level-details">
+                                <div class="content-box">
+                                    <div class="section">
+                                        <p>📚 What You'll Learn</p>
+                                        <ul>
+                                            <li>React.js Basics &amp; Component Architecture</li>
+                                            <li>State Management (useState, useEffect)</li>
+                                            <li>Building Reusable UI Components</li>
+                                        </ul>
+                                    </div>
+                                    <div class="section">
+                                        <p>⚙️ How You'll Learn (AI-Powered)</p>
+                                        <ul>
+                                            <li>AI-guided scalable component building</li>
+                                            <li>Live mentorship via AI</li>
+                                            <li>Build a functional React Dashboard</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= LEVEL 5 ================= -->
+                        <div class="level-card" id="level-5">
+                            <div class="level-image" onclick="toggleLevel('level-5')">
+                                <img src="level-5.png" alt="Level 5" onerror="this.style.display='none'" />
+                            </div>
+                            <h4>Level 05: AI_DEVELOPER</h4>
+                            <p class="desc">Integrate AI APIs and build smart features into your web apps.</p>
+                            <div class="status-row">
+                                <div class="badge-row">
+                                    <span class="status" id="status-5">🔒 Locked</span>
+                                    <button class="action-btn" id="action-5">🔒 Contact admin</button>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-header">
+                                        <span>Payment Status</span>
+                                        <span class="progress-text" id="progress-text-5">Not Started</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-bar" id="progress-bar-5" style="width:0%; background:#888;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level-details">
+                                <div class="content-box">
+                                    <div class="section">
+                                        <p>📚 What You'll Learn</p>
+                                        <ul>
+                                            <li>Integrating AI APIs (OpenAI/Google AI)</li>
+                                            <li>Building Smart Features for Web Apps</li>
+                                            <li>AI-Assisted Debugging</li>
+                                        </ul>
+                                    </div>
+                                    <div class="section">
+                                        <p>⚙️ How You'll Learn (AI-Powered)</p>
+                                        <ul>
+                                            <li>Hands-on AI tooling integration</li>
+                                            <li>Advanced AI project work</li>
+                                            <li>Integrate an AI chatbot into your app</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ================= LEVEL 6 ================= -->
+                        <div class="level-card" id="level-6">
+                            <div class="level-image" onclick="toggleLevel('level-6')">
+                                <img src="level-6.png" alt="Level 6" onerror="this.style.display='none'" />
+                            </div>
+                            <h4>Level 06: PROJECT_MASTERY</h4>
+                            <p class="desc">Deploy a full-stack application and manage the entire lifecycle.</p>
+                            <div class="status-row">
+                                <div class="badge-row">
+                                    <span class="status" id="status-6">🔒 Locked</span>
+                                    <button class="action-btn" id="action-6">🔒 Contact admin</button>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-header">
+                                        <span>Payment Status</span>
+                                        <span class="progress-text" id="progress-text-6">Not Started</span>
+                                    </div>
+                                    <div class="progress-track">
+                                        <div class="progress-bar" id="progress-bar-6" style="width:0%; background:#888;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="level-details">
+                                <div class="content-box">
+                                    <div class="section">
+                                        <p>📚 What You'll Learn</p>
+                                        <ul>
+                                            <li>Full-Stack Deployment</li>
+                                            <li>Database Integration</li>
+                                            <li>Capstone Project Management</li>
+                                        </ul>
+                                    </div>
+                                    <div class="section">
+                                        <p>⚙️ How You'll Learn (AI-Powered)</p>
+                                        <ul>
+                                            <li>End-to-end AI-driven project build</li>
+                                            <li>Mentor feedback &amp; code reviews</li>
+                                            <li>Launch a full-stack web app</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div> <!-- End levelList -->
+
+                    <!-- ============================================================
+                    FOLDER VIEW (Visible by default – COLLAPSED)
+                    ============================================================ -->
+                    <div id="folderView" style="display: block; text-align: center; padding: 1rem;">
+                        <div onclick="toggleAllLevels()" class="folder-card" style="display: inline-block; cursor: pointer; background: #ffffff; border-radius: 20px; padding: 2.5rem 4rem; border: 2px solid #1E88E5; box-shadow: 0 8px 24px rgba(30, 136, 229, 0.08); transition: all 0.3s ease;">
+                            <i class="fas fa-folder-open" style="font-size: 3.5rem; color: #1E88E5; margin-bottom: 0.5rem; display: block;"></i>
+                            <h4 style="font-size: 1.5rem; color: #0B1A2E; margin: 0;">📁 PROGRAMMING COURSE</h4>
+                            <span id="folderStatus" style="font-size: 0.85rem; color: #1E88E5; font-weight: 600;">✅ Available</span>
+                            <p style="font-size: 0.75rem; color: #888; margin-top: 0.3rem;">Tap to expand</p>
+                        </div>
+                    </div>
+
+                </div> <!-- End coursesContainer -->
+
+                <!-- -------------------- FLOATING TOGGLE BUTTON -------------------- -->
+                <div id="toggleButton" onclick="toggleAllLevels()" style="position: fixed; bottom: 2rem; right: 2rem; background: linear-gradient(145deg, #1E88E5, #1565C0); color: #ffffff; width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; box-shadow: 0 6px 20px rgba(30, 136, 229, 0.3); cursor: pointer; z-index: 999; transition: all 0.3s ease;">
+                    <i class="fas fa-book-open"></i>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+    JAVASCRIPT: TOGGLE & EXPAND FUNCTIONS
+    ============================================================ -->
+    <script>
+        // --- Toggle Individual Level Details (Accordion) ---
+        function toggleLevel(levelId) {
+            var card = document.getElementById(levelId);
+            if (!card) return;
+            var details = card.querySelector('.level-details');
+            if (!details) return;
+
+            // Close all other open levels
+            var allCards = document.querySelectorAll('.level-card');
+            allCards.forEach(function(c) {
+                if (c.id !== levelId) {
+                    var otherDetails = c.querySelector('.level-details');
+                    if (otherDetails) otherDetails.style.display = 'none';
+                }
+            });
+
+            // Toggle the clicked one
+            if (details.style.display === 'none' || details.style.display === '') {
+                details.style.display = 'block';
+            } else {
+                details.style.display = 'none';
+            }
+        }
+
+        // --- Toggle between Expanded and Folder View ---
+        var isCollapsed = true; // Default to collapsed
+
+        function toggleAllLevels() {
+            var levelList = document.getElementById('levelList');
+            var folderView = document.getElementById('folderView');
+            var toggleButton = document.getElementById('toggleButton');
+
+            if (!levelList || !folderView || !toggleButton) return;
+
+            isCollapsed = !isCollapsed;
+
+            if (isCollapsed) {
+                // Show folder, hide levels
+                levelList.style.display = 'none';
+                folderView.style.display = 'block';
+                toggleButton.innerHTML = '<i class="fas fa-folder-open"></i>';
+            } else {
+                // Show levels, hide folder
+                levelList.style.display = 'block';
+                folderView.style.display = 'none';
+                toggleButton.innerHTML = '<i class="fas fa-book-open"></i>';
+            }
+        }
+
+        // --- Expose functions globally ---
+        window.toggleLevel = toggleLevel;
+        window.toggleAllLevels = toggleAllLevels;
+    </script>
+</body>
+</html>

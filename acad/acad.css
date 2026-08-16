@@ -1,0 +1,672 @@
+/* ============================================================
+   SOLVATECH ACADEMY - ULTIMATE PRIVATE CSS
+   ============================================================ */
+
+/* ============================================================
+   1. ACADEMY LOADING OVERLAY (Premium 3-Ring + Shimmer)
+   ============================================================ */
+.loading-overlay {
+    background: rgba(15, 26, 42, 0.92) !important;
+    backdrop-filter: blur(14px) !important;
+    -webkit-backdrop-filter: blur(14px) !important;
+}
+
+.loading-overlay .spinner-ring .ring {
+    border-top-color: #1E88E5 !important;
+}
+.loading-overlay .spinner-ring .ring:nth-child(2) {
+    border-top-color: #10b981 !important;
+    animation-duration: 0.9s !important;
+    animation-direction: reverse !important;
+}
+.loading-overlay .spinner-ring .ring:nth-child(3) {
+    border-top-color: #f59e0b !important;
+    animation-duration: 0.7s !important;
+}
+
+.loading-overlay h3 {
+    color: #eef4ff !important;
+    font-weight: 800 !important;
+    letter-spacing: 1.5px !important;
+}
+.loading-overlay p {
+    color: #8aaabc !important;
+}
+.loading-overlay .loader-progress {
+    background: #1e2a3a !important;
+}
+.loading-overlay .loader-progress .bar {
+    background: linear-gradient(90deg, #1E88E5, #10b981, #f59e0b) !important;
+    background-size: 300% 100% !important;
+}
+
+/* ============================================================
+   2. PAGE SWITCHING (SPA Routing)
+   ============================================================ */
+.acad-page {
+    display: none;
+    animation: fadeInUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+.acad-page.active {
+    display: block;
+}
+
+/* ============================================================
+   3. DASHBOARD WELCOME BANNER
+   ============================================================ */
+.acad-welcome-banner {
+    background: linear-gradient(145deg, #f0f7ff 0%, #ffffff 100%);
+    border-radius: 20px;
+    padding: 3rem 2rem;
+    text-align: center;
+    border: 2px solid rgba(30, 136, 229, 0.15);
+    box-shadow: 0 8px 32px rgba(30, 136, 229, 0.05);
+    margin-bottom: 2.5rem;
+    position: relative;
+    overflow: hidden;
+}
+.acad-welcome-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, #1E88E5, #10b981, #f59e0b, #8b5cf6);
+    background-size: 300% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+}
+.acad-welcome-banner::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at 50% 50%, rgba(30, 136, 229, 0.05), transparent 60%);
+    pointer-events: none;
+}
+.acad-welcome-banner h2 {
+    font-size: 2.4rem;
+    color: #0B1A2E;
+    font-weight: 800;
+    margin-bottom: 0.2rem;
+    position: relative;
+    z-index: 1;
+}
+.acad-welcome-banner h2 span {
+    color: #1E88E5;
+    background: rgba(30, 136, 229, 0.08);
+    padding: 0.1rem 0.8rem;
+    border-radius: 30px;
+    display: inline-block;
+}
+.acad-welcome-banner p {
+    color: #555;
+    font-size: 1.1rem;
+    margin-top: 0.3rem;
+    opacity: 0.8;
+    position: relative;
+    z-index: 1;
+}
+
+/* ============================================================
+   4. DASHBOARD STATS CARDS
+   ============================================================ */
+.acad-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 3rem;
+}
+.acad-stat-card {
+    background: #FFFFFF;
+    border-radius: 16px;
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+    border: 1px solid #eef2f6;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.acad-stat-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.06);
+    border-color: transparent;
+}
+.acad-stat-card i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.5rem;
+    transition: transform 0.3s ease;
+}
+.acad-stat-card:hover i {
+    transform: scale(1.1) rotate(-5deg);
+}
+.acad-stat-card .stat-number {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: #0B1A2E;
+    line-height: 1.2;
+}
+.acad-stat-card .stat-label {
+    font-size: 0.7rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    font-weight: 600;
+    margin-top: 0.1rem;
+}
+.acad-stat-card.enrolled i { color: #1E88E5; }
+.acad-stat-card.completed i { color: #10b981; }
+.acad-stat-card.in-progress i { color: #f59e0b; }
+.acad-stat-card.certificates i { color: #8b5cf6; }
+
+/* ============================================================
+   5. FOLDER VIEW (Collapsed State)
+   ============================================================ */
+#folderView {
+    text-align: center;
+    padding: 1rem;
+}
+#folderView .folder-card {
+    display: inline-block;
+    cursor: pointer;
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 2.5rem 4rem;
+    border: 2px solid #1E88E5;
+    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.08);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#folderView .folder-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(30, 136, 229, 0.15);
+    border-color: #1565C0;
+}
+#folderView .folder-card i {
+    font-size: 3.5rem;
+    color: #1E88E5;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+#folderView .folder-card h4 {
+    font-size: 1.5rem;
+    color: #0B1A2E;
+    margin: 0;
+}
+#folderView .folder-card span {
+    font-size: 0.85rem;
+    color: #1E88E5;
+    font-weight: 600;
+}
+#folderView .folder-card p {
+    font-size: 0.75rem;
+    color: #888;
+    margin-top: 0.3rem;
+}
+
+/* ============================================================
+   6. LEVEL CARDS (Expanded View)
+   ============================================================ */
+.level-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 1.8rem;
+    border: 1px solid #eef2f6;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+}
+.level-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    border-color: #dce4f0;
+}
+.level-card .level-image {
+    max-width: 180px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 auto;
+}
+.level-card .level-image img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+    border-radius: 16px;
+    background: #f0f7ff;
+    border: 1px solid #dce4f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+.level-card .level-image:hover img {
+    transform: scale(1.03);
+    border-color: #1E88E5;
+}
+.level-card h4 {
+    font-size: 1.3rem;
+    color: #0B1A2E;
+    margin: 0.8rem 0 0.3rem;
+}
+.level-card .desc {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0;
+}
+.level-card .status-row {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    margin-top: 0.8rem;
+    width: 100%;
+}
+.level-card .status-row .badge-row {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+.level-card .status-row .badge-row .status {
+    font-size: 0.85rem;
+    font-weight: 600;
+    background: #f8fafc;
+    padding: 0.2rem 1rem;
+    border-radius: 20px;
+}
+.level-card .status-row .badge-row .action-btn {
+    padding: 0.5rem 1.5rem;
+    border-radius: 30px;
+    border: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: default;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+.level-card .status-row .badge-row .action-btn.pay-btn {
+    cursor: pointer;
+    background: #1E88E5;
+    color: #fff;
+    box-shadow: 0 4px 16px rgba(30, 136, 229, 0.2);
+}
+.level-card .status-row .badge-row .action-btn.pay-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.3);
+}
+.level-card .status-row .badge-row .action-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* ============================================================
+   7. PROGRESS BAR (Payment Lifecycle)
+   ============================================================ */
+.level-card .progress-container {
+    width: 100%;
+    max-width: 320px;
+    text-align: left;
+    margin: 0 auto;
+}
+.level-card .progress-container .progress-header {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    color: #888;
+    font-weight: 500;
+}
+.level-card .progress-container .progress-header .progress-text {
+    font-weight: 600;
+}
+.level-card .progress-container .progress-track {
+    width: 100%;
+    height: 6px;
+    background: #eef2f6;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-top: 0.3rem;
+}
+.level-card .progress-container .progress-track .progress-bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+/* Color States for Progress Bar */
+.level-card .progress-container .progress-track .progress-bar.status-0 { background: #888; }
+.level-card .progress-container .progress-track .progress-bar.status-20 { background: #f97316; } /* Orange */
+.level-card .progress-container .progress-track .progress-bar.status-50 { background: #f59e0b; } /* Amber */
+.level-card .progress-container .progress-track .progress-bar.status-100 { background: #10b981; } /* Green */
+
+/* ============================================================
+   8. LEVEL DETAILS (Accordion Area)
+   ============================================================ */
+.level-details {
+    display: none;
+    margin-top: 1.5rem;
+    border-top: 1px solid #eef2f6;
+    padding-top: 1.5rem;
+    text-align: left;
+    animation: fadeInUp 0.3s ease forwards;
+}
+.level-details .content-box {
+    background: #f8fafc;
+    padding: 1.2rem;
+    border-radius: 14px;
+    border: 1px solid #eef2f6;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+}
+.level-details .content-box .section p {
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #0B1A2E;
+    margin-bottom: 0.3rem;
+}
+.level-details .content-box .section ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.level-details .content-box .section ul li {
+    margin-bottom: 0.3rem;
+    font-size: 0.85rem;
+    color: #555;
+    padding-left: 0.5rem;
+    border-left: 2px solid #1E88E5;
+}
+
+/* ============================================================
+   9. FLOATING TOGGLE BUTTON (Book/Folder Icon)
+   ============================================================ */
+#toggleButton {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: linear-gradient(145deg, #1E88E5, #1565C0);
+    color: #ffffff;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.3);
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+#toggleButton:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 12px 36px rgba(30, 136, 229, 0.4);
+}
+#toggleButton:active {
+    transform: scale(0.9);
+}
+
+/* ============================================================
+   10. ACCOUNT BADGE & NAVIGATION FIXES
+   ============================================================ */
+#accountBadge {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: linear-gradient(145deg, #1E88E5, #1565C0); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 1.2rem;
+    border: 2px solid #fff; box-shadow: 0 2px 10px rgba(30, 136, 229, 0.25);
+    margin-left: 12px; flex-shrink: 0;
+}
+.nav-menu ul li a::before,
+.drawer-footer::before {
+    display: none !important;
+}
+
+/* ============================================================
+   11. PROFILE COMPLETION MODAL (Glassmorphism)
+   ============================================================ */
+#completeProfileModal {
+    background: rgba(11, 26, 46, 0.85) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    z-index: 99999 !important;
+}
+#completeProfileModal .service-modal {
+    background: #ffffff !important;
+    border-radius: 24px !important;
+    max-width: 440px !important;
+    width: 100% !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    overflow: hidden !important;
+    animation: modalPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) !important;
+    padding: 0 !important;
+}
+#completeProfileModal .service-modal-header {
+    background: linear-gradient(135deg, #0B1A2E 0%, #1E3A5F 50%, #1E88E5 100%) !important;
+    padding: 2.5rem 1.5rem 1.8rem !important;
+    text-align: center !important;
+    border-radius: 24px 24px 0 0 !important;
+    margin: 0 !important;
+}
+#completeProfileModal .modal-header-icon {
+    width: 76px; height: 76px;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 50% !important;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2.5rem; color: #64B5F6;
+    margin: 0 auto 1rem !important;
+    border: 2px solid rgba(255, 255, 255, 0.15) !important;
+    animation: pulse 2s ease-in-out infinite;
+}
+#completeProfileModal .service-modal-header h2 {
+    color: #ffffff !important;
+    font-size: 1.6rem !important;
+    font-weight: 800 !important;
+    margin-bottom: 0.3rem !important;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+#completeProfileModal .service-modal-header p {
+    color: #90CAF9 !important;
+    font-size: 0.9rem !important;
+    font-weight: 400 !important;
+    margin: 0 !important;
+}
+#completeProfileModal .service-modal-body {
+    padding: 2rem 1.8rem 1rem !important;
+    background: #ffffff !important;
+}
+#completeProfileModal .form-group {
+    margin-bottom: 1.2rem !important;
+    position: relative;
+}
+#completeProfileModal .form-group label {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-weight: 600; font-size: 0.85rem;
+    color: #0B1A2E; margin-bottom: 0.3rem;
+}
+#completeProfileModal .form-group label i { width: 18px; }
+#completeProfileModal .form-group input {
+    width: 100%; padding: 0.8rem 1.2rem;
+    border: 2px solid #eef2f6; border-radius: 14px;
+    font-size: 1rem; background: #fafcfc;
+    color: #1E1E1E; transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    font-family: inherit;
+}
+#completeProfileModal .form-group input:focus {
+    outline: none; border-color: #1E88E5;
+    box-shadow: 0 0 0 5px rgba(30, 136, 229, 0.12);
+    background: #ffffff; transform: translateY(-2px);
+}
+#completeProfileModal .form-group input:read-only {
+    background: #f5f7fa; cursor: not-allowed;
+    border-color: #dce4f0; color: #888; transform: none; box-shadow: none;
+}
+#completeProfileModal .form-group input.invalid {
+    border-color: #ef4444 !important;
+    animation: shake 0.5s ease forwards;
+}
+#completeProfileModal .form-error {
+    display: none; font-size: 0.75rem; color: #ef4444;
+    margin-top: 0.4rem; font-weight: 500; text-align: left;
+}
+#completeProfileModal .form-error.show { display: block; }
+#completeProfileModal .form-group .warning-text {
+    font-size: 0.75rem; color: #f59e0b; margin-top: 0.3rem;
+    display: flex; align-items: center; gap: 0.3rem;
+}
+#completeProfileModal .btn-auth {
+    width: 100% !important; padding: 0.9rem !important; font-size: 1.05rem !important;
+    border-radius: 14px !important; margin-top: 0.5rem;
+    background: linear-gradient(145deg, #1E88E5 0%, #1565C0 100%);
+    color: #fff; border: none; font-weight: 700; cursor: pointer;
+    transition: all 0.3s ease; box-shadow: 0 4px 20px rgba(30, 136, 229, 0.25);
+}
+#completeProfileModal .btn-auth:hover {
+    transform: translateY(-3px); box-shadow: 0 8px 30px rgba(30, 136, 229, 0.35);
+}
+#completeProfileModal .btn-auth:active { transform: scale(0.96); }
+#completeProfileModal .btn-auth:disabled {
+    opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none;
+}
+#completeProfileModal .service-modal-footer {
+    background: #ffffff !important; padding: 0.5rem 1.8rem 1.8rem !important;
+    text-align: center !important; border-radius: 0 0 24px 24px !important;
+    margin: 0 !important;
+}
+#completeProfileModal .service-modal-footer p {
+    font-size: 0.8rem; color: #888; margin: 0;
+    display: flex; align-items: center; justify-content: center; gap: 0.3rem;
+}
+
+/* ============================================================
+   12. DARK MODE OVERRIDES (Academy Deep Navy)
+   ============================================================ */
+body.dark-mode {
+    background-color: #0f1a2a;
+    color: #eef4ff;
+}
+body.dark-mode .loading-overlay {
+    background: rgba(15, 26, 42, 0.95) !important;
+}
+body.dark-mode .acad-welcome-banner {
+    background: linear-gradient(145deg, #122a3a 0%, #0f1f2f 100%);
+    border-color: rgba(30, 136, 229, 0.2);
+}
+body.dark-mode .acad-welcome-banner h2 { color: #eef4ff; }
+body.dark-mode .acad-welcome-banner h2 span { background: rgba(30, 136, 229, 0.15); }
+body.dark-mode .acad-welcome-banner p { color: #8aaabc; }
+
+body.dark-mode .acad-stat-card {
+    background: #122a3a;
+    border-color: rgba(255, 255, 255, 0.04);
+}
+body.dark-mode .acad-stat-card:hover {
+    border-color: rgba(30, 136, 229, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+body.dark-mode .acad-stat-card .stat-number { color: #eef4ff; }
+body.dark-mode .acad-stat-card .stat-label { color: #8aaabc; }
+
+body.dark-mode #folderView .folder-card {
+    background: #122a3a;
+    border-color: #1E88E5;
+    box-shadow: 0 8px 24px rgba(30, 136, 229, 0.1);
+}
+body.dark-mode #folderView .folder-card h4 { color: #eef4ff; }
+body.dark-mode #folderView .folder-card p { color: #8aaabc; }
+
+body.dark-mode .level-card {
+    background: #122a3a;
+    border-color: rgba(255, 255, 255, 0.04);
+}
+body.dark-mode .level-card:hover {
+    border-color: #1E88E5;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+body.dark-mode .level-card h4 { color: #eef4ff; }
+body.dark-mode .level-card .desc { color: #8aaabc; }
+body.dark-mode .level-card .level-image img {
+    background: #0f1f2f;
+    border-color: #2a4a5a;
+}
+body.dark-mode .level-card .status-row .badge-row .status {
+    background: #0a1a2a;
+    color: #8aaabc;
+}
+
+body.dark-mode .level-details {
+    border-top-color: rgba(255, 255, 255, 0.04);
+}
+body.dark-mode .level-details .content-box {
+    background: #0f1f2f;
+    border-color: #2a4a5a;
+}
+body.dark-mode .level-details .content-box .section p { color: #eef4ff; }
+body.dark-mode .level-details .content-box .section ul li {
+    color: #8aaabc;
+    border-left-color: #1E88E5;
+}
+body.dark-mode .level-card .progress-container .progress-track {
+    background: #1e2a3a;
+}
+body.dark-mode .level-card .progress-container .progress-header {
+    color: #8aaabc;
+}
+
+body.dark-mode #toggleButton {
+    box-shadow: 0 6px 20px rgba(30, 136, 229, 0.3);
+}
+
+/* --- Dark Mode: Modal --- */
+body.dark-mode #completeProfileModal .service-modal {
+    background: #122a3a !important;
+    border-color: rgba(255, 255, 255, 0.05) !important;
+}
+body.dark-mode #completeProfileModal .service-modal-body {
+    background: #122a3a !important;
+}
+body.dark-mode #completeProfileModal .service-modal-footer {
+    background: #122a3a !important;
+}
+body.dark-mode #completeProfileModal .form-group label { color: #eef4ff !important; }
+body.dark-mode #completeProfileModal .form-group input {
+    background: #0a1a2a !important;
+    border-color: #2a4a5a !important;
+    color: #eef4ff !important;
+}
+body.dark-mode #completeProfileModal .form-group input:focus {
+    border-color: #1E88E5 !important;
+    background: #0f1f2f !important;
+}
+body.dark-mode #completeProfileModal .form-group input:read-only {
+    background: #0a1a2a !important;
+    color: #8aaabc !important;
+    border-color: #1e2a3a !important;
+}
+body.dark-mode #completeProfileModal .service-modal-footer p { color: #8aaabc !important; }
+
+/* ============================================================
+   13. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+@media (max-width: 1024px) { .acad-stats-grid { gap: 1rem; } }
+@media (max-width: 768px) {
+    .acad-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .acad-welcome-banner { padding: 2rem 1.2rem; }
+    .acad-welcome-banner h2 { font-size: 1.8rem; }
+    .level-card { padding: 1.2rem; }
+    .level-card .level-image { max-width: 140px; }
+    #folderView .folder-card { padding: 1.5rem 2rem; }
+    #toggleButton { width: 50px; height: 50px; font-size: 1.2rem; }
+}
+@media (max-width: 480px) {
+    .acad-stats-grid { grid-template-columns: 1fr 1fr; gap: 0.8rem; }
+    .acad-stat-card { padding: 1rem 0.8rem; }
+    .acad-stat-card i { font-size: 1.4rem; }
+    .acad-stat-card .stat-number { font-size: 1.3rem; }
+    #accountBadge { width: 34px; height: 34px; font-size: 1rem; margin-left: 8px; }
+    #toggleButton { width: 44px; height: 44px; font-size: 1rem; bottom: 1.2rem; right: 1.2rem; }
+    .level-details .content-box { grid-template-columns: 1fr; }
+    #completeProfileModal .service-modal-body { padding: 1.5rem 1rem 1rem !important; }
+}

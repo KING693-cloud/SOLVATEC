@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - SOLVATECH Academy</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Public CSS -->
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+    <link rel="stylesheet" href="../css/services.css" />
+
+    <!-- Academy CSS -->
+    <link rel="stylesheet" href="acad.css" />
+
+    <!-- 🔥 PAYMENT SDKs -->
+    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <!-- Public JS -->
+    <script src="../js/config.js"></script>
+    <script src="../js/head-config.js"></script>
+    <script src="../js/global.js"></script>
+    <script src="../js/services.js"></script>
+
+    <!-- Academy JS -->
+    <script src="acad.js"></script>
+
+    <style>
+        /* ===== Global Checkout Styles ===== */
+        .checkout-summary { background:#fff; border-radius:16px; padding:1.5rem; border:1px solid #eef2f6; box-shadow:0 4px 16px rgba(0,0,0,0.04); text-align:center; margin-bottom:2rem; max-width:600px; margin-left:auto; margin-right:auto; }
+        .checkout-summary h3 { color:#0B1A2E; font-size:1.2rem; margin:0; }
+        .checkout-summary p { color:#555; font-size:0.9rem; margin:0.3rem 0; }
+        .checkout-summary .price { margin:0.8rem 0; font-size:2.5rem; font-weight:900; color:#1E88E5; }
+
+        /* ===== Payment Method Buttons (3 Big Tiles) ===== */
+        #paymentMethods {
+            max-width: 600px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .pm-btn {
+            background: #fff;
+            border: 2px solid #eef2f6;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.03);
+            position: relative;
+        }
+
+        .pm-btn:hover:not(.disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+            border-color: #1E88E5;
+        }
+
+        .pm-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            border-color: #dce4f0;
+        }
+
+        .pm-btn .icon {
+            font-size: 2.5rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .pm-btn .title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #0B1A2E;
+        }
+
+        .pm-btn .subtitle {
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .pm-btn .status {
+            display: inline-block;
+            margin-top: 0.3rem;
+            font-size: 0.8rem;
+            font-weight: 600;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+        }
+
+        .pm-btn .status.available { background: #e8f5e9; color: #2e7d32; }
+        .pm-btn .status.unavailable { background: #fce4ec; color: #c62828; }
+
+        /* ----- Manual Button Specifics ----- */
+        .pm-btn.manual { border-color: #7D26CD; }
+        .pm-btn.manual .icon { color: #7D26CD; }
+
+        /* ----- Paystack Button ----- */
+        .pm-btn.paystack { border-color: #00BFA5; }
+        .pm-btn.paystack .icon { color: #00BFA5; }
+
+        /* ----- Flutterwave Button ----- */
+        .pm-btn.flutterwave { border-color: #F89B28; }
+        .pm-btn.flutterwave .icon { color: #F89B28; }
+
+        /* ===== Expanded Manual Content ===== */
+        #manualContent {
+            display: none;
+            margin-top: 1.5rem;
+            border-top: 1px solid #eef2f6;
+            padding-top: 1.5rem;
+            animation: fadeInUp 0.3s ease;
+        }
+
+        #manualContent.active {
+            display: block;
+        }
+
+        #manualContent .field {
+            background: #f8fafc;
+            border-radius: 10px;
+            border: 1px solid #eef2f6;
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        #manualContent .field .label {
+            background: #7D26CD;
+            display: inline-block;
+            color: #fff;
+            padding: 0.1rem 1rem;
+            border-radius: 20px;
+            font-size: 0.6rem;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        #manualContent .field .value {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #0B1A2E;
+            letter-spacing: 2px;
+            margin: 0;
+        }
+
+        #manualContent .field .copy-btn {
+            position: relative;
+            display: inline-block;
+            margin-top: 0.5rem;
+        }
+
+        #manualContent .field .copy-btn button {
+            background: none;
+            border: none;
+            color: #1E88E5;
+            cursor: pointer;
+            font-size: 1rem;
+            padding: 0.3rem 1rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+        }
+
+        #manualContent .field .copy-btn button:hover {
+            background: rgba(30,136,229,0.1);
+        }
+
+        /* ===== Manual Form ===== */
+        #manualContent .form-section {
+            border-top: 1px solid #eef2f6;
+            padding-top: 1.5rem;
+        }
+
+        #manualContent .form-section .row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        #manualContent .form-section .row .col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #manualContent .form-section .row .col label {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #0B1A2E;
+            margin-bottom: 0.3rem;
+        }
+
+        #manualContent .form-section .row .col input {
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            border: 2px solid #eef2f6;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            background: #fafcfc;
+            transition: border-color 0.3s;
+        }
+
+        #manualContent .form-section .row .col input:focus {
+            outline: none;
+            border-color: #1E88E5;
+        }
+
+        #manualContent .form-section .row .col input.invalid {
+            border-color: #ef4444;
+        }
+
+        #manualContent .form-section .full-width {
+            margin-bottom: 0.8rem;
+        }
+
+        #manualContent .form-section .full-width label {
+            font-weight: 600;
+            font-size: 0.8rem;
+            color: #0B1A2E;
+            margin-bottom: 0.3rem;
+            display: block;
+        }
+
+        #manualContent .form-section .full-width input {
+            width: 100%;
+            padding: 0.6rem 0.8rem;
+            border: 2px solid #eef2f6;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            background: #fafcfc;
+            text-align: center;
+        }
+
+        #manualContent .form-section .full-width input:focus {
+            outline: none;
+            border-color: #1E88E5;
+        }
+
+        #manualContent .form-section .full-width input.invalid {
+            border-color: #ef4444;
+        }
+
+        #manualContent .form-section .full-width .help {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+
+        #manualContent .form-section .submit-btn {
+            width: 100%;
+            padding: 0.8rem;
+            border: none;
+            border-radius: 30px;
+            background: linear-gradient(145deg, #7D26CD, #5A189A);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 16px rgba(125,38,205,0.25);
+            margin-top: 1rem;
+        }
+
+        #manualContent .form-section .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(125,38,205,0.35);
+        }
+
+        #manualContent .form-section .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* ===== Cancel Link ===== */
+        .cancel-link {
+            text-align: center;
+            margin-top: 1.5rem;
+        }
+
+        .cancel-link a {
+            color: #888;
+            font-size: 0.8rem;
+            text-decoration: none;
+        }
+
+        .cancel-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 480px) {
+            #manualContent .field .value {
+                font-size: 1.6rem;
+            }
+            #manualContent .form-section .row {
+                grid-template-columns: 1fr;
+            }
+            .pm-btn {
+                padding: 1rem;
+            }
+            .pm-btn .icon {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-ring"><div class="ring"></div><div class="ring"></div><div class="ring"></div></div>
+        <h3 id="loadingTitle">SOLVATECH</h3>
+        <p id="loadingMessage">Preparing your checkout...</p>
+        <div class="loader-progress"><div class="bar" id="loaderBar"></div></div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-notification" id="customToast"><i class="fa-solid fa-circle-check"></i><div class="toast-msg" id="toastMsg">Ready.</div></div>
+
+    <div class="page-content">
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="container nav-container">
+                <a href="acad.html" class="logo" onclick="location.href='acad.html'; return false;">
+                    <img src="academy-hero.png" alt="SOLVATECH" class="logo-img" style="border-radius:50%; width:40px; height:40px; object-fit:cover;" />
+                    <span class="logo-icon">◆</span> SOLVATECH
+                </a>
+                <div id="accountBadge">S</div>
+                <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="acad.html">HOME</a></li>
+                        <li><a href="courses.html">COURSES</a></li>
+                        <li><a href="settings.html">SETTINGS</a></li>
+                        <li><a href="#" id="logoutLink">LOGOUT</a></li>
+                    </ul>
+                    <div class="drawer-footer"><p>© 2026 SOLVATECH</p></div>
+                </nav>
+            </div>
+        </header>
+
+        <section class="services-page-grid">
+            <div class="container">
+
+                <!-- Summary Box -->
+                <div class="checkout-summary">
+                    <h3 id="chkCourse">Loading...</h3>
+                    <p id="chkLevel">Loading...</p>
+                    <div class="price">₦<span id="chkPrice">0</span></div>
+                </div>
+
+                <!-- ============================================================
+                PAYMENT METHODS (3 Big Buttons)
+                ============================================================ -->
+                <div id="paymentMethods">
+
+                    <!-- ===== 1. MANUAL ===== -->
+                    <div class="pm-btn manual" id="manualBtn" onclick="toggleManual()">
+                        <span class="icon"><i class="fas fa-hand-holding-usd"></i></span>
+                        <div class="title">Manual Transfer</div>
+                        <div class="subtitle">Pay via bank transfer</div>
+                        <span class="status available">Available</span>
+                    </div>
+
+                    <!-- Manual Content (Hidden initially) -->
+                    <div id="manualContent">
+                        <div class="field">
+                            <div class="label">Recipient Bank</div>
+                            <div class="value">PalmPay</div>
+                        </div>
+                        <div class="field">
+                            <div class="label">Account Number</div>
+                            <div class="value" id="accountNumberDisplay">8901716544</div>
+                            <div class="copy-btn"><button id="copyAccountBtn"><i class="fas fa-copy"></i> Copy</button></div>
+                        </div>
+                        <div class="field">
+                            <div class="label">Account Name</div>
+                            <div class="value" style="font-size:1.4rem;">SOLVATECH LIMITED(TAIWO)</div>
+                        </div>
+                        <div class="form-section">
+                            <div class="row">
+                                <div class="col"><label>First Name</label><input type="text" id="senderFirstName" placeholder="e.g. John" /></div>
+                                <div class="col"><label>Last Name</label><input type="text" id="senderLastName" placeholder="e.g. Doe" /></div>
+                            </div>
+                            <div class="full-width">
+                                <label>Your 10‑digit Account Number</label>
+                                <input type="text" id="senderAccountInput" placeholder="e.g. 0123456789" maxlength="10" />
+                                <div class="help">Enter the NUBAN account you used for the transfer.</div>
+                            </div>
+                            <button class="submit-btn" id="submitManualPaymentBtn"><i class="fas fa-paper-plane"></i> I have sent the money</button>
+                        </div>
+                    </div>
+
+                    <!-- ===== 2. PAYSTACK ===== -->
+                    <div class="pm-btn paystack disabled" id="paystackBtn">
+                        <span class="icon"><i class="fas fa-lock"></i></span>
+                        <div class="title">Paystack</div>
+                        <div class="subtitle">Pay with card, bank, or USSD</div>
+                        <span class="status unavailable" id="paystackStatus">Unavailable</span>
+                    </div>
+
+                    <!-- ===== 3. FLUTTERWAVE ===== -->
+                    <div class="pm-btn flutterwave disabled" id="flutterwaveBtn">
+                        <span class="icon"><i class="fas fa-lock"></i></span>
+                        <div class="title">Flutterwave</div>
+                        <div class="subtitle">Pay with card, bank, or USSD</div>
+                        <span class="status unavailable" id="flutterwaveStatus">Unavailable</span>
+                    </div>
+
+                </div>
+
+                <!-- Cancel Link -->
+                <div class="cancel-link">
+                    <a href="courses.html">← Cancel and go back</a>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================================
+    CHECKOUT JAVASCRIPT (Telegram alerts for all payments)
+    ============================================================ -->
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('🚀 CHECKOUT: Initializing...');
+
+        // --- DOM refs ---
+        var chkCourse = document.getElementById('chkCourse');
+        var chkLevel = document.getElementById('chkLevel');
+        var chkPrice = document.getElementById('chkPrice');
+
+        var manualBtn = document.getElementById('manualBtn');
+        var manualContent = document.getElementById('manualContent');
+        var copyBtn = document.getElementById('copyAccountBtn');
+        var submitBtn = document.getElementById('submitManualPaymentBtn');
+
+        var paystackBtn = document.getElementById('paystackBtn');
+        var paystackStatus = document.getElementById('paystackStatus');
+        var flutterwaveBtn = document.getElementById('flutterwaveBtn');
+        var flutterwaveStatus = document.getElementById('flutterwaveStatus');
+
+        // --- Get URL parameters ---
+        var params = new URLSearchParams(window.location.search);
+        var courseId = params.get('course') || 'web_dev';
+        var levelNum = parseInt(params.get('level')) || 1;
+        var price = parseInt(params.get('price')) || 1500;
+
+        // --- Redirect if user came directly (no parameters) ---
+        if (!params.has('course') || !params.has('level') || !params.has('price')) {
+            showToast('⚠️ Please select a course level from the courses page.', true);
+            setTimeout(function() {
+                window.location.href = 'courses.html';
+            }, 2000);
+            return;
+        }
+
+        // --- Update summary ---
+        if (chkCourse) chkCourse.textContent = 'Web Development';
+        if (chkLevel) chkLevel.textContent = 'Unlocking Level ' + levelNum + ' for ₦' + price.toLocaleString();
+        if (chkPrice) chkPrice.textContent = price.toLocaleString();
+
+        // --- Copy account number ---
+        var accountNumber = '8901716544';
+        if (copyBtn) {
+            copyBtn.addEventListener('click', function() {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(accountNumber).then(() => {
+                        showToast('✅ Account number copied!');
+                    }).catch(() => { fallbackCopy(accountNumber); });
+                } else {
+                    fallbackCopy(accountNumber);
+                }
+            });
+        }
+
+        function fallbackCopy(text) {
+            var textarea = document.createElement('textarea');
+            textarea.value = text;
+            document.body.appendChild(textarea);
+            textarea.select();
+            try {
+                document.execCommand('copy');
+                showToast('✅ Account number copied!');
+            } catch (err) {
+                showToast('❌ Could not copy.', true);
+            }
+            document.body.removeChild(textarea);
+        }
+
+        // ============================================================
+        // 🔥 TELEGRAM SENDER (Reads from Firebase settings)
+        // ============================================================
+        function sendTelegramAlert(message) {
+            if (typeof window.rtdb === 'undefined' || !window.rtdb) {
+                console.warn('⚠️ CHECKOUT: rtdb not available. Telegram alert skipped.');
+                return Promise.resolve();
+            }
+
+            return window.rtdb.ref('settings/telegram').once('value')
+                .then(function(snapshot) {
+                    var tgData = snapshot.val();
+                    if (!tgData) {
+                        console.log('ℹ️ CHECKOUT: No Telegram settings found. Alert skipped.');
+                        return;
+                    }
+
+                    var botToken = tgData.botToken1 || tgData.botToken2;
+                    var chatId = tgData.chatId1 || tgData.chatId2;
+
+                    if (!botToken || !chatId) {
+                        console.log('ℹ️ CHECKOUT: Telegram bot token or chat ID missing. Alert skipped.');
+                        return;
+                    }
+
+                    var url = 'https://api.telegram.org/bot' + botToken + '/sendMessage';
+                    return fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            chat_id: chatId,
+                            text: message,
+                            parse_mode: 'HTML',
+                            disable_web_page_preview: true
+                        })
+                    })
+                    .then(function(res) { return res.json(); })
+                    .then(function(result) {
+                        if (result.ok) {
+                            console.log('✅ CHECKOUT: Telegram alert sent successfully.');
+                        } else {
+                            console.warn('⚠️ CHECKOUT: Telegram API error:', result);
+                        }
+                    })
+                    .catch(function(err) {
+                        console.warn('⚠️ CHECKOUT: Failed to send Telegram alert:', err);
+                    });
+                })
+                .catch(function(err) {
+                    console.warn('⚠️ CHECKOUT: Could not read Telegram settings:', err);
+                });
+        }
+
+        // ============================================================
+        // 🔥 GET WHATSAPP LINK FROM FIREBASE
+        // ============================================================
+        function getWhatsAppLink(levelNumber) {
+            return new Promise(function(resolve, reject) {
+                if (typeof window.rtdb === 'undefined' || !window.rtdb) {
+                    reject('RTDB not available');
+                    return;
+                }
+                window.rtdb.ref('settings/whatsappLinks').once('value')
+                    .then(function(snap) {
+                        var links = snap.val() || {};
+                        var key = 'level' + levelNumber;
+                        var link = links[key] || '';
+                        resolve(link);
+                    })
+                    .catch(function(err) {
+                        reject(err);
+                    });
+            });
+        }
+
+        // ============================================================
+        // 🔥 GET USER WHATSAPP NUMBER FROM FIREBASE
+        // ============================================================
+        function getUserWhatsApp(uid) {
+            return new Promise(function(resolve, reject) {
+                if (typeof window.rtdb === 'undefined' || !window.rtdb) {
+                    reject('RTDB not available');
+                    return;
+                }
+                window.rtdb.ref('users/' + uid + '/whatsapp').once('value')
+                    .then(function(snap) {
+                        var wa = snap.val() || 'N/A';
+                        resolve(wa);
+                    })
+                    .catch(function(err) {
+                        reject(err);
+                    });
+            });
+        }
+
+        // ============================================================
+        // 🔥 AUTH SAFE: Wait for user before proceeding
+        // ============================================================
+        if (typeof firebase === 'undefined' || !firebase.auth) {
+            showToast('❌ Firebase not available.', true);
+            return;
+        }
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (!user) {
+                showToast('You must be logged in.', true);
+                setTimeout(function() {
+                    window.location.href = '../login.html';
+                }, 1500);
+                return;
+            }
+
+            var uid = user.uid;
+            loadPaymentOptions(uid);
+        });
+
+        // ============================================================
+        // 🔥 LOAD PAYMENT OPTIONS
+        // ============================================================
+        function loadPaymentOptions(uid) {
+            if (typeof window.rtdb === 'undefined' || !window.rtdb) {
+                showToast('❌ Database connection error. Please refresh.', true);
+                return;
+            }
+
+            window.rtdb.ref('settings/payment').once('value').then(function(snapshot) {
+                var paySettings = snapshot.val() || {};
+                var mode = paySettings.mode || 'manual';
+                var flwKey = paySettings.flutterwaveKey || '';
+                var pstkKey = paySettings.paystackKey || '';
+
+                console.log('📥 Payment Settings loaded:', { mode, flwKey, pstkKey });
+
+                manualBtn.classList.remove('disabled');
+                manualBtn.style.cursor = 'pointer';
+
+                if ((mode === 'auto') && pstkKey) {
+                    paystackBtn.classList.remove('disabled');
+                    paystackBtn.style.cursor = 'pointer';
+                    paystackStatus.textContent = 'Available';
+                    paystackStatus.className = 'status available';
+                    paystackBtn.onclick = function() {
+                        processAutoPayment('paystack', pstkKey, uid);
+                    };
+                } else {
+                    paystackBtn.classList.add('disabled');
+                    paystackBtn.style.cursor = 'default';
+                    paystackStatus.textContent = 'Unavailable';
+                    paystackStatus.className = 'status unavailable';
+                    paystackBtn.onclick = null;
+                }
+
+                if ((mode === 'auto') && flwKey) {
+                    flutterwaveBtn.classList.remove('disabled');
+                    flutterwaveBtn.style.cursor = 'pointer';
+                    flutterwaveStatus.textContent = 'Available';
+                    flutterwaveStatus.className = 'status available';
+                    flutterwaveBtn.onclick = function() {
+                        processAutoPayment('flutterwave', flwKey, uid);
+                    };
+                } else {
+                    flutterwaveBtn.classList.add('disabled');
+                    flutterwaveBtn.style.cursor = 'default';
+                    flutterwaveStatus.textContent = 'Unavailable';
+                    flutterwaveStatus.className = 'status unavailable';
+                    flutterwaveBtn.onclick = null;
+                }
+
+                setupManualPayment(uid);
+
+            }).catch(function(err) {
+                console.error('❌ Error fetching settings:', err);
+                showToast('❌ Could not load payment settings. Try again.', true);
+            });
+        }
+
+        // ============================================================
+        // ✅ Toggle Manual Expansion
+        // ============================================================
+        window.toggleManual = function() {
+            manualContent.classList.toggle('active');
+        };
+
+        // ============================================================
+        // ✅ SETUP MANUAL PAYMENT SUBMISSION (SIMPLE ALERT)
+        // ============================================================
+        function setupManualPayment(uid) {
+            if (!submitBtn) return;
+            var newBtn = submitBtn.cloneNode(true);
+            submitBtn.parentNode.replaceChild(newBtn, submitBtn);
+            submitBtn = document.getElementById('submitManualPaymentBtn');
+
+            submitBtn.addEventListener('click', function() {
+                var firstName = document.getElementById('senderFirstName').value.trim();
+                var lastName = document.getElementById('senderLastName').value.trim();
+                var senderAcc = document.getElementById('senderAccountInput').value.trim();
+
+                var valid = true;
+                if (!firstName || firstName.length < 2) {
+                    document.getElementById('senderFirstName').classList.add('invalid');
+                    showToast('Please enter a valid first name.', true);
+                    valid = false;
+                } else {
+                    document.getElementById('senderFirstName').classList.remove('invalid');
+                }
+                if (!lastName || lastName.length < 2) {
+                    document.getElementById('senderLastName').classList.add('invalid');
+                    showToast('Please enter a valid last name.', true);
+                    valid = false;
+                } else {
+                    document.getElementById('senderLastName').classList.remove('invalid');
+                }
+                if (!senderAcc || senderAcc.length !== 10 || isNaN(senderAcc)) {
+                    document.getElementById('senderAccountInput').classList.add('invalid');
+                    showToast('Please enter a valid 10-digit account number.', true);
+                    valid = false;
+                } else {
+                    document.getElementById('senderAccountInput').classList.remove('invalid');
+                }
+
+                if (!valid) return;
+
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
+
+                var user = firebase.auth().currentUser;
+                if (!user) {
+                    showToast('You must be logged in.', true);
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> I have sent the money';
+                    return;
+                }
+
+                var levelKey = courseId + '_level_' + levelNum;
+
+                window.rtdb.ref('users/' + uid + '/pendingLevels').once('value')
+                    .then(function(snapshot) {
+                        var currentPending = snapshot.val() || [];
+                        if (!currentPending.includes(levelKey)) {
+                            currentPending.push(levelKey);
+                        }
+                        return currentPending;
+                    })
+                    .then(function(updatedPending) {
+                        return window.rtdb.ref('users/' + uid).update({ pendingLevels: updatedPending });
+                    })
+                    .then(function() {
+                        var paymentId = 'PAY_' + Date.now();
+                        return window.rtdb.ref('pending_payments/' + paymentId).set({
+                            uid: uid,
+                            email: user.email,
+                            firstName: firstName,
+                            lastName: lastName,
+                            senderAccount: senderAcc,
+                            courseId: courseId,
+                            levelNumber: levelNum,
+                            price: price,
+                            status: 'pending',
+                            timestamp: new Date().toISOString()
+                        });
+                    })
+                    .then(function() {
+                        // ✅ SIMPLE MANUAL PAYMENT ALERT
+                        var userName = user.displayName || 'Student';
+                        var msg = "💸 *Manual Payment Initiated!*\n\n" +
+                                  "👤 User: " + userName + "\n" +
+                                  "🎯 Level: Level " + levelNum + "\n" +
+                                  "💰 Amount: ₦" + price.toLocaleString() + "\n" +
+                                  "📊 Status: Payment submitted. Awaiting admin approval.\n" +
+                                  "🕒 Time: " + new Date().toLocaleString();
+                        sendTelegramAlert(msg);
+
+                        showToast('✅ Payment recorded! Admin will verify soon.');
+                        setTimeout(function() {
+                            window.location.href = 'courses.html';
+                        }, 2000);
+                    })
+                    .catch(function(err) {
+                        console.error('Error saving payment:', err);
+                        showToast('❌ Failed to submit payment. Please try again.', true);
+                        submitBtn.disabled = false;
+                        submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> I have sent the money';
+                    });
+            });
+        }
+
+        // ============================================================
+        // 🚀 PROCESS AUTO PAYMENT (Paystack / Flutterwave)
+        // ============================================================
+        window.processAutoPayment = function(provider, key, uid) {
+            var user = firebase.auth().currentUser;
+            if (!user) {
+                showToast('You must be logged in.', true);
+                return;
+            }
+
+            var amount = price;
+            var email = user.email;
+            var ref = 'PAY_' + Date.now();
+
+            if (provider === 'paystack') {
+                var handler = PaystackPop.setup({
+                    key: key,
+                    email: email,
+                    amount: amount * 100,
+                    currency: 'NGN',
+                    ref: ref,
+                    callback: function(response) {
+                        if (response.status === 'success') {
+                            handleAutoPaymentSuccess(uid, courseId, levelNum);
+                        } else {
+                            showToast('❌ Paystack payment failed.', true);
+                        }
+                    },
+                    onClose: function() {}
+                });
+                handler.openIframe();
+
+            } else if (provider === 'flutterwave') {
+                FlutterwaveCheckout({
+                    public_key: key,
+                    tx_ref: ref,
+                    amount: amount,
+                    currency: 'NGN',
+                    country: 'NG',
+                    payment_options: 'card, banktransfer, ussd',
+                    customer: {
+                        email: email,
+                        name: user.displayName || 'Student',
+                    },
+                    callback: function(response) {
+                        if (response.status === 'successful') {
+                            handleAutoPaymentSuccess(uid, courseId, levelNum);
+                        } else {
+                            showToast('❌ Flutterwave payment failed.', true);
+                        }
+                    },
+                    onclose: function() {}
+                });
+            }
+        };
+
+        // ============================================================
+        // ✅ HANDLE AUTO PAYMENT SUCCESS (FULL APPROVAL REQUEST + WHATSAPP NUMBER)
+        // ============================================================
+        function handleAutoPaymentSuccess(uid, cId, lNum) {
+            console.log('🏆 Payment success! Writing to Firebase...');
+            
+            var levelKey = cId + '_level_' + lNum;
+            var user = firebase.auth().currentUser;
+
+            if (!user) {
+                console.error('❌ User not authenticated after payment!');
+                showToast('❌ User not authenticated. Please log in again.', true);
+                return;
+            }
+
+            // 1. Add to approvedLevels instantly (50%)
+            window.rtdb.ref('users/' + uid + '/approvedLevels').once('value')
+                .then(function(snapshot) {
+                    var currentApproved = snapshot.val() || [];
+                    if (!currentApproved.includes(levelKey)) {
+                        currentApproved.push(levelKey);
+                    }
+                    return currentApproved;
+                })
+                .then(function(updatedApproved) {
+                    return window.rtdb.ref('users/' + uid).update({ approvedLevels: updatedApproved });
+                })
+                .then(function() {
+                    var paymentId = 'PAY_' + Date.now();
+                    return window.rtdb.ref('pending_payments/' + paymentId).set({
+                        uid: uid,
+                        email: user.email,
+                        courseId: cId,
+                        levelNumber: lNum,
+                        price: price,
+                        status: 'approved',
+                        timestamp: new Date().toISOString()
+                    });
+                })
+                .then(function() {
+                    // ✅ Get WhatsApp number and group link
+                    return Promise.all([
+                        getUserWhatsApp(uid),
+                        getWhatsAppLink(lNum)
+                    ]);
+                })
+                .then(function(results) {
+                    var wa = results[0] || 'N/A';
+                    var link = results[1] || '⚠️ No link set in Settings';
+
+                    // ✅ MAIN APPROVAL REQUEST MESSAGE (with instructions)
+                    var userName = user.displayName || 'Student';
+                    var mainMsg = "📋 *New Payment Approval Request*\n\n" +
+                                  "👤 *User Details:*\n" +
+                                  "Name: " + userName + "\n" +
+                                  "Email: " + user.email + "\n\n" +
+                                  "🎯 Level: " + lNum + "\n" +
+                                  "💰 Amount: ₦" + price.toLocaleString() + "\n\n" +
+                                  "🔗 *WhatsApp Group Link:*\n" +
+                                  link + "\n\n" +
+                                  "📌 *Instructions:*\n" +
+                                  "1. Copy the WhatsApp number below (separate message).\n" +
+                                  "2. Copy the group link above.\n" +
+                                  "3. Add the user to the WhatsApp group.\n" +
+                                  "4. Return to the admin panel and click Approve.";
+
+                    // ✅ WhatsApp number message – ONLY THE NUMBER
+                    var waMsg = wa;
+
+                    // Send main message first
+                    return sendTelegramAlert(mainMsg)
+                        .then(function() {
+                            // Wait 0.5 seconds, then send JUST the WhatsApp number
+                            return new Promise(function(resolve) {
+                                setTimeout(function() {
+                                    sendTelegramAlert(waMsg)
+                                        .then(function() {
+                                            resolve();
+                                        })
+                                        .catch(function(err) {
+                                            console.warn('⚠️ WhatsApp number message failed:', err);
+                                            resolve();
+                                        });
+                                }, 500);
+                            });
+                        });
+                })
+                .then(function() {
+                    showToast('🎉 Payment successful! Level unlocked.');
+                    setTimeout(function() {
+                        window.location.href = 'courses.html';
+                    }, 1500);
+                })
+                .catch(function(err) {
+                    console.error('❌ Auto-approval error:', err);
+                    showToast('❌ Payment successful, but approval failed. Contact admin.', true);
+                });
+        }
+
+        // --- Hide Loading Overlay ---
+        setTimeout(function() {
+            var overlay = document.getElementById('loadingOverlay');
+            if (overlay && overlay.classList.contains('active')) {
+                if (typeof hideLoading === 'function') hideLoading();
+                else { overlay.classList.remove('active'); overlay.style.display = 'none'; }
+            }
+        }, 1500);
+
+        console.log('✅ CHECKOUT: Ready. 3 big payment methods loaded.');
+    });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings - SOLVATECH Academy</title>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Public CSS -->
+    <link rel="stylesheet" href="../css/global.css" />
+    <link rel="stylesheet" href="../css/animations.css" />
+    <link rel="stylesheet" href="../css/services.css" />
+
+    <!-- Academy CSS -->
+    <link rel="stylesheet" href="acad.css" />
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <!-- Public JS -->
+    <script src="../js/config.js"></script>
+    <script src="../js/head-config.js"></script>
+    <script src="../js/global.js"></script>
+    <script src="../js/services.js"></script>
+
+    <!-- Academy JS -->
+    <script src="acad.js"></script>
+
+    <style>
+        /* ============================================================
+           SETTINGS PAGE - ADDITIONAL STYLES
+           ============================================================ */
+
+        /* --- Profile Avatar Container --- */
+        .acad-avatar-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+        }
+
+        .acad-avatar-container #profileAvatarImg {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid #1E88E5;
+            box-shadow: 0 4px 20px rgba(30, 136, 229, 0.2);
+            background: #f0f7ff;
+            transition: all 0.3s ease;
+        }
+
+        .acad-avatar-container #profileAvatarImg:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 30px rgba(30, 136, 229, 0.3);
+        }
+
+        .acad-avatar-container .btn-upload {
+            margin-top: 0.8rem;
+            background: #f0f7ff;
+            color: #1E88E5;
+            border: 2px solid #1E88E5;
+            padding: 0.5rem 1.5rem;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .acad-avatar-container .btn-upload:hover {
+            background: #1E88E5;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(30, 136, 229, 0.25);
+        }
+
+        /* --- Profile Card --- */
+        .acad-profile-card {
+            background: #FFFFFF;
+            border-radius: 20px;
+            padding: 2rem 2rem 1.8rem;
+            border: 1px solid #eef2f6;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+        }
+
+        .acad-profile-card:hover {
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+        }
+
+        .acad-profile-card .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .acad-profile-card .form-group label {
+            display: block;
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: #0B1A2E;
+            margin-bottom: 0.3rem;
+        }
+
+        .acad-profile-card .form-group label i {
+            width: 20px;
+            color: #1E88E5;
+        }
+
+        .acad-profile-card .form-group input {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: 2px solid #eef2f6;
+            border-radius: 14px;
+            font-size: 1rem;
+            background: #fafcfc;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            font-family: inherit;
+            color: #1E1E1E;
+        }
+
+        .acad-profile-card .form-group input:focus {
+            outline: none;
+            border-color: #1E88E5;
+            box-shadow: 0 0 0 5px rgba(30, 136, 229, 0.12);
+            background: #ffffff;
+            transform: translateY(-2px);
+        }
+
+        .acad-profile-card .form-group input:read-only {
+            background: #f5f7fa;
+            cursor: not-allowed;
+            border-color: #dce4f0;
+            color: #888;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .acad-profile-card .form-group input.invalid {
+            border-color: #ef4444 !important;
+            animation: shake 0.5s ease forwards;
+        }
+
+        .acad-profile-card .form-group .validation-hint {
+            font-size: 0.7rem;
+            color: #888;
+            margin-top: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .acad-profile-card .form-group .validation-hint.error {
+            color: #ef4444;
+        }
+
+        .acad-profile-card .form-group .validation-hint.success {
+            color: #10b981;
+        }
+
+        /* --- Save Button --- */
+        .btn-save-profile {
+            width: 100%;
+            padding: 0.9rem;
+            border: none;
+            border-radius: 14px;
+            background: linear-gradient(145deg, #1E88E5, #1565C0);
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(30, 136, 229, 0.25);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn-save-profile:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(30, 136, 229, 0.35);
+        }
+
+        .btn-save-profile:active:not(:disabled) {
+            transform: scale(0.96);
+        }
+
+        .btn-save-profile:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        /* --- Section Header --- */
+        .section-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+
+        .section-tag {
+            display: inline-block;
+            background: rgba(30, 136, 229, 0.08);
+            color: #1E88E5;
+            padding: 0.2rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #0B1A2E;
+            margin-bottom: 0.2rem;
+        }
+
+        .section-title.gradient {
+            background: linear-gradient(145deg, #0B1A2E 0%, #1E88E5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-subtitle {
+            font-size: 0.95rem;
+            color: #888;
+            margin-top: 0.2rem;
+        }
+
+        /* --- Back Button --- */
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            background: transparent;
+            border: 2px solid #dce4f0;
+            color: #555;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .btn-back:hover {
+            background: #f5f7fa;
+            border-color: #bbb;
+        }
+
+        /* --- Shake Animation --- */
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-4px); }
+            80% { transform: translateX(4px); }
+        }
+
+        /* --- Dark Mode --- */
+        body.dark-mode .acad-profile-card {
+            background: #122a3a;
+            border-color: rgba(255, 255, 255, 0.04);
+        }
+
+        body.dark-mode .acad-profile-card .form-group label {
+            color: #eef4ff;
+        }
+
+        body.dark-mode .acad-profile-card .form-group label i {
+            color: #64B5F6;
+        }
+
+        body.dark-mode .acad-profile-card .form-group input {
+            background: #0a1a2a;
+            border-color: #2a4a5a;
+            color: #eef4ff;
+        }
+
+        body.dark-mode .acad-profile-card .form-group input:focus {
+            border-color: #1E88E5;
+            background: #0f1f2f;
+        }
+
+        body.dark-mode .acad-profile-card .form-group input:read-only {
+            background: #0a1a2a;
+            color: #8aaabc;
+            border-color: #1e2a3a;
+        }
+
+        body.dark-mode .section-title.gradient {
+            background: linear-gradient(145deg, #eef4ff 0%, #1E88E5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark-mode .acad-avatar-container .btn-upload {
+            background: #0f1f2f;
+            color: #1E88E5;
+            border-color: #1E88E5;
+        }
+
+        body.dark-mode .acad-avatar-container .btn-upload:hover {
+            background: #1E88E5;
+            color: #fff;
+        }
+
+        body.dark-mode .btn-back {
+            border-color: #2a4a5a;
+            color: #8aaabc;
+        }
+
+        body.dark-mode .btn-back:hover {
+            background: #0f1f2f;
+            border-color: #1E88E5;
+        }
+
+        /* --- Responsive --- */
+        @media (max-width: 480px) {
+            .acad-profile-card {
+                padding: 1.5rem 1.2rem;
+            }
+
+            .acad-avatar-container #profileAvatarImg {
+                width: 100px;
+                height: 100px;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .acad-profile-card .form-group input {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ============================================================
+    GLOBAL LOADING OVERLAY
+    ============================================================ -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-ring">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+        <h3 id="loadingTitle">SOLVATECH</h3>
+        <p id="loadingMessage">Loading your profile...</p>
+        <div class="loader-progress">
+            <div class="bar" id="loaderBar"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    TOAST NOTIFICATION
+    ============================================================ -->
+    <div class="toast-notification" id="customToast">
+        <i class="fa-solid fa-circle-check"></i>
+        <div class="toast-msg" id="toastMsg">Ready.</div>
+    </div>
+
+    <!-- ============================================================
+    PAGE CONTENT
+    ============================================================ -->
+    <div class="page-content">
+
+        <!-- ========== NAVIGATION ========== -->
+        <header class="navbar">
+            <div class="container nav-container">
+                <a href="acad.html" class="logo" onclick="location.href='acad.html'; return false;">
+                    <img src="academy-hero.png" alt="SOLVATECH" class="logo-img" style="border-radius:50%; width:40px; height:40px; object-fit:cover;" />
+                    <span class="logo-icon">◆</span> SOLVATECH
+                </a>
+                <div id="accountBadge">S</div>
+                <button class="nav-toggle" id="navToggle"><i class="fas fa-bars"></i></button>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="acad.html">HOME</a></li>
+                        <li><a href="courses.html">COURSES</a></li>
+                        <li><a href="settings.html" class="active">SETTINGS</a></li>
+                        <li><a href="#" id="logoutLink">LOGOUT</a></li>
+                    </ul>
+                    <div class="drawer-footer">
+                        <p>© 2026 SOLVATECH</p>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ========== SETTINGS CONTENT ========== -->
+        <section class="services-page-grid">
+            <div class="container" style="max-width: 600px; margin: 0 auto;">
+
+                <!-- Section Header -->
+                <div class="section-header">
+                    <span class="section-tag">SETTINGS</span>
+                    <h2 class="section-title gradient">Your Profile</h2>
+                    <p class="section-subtitle">Update your personal details.</p>
+                </div>
+
+                <!-- Profile Card -->
+                <div class="acad-profile-card">
+                    <!-- Avatar (Circular, centered) -->
+                    <div class="acad-avatar-container">
+                        <img src="default-avatar.png" alt="Avatar" id="profileAvatarImg" />
+                        <input type="file" id="profileImageInput" accept="image/*" style="display:none;" />
+                        <button class="btn-upload" id="uploadProfileBtn">
+                            <i class="fas fa-camera"></i> Upload Picture
+                        </button>
+                    </div>
+
+                    <!-- Form -->
+                    <div class="form-group">
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input type="text" id="profileName" value="Student" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="profileEmail" value="student@example.com" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone</label>
+                        <input type="tel" id="profilePhone" value="Not set" readonly />
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fab fa-whatsapp"></i> WhatsApp Number</label>
+                        <input type="tel" id="profileWhatsapp" placeholder="Enter your WhatsApp number" maxlength="15" />
+                        <div class="validation-hint" id="whatsappHint">
+                            <i class="fas fa-info-circle"></i> Enter 11 digits (e.g. 08012345678)
+                        </div>
+                    </div>
+                    <button class="btn-save-profile" id="profileSaveBtn" disabled>
+                        <i class="fas fa-save"></i> Save Profile
+                    </button>
+                </div>
+
+                <!-- Back Button -->
+                <div style="text-align:center; margin-top:1.5rem;">
+                    <a href="acad.html" class="btn-back">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </a>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+    <!-- end page-content -->
+
+    <!-- ============================================================
+    INLINE SCRIPT – WhatsApp Validation
+    ============================================================ -->
+    <script>
+        (function() {
+            'use strict';
+
+            // Wait for acad.js to load and populate the form
+            setTimeout(function() {
+                var waInput = document.getElementById('profileWhatsapp');
+                var saveBtn = document.getElementById('profileSaveBtn');
+                var hint = document.getElementById('whatsappHint');
+
+                if (!waInput || !saveBtn) return;
+
+                // Function to validate WhatsApp number (exactly 11 digits)
+                function validateWhatsApp(number) {
+                    var cleaned = number.replace(/\D/g, '');
+                    return cleaned.length === 11;
+                }
+
+                // Function to clean and format the number for display
+                function cleanNumber(number) {
+                    return number.replace(/\D/g, '');
+                }
+
+                // Real-time validation
+                waInput.addEventListener('input', function() {
+                    var value = this.value;
+                    var cleaned = cleanNumber(value);
+                    var isValid = validateWhatsApp(cleaned);
+
+                    if (value.length > 0) {
+                        if (isValid) {
+                            this.classList.remove('invalid');
+                            hint.className = 'validation-hint success';
+                            hint.innerHTML = '<i class="fas fa-check-circle"></i> Valid WhatsApp number (11 digits)';
+                            saveBtn.disabled = false;
+                        } else {
+                            this.classList.add('invalid');
+                            hint.className = 'validation-hint error';
+                            var remaining = 11 - cleaned.length;
+                            if (cleaned.length > 0 && cleaned.length < 11) {
+                                hint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Need ' + remaining + ' more digit(s) (11 total)';
+                            } else if (cleaned.length > 11) {
+                                hint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Too many digits (max 11)';
+                            } else {
+                                hint.innerHTML = '<i class="fas fa-info-circle"></i> Enter 11 digits (e.g. 08012345678)';
+                            }
+                            saveBtn.disabled = true;
+                        }
+                    } else {
+                        // Empty field
+                        this.classList.remove('invalid');
+                        hint.className = 'validation-hint';
+                        hint.innerHTML = '<i class="fas fa-info-circle"></i> Enter 11 digits (e.g. 08012345678)';
+                        saveBtn.disabled = true;
+                    }
+
+                    // Also check if there's an existing value from Firebase
+                    var existingValue = this.dataset.existingValue || '';
+                    if (existingValue && cleaned === cleanNumber(existingValue)) {
+                        // If the user hasn't changed the number, enable save if it was valid
+                        if (validateWhatsApp(existingValue)) {
+                            saveBtn.disabled = false;
+                        }
+                    }
+                });
+
+                // On blur, clean up the display
+                waInput.addEventListener('blur', function() {
+                    var value = this.value;
+                    var cleaned = cleanNumber(value);
+                    if (cleaned.length === 11) {
+                        // Format nicely
+                        var formatted = cleaned.replace(/(\d{3})(\d{3})(\d{4})/, '$1 $2 $3');
+                        this.value = formatted;
+                        this.classList.remove('invalid');
+                        hint.className = 'validation-hint success';
+                        hint.innerHTML = '<i class="fas fa-check-circle"></i> Valid WhatsApp number (11 digits)';
+                        saveBtn.disabled = false;
+                    } else if (cleaned.length > 0 && cleaned.length < 11) {
+                        this.classList.add('invalid');
+                        hint.className = 'validation-hint error';
+                        var remaining = 11 - cleaned.length;
+                        hint.innerHTML = '<i class="fas fa-exclamation-circle"></i> Need ' + remaining + ' more digit(s) (11 total)';
+                        saveBtn.disabled = true;
+                    }
+                });
+
+                // Store existing value when acad.js populates it
+                var observer = new MutationObserver(function() {
+                    if (waInput.value && waInput.value !== '') {
+                        var cleaned = cleanNumber(waInput.value);
+                        if (validateWhatsApp(cleaned)) {
+                            waInput.dataset.existingValue = waInput.value;
+                            saveBtn.disabled = false;
+                            waInput.classList.remove('invalid');
+                            hint.className = 'validation-hint success';
+                            hint.innerHTML = '<i class="fas fa-check-circle"></i> Valid WhatsApp number (11 digits)';
+                        }
+                    }
+                });
+                observer.observe(waInput, { attributes: true, attributeFilter: ['value'] });
+
+                // Also check after acad.js loads
+                setTimeout(function() {
+                    if (waInput.value && waInput.value !== '') {
+                        var cleaned = cleanNumber(waInput.value);
+                        if (validateWhatsApp(cleaned)) {
+                            waInput.dataset.existingValue = waInput.value;
+                            saveBtn.disabled = false;
+                            waInput.classList.remove('invalid');
+                            hint.className = 'validation-hint success';
+                            hint.innerHTML = '<i class="fas fa-check-circle"></i> Valid WhatsApp number (11 digits)';
+                        }
+                    }
+                }, 1000);
+
+                console.log('✅ Settings page: WhatsApp validation active.');
+
+            }, 500);
+
+        })();
+    </script>
+
+</body>
+</html>
