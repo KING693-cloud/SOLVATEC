@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
+============================================================ -->
+<meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+<meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+<meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
+<meta property="og:url" content="https://solvatech.name.ng" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SOLVATECH" />
+<meta property="og:locale" content="en_US" />
+
+<!-- ============================================================
+TWITTER CARDS
+============================================================ -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+<meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+<meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- ===== CSS (Modular) ===== -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/about.css" />
+
+    <!-- ===== JS (Modular) ===== -->
+    <script src="js/config.js"></script>
+    <script src="js/head-config.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/about.js"></script>
+</head>
+<body>
+
+    <!-- ============================================================
+    GLOBAL LOADING OVERLAY
+    ============================================================ -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-ring">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+        <h3 id="loadingTitle">SOLVATECH</h3>
+        <p id="loadingMessage">Loading your request...</p>
+        <div class="loader-progress">
+            <div class="bar" id="loaderBar"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    TOAST NOTIFICATION
+    ============================================================ -->
+    <div class="toast-notification" id="customToast">
+        <i class="fa-solid fa-circle-check"></i>
+        <div class="toast-msg" id="toastMsg">Ready.</div>
+    </div>
+
+    <!-- ============================================================
+    PAGE CONTENT
+    ============================================================ -->
+    <div class="page-content">
+
+        <!-- ========== NAVIGATION ========== -->
+        <header class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    <span class="logo-icon">◆</span> SOLVATECH
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="academy.html">Academy</a></li>
+                        <li><a href="about.html" class="active">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <div class="drawer-footer">
+                        <p>© 2026 SOLVATECH</p>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ========== HERO (Short & Bold) ========== -->
+        <section class="hero-short">
+            <div class="container hero-short-content">
+                <h1 class="hero-short-title">About <span>SOLVATECH</span></h1>
+                <p class="hero-short-tagline">Turning Ideas Into Digital Solutions.</p>
+            </div>
+        </section>
+
+        <!-- ========== 3 COLORFUL BOXES ========== -->
+        <section class="about-boxes-section">
+            <div class="container">
+                <div class="about-boxes-grid">
+
+                    <!-- Box 1: About -->
+                    <div class="about-box about-box-1">
+                        <div class="about-box-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3>About</h3>
+                        <p>We turn ideas into powerful digital solutions.</p>
+                        <div class="about-box-full" id="aboutFull">
+                            <p>SOLVATECH is a digital technology company helping businesses and creators build websites, apps, designs, and AI-powered solutions that drive real results.</p>
+                        </div>
+                        <button class="about-expand-btn" onclick="toggleExpand('aboutFull', this)">
+                            Read More <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+
+                    <!-- Box 2: Mission -->
+                    <div class="about-box about-box-2">
+                        <div class="about-box-icon">
+                            <i class="fas fa-bullseye"></i>
+                        </div>
+                        <h3>Mission</h3>
+                        <p>Empower businesses with digital solutions that drive growth and success.</p>
+                    </div>
+
+                    <!-- Box 3: Vision -->
+                    <div class="about-box about-box-3">
+                        <div class="about-box-icon">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <h3>Vision</h3>
+                        <p>To be Africa's most trusted digital solutions partner.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== VALUES ========== -->
+        <section class="values-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">CORE VALUES</span>
+                    <h2 class="section-title gradient">What We Believe</h2>
+                </div>
+
+                <div class="values-grid">
+                    <div class="value-card value-card-1">
+                        <div class="value-icon"><i class="fas fa-lightbulb"></i></div>
+                        <h3>Innovation</h3>
+                        <p>Fresh ideas, bold solutions.</p>
+                    </div>
+                    <div class="value-card value-card-2">
+                        <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                        <h3>Integrity</h3>
+                        <p>Honest, transparent, trusted.</p>
+                    </div>
+                    <div class="value-card value-card-3">
+                        <div class="value-icon"><i class="fas fa-users"></i></div>
+                        <h3>Collaboration</h3>
+                        <p>We work with you, not for you.</p>
+                    </div>
+                    <div class="value-card value-card-4">
+                        <div class="value-icon"><i class="fas fa-star"></i></div>
+                        <h3>Excellence</h3>
+                        <p>Quality in everything we do.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== TEAM ========== -->
+        <section class="team-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">FOUNDER</span>
+                    <h2 class="section-title gradient">Meet Solomon</h2>
+                </div>
+
+                <div class="team-single">
+                    <div class="team-member team-member-1">
+                        <div class="team-avatar">
+                            <img src="assets/solo.png" alt="Solomon" />
+                        </div>
+                        <h4>Solomon</h4>
+                        <span class="team-role">Founder &amp; Lead Developer</span>
+                        <p>Turning ideas into code. Building solutions that matter.</p>
+                        <div class="team-social">
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CTA ========== -->
+        <section class="cta-section">
+            <div class="container cta-content">
+                <h2>Ready to Bring Your Idea to Life?</h2>
+                <p>Let's work together to create something amazing.</p>
+                <div class="cta-buttons">
+                    <a href="contact.html" class="btn-primary btn-large">
+                        <i class="fas fa-paper-plane"></i> Get in Touch
+                    </a>
+                    <a href="services.html" class="btn-secondary btn-large">
+                        <i class="fas fa-cogs"></i> Explore Services
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    </a>
+                    <p>Turning Ideas Into Digital Solutions.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="academy.html">Academy</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> solvatech@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +234 904 997 9183</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nigeria</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <p>&copy; 2026 SOLVATECH. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- end page-content -->
+
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
+============================================================ -->
+<meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+<meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+<meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
+<meta property="og:url" content="https://solvatech.name.ng" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SOLVATECH" />
+<meta property="og:locale" content="en_US" />
+
+<!-- ============================================================
+TWITTER CARDS
+============================================================ -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+<meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+<meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- ===== CSS (Modular) ===== -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/academy.css" />
+
+    <!-- ===== JS (Modular) ===== -->
+    <script src="js/config.js"></script>
+    <script src="js/head-config.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/academy.js"></script>
+</head>
+<body>
+
+    <!-- ============================================================
+    GLOBAL LOADING OVERLAY
+    ============================================================ -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-ring">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+        <h3 id="loadingTitle">SOLVATECH</h3>
+        <p id="loadingMessage">Loading your request...</p>
+        <div class="loader-progress">
+            <div class="bar" id="loaderBar"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    TOAST NOTIFICATION
+    ============================================================ -->
+    <div class="toast-notification" id="customToast">
+        <i class="fa-solid fa-circle-check"></i>
+        <div class="toast-msg" id="toastMsg">Ready.</div>
+    </div>
+
+    <!-- ============================================================
+    PAGE CONTENT
+    ============================================================ -->
+    <div class="page-content">
+
+        <!-- ========== NAVIGATION ========== -->
+        <header class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    <span class="logo-icon">◆</span> SOLVATECH
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="academy.html" class="active">Academy</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <div class="drawer-footer">
+                        <p>© 2026 SOLVATECH</p>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ========== HERO ========== -->
+        <section class="academy-hero">
+            <div class="academy-hero-bg">
+                <img src="assets/hero-academy.png" alt="SOLVATECH Academy" />
+            </div>
+            <div class="container academy-hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Learn with us</span>
+                </div>
+                <h1 class="academy-hero-title">SOLVATECH <span>Academy</span></h1>
+                <p class="academy-hero-tagline">Master digital skills with AI-assisted learning.</p>
+                <p class="academy-hero-desc">
+                    From beginner to expert — learn web development, AI, design, and more.
+                </p>
+            </div>
+        </section>
+
+        <!-- ========== COURSES OVERVIEW ========== -->
+        <section class="academy-courses-section" id="courses">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">WHAT YOU'LL LEARN</span>
+                    <h2 class="section-title gradient">Choose Your Learning Path</h2>
+                    <p class="section-subtitle">Each course is structured with levels, projects, and AI-assisted support.</p>
+                </div>
+
+                <div class="courses-grid">
+
+                    <!-- Course 1: Web Development (Active) -->
+                    <div class="course-card course-active" data-course="Web Development" data-status="active">
+                        <div class="course-card-icon">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Build websites and web apps from scratch. Master HTML, CSS, JavaScript, and modern frameworks.</p>
+                        <div class="course-meta">
+                            <span class="course-status active">Available Now</span>
+                            <span class="course-levels">6 Levels</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="course-progress-bar" style="width:100%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Course 2: AI Creative (Coming Soon) -->
+                    <div class="course-card course-coming" data-course="AI Creative" data-status="coming">
+                        <div class="course-card-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3>AI Creative</h3>
+                        <p>Learn AI video, music, voice, and content automation. Create with the power of artificial intelligence.</p>
+                        <div class="course-meta">
+                            <span class="course-status coming">Coming Soon</span>
+                            <span class="course-levels">4 Levels</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="course-progress-bar" style="width:0%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Course 3: Graphic Design (Coming Soon) -->
+                    <div class="course-card course-coming" data-course="Graphic Design" data-status="coming">
+                        <div class="course-card-icon">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <h3>Graphic Design</h3>
+                        <p>Master logo design, branding, typography, and visual identity. Build a portfolio that stands out.</p>
+                        <div class="course-meta">
+                            <span class="course-status coming">Coming Soon</span>
+                            <span class="course-levels">4 Levels</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="course-progress-bar" style="width:0%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Course 4: Digital Solutions (Coming Soon) -->
+                    <div class="course-card course-coming" data-course="Digital Solutions" data-status="coming">
+                        <div class="course-card-icon">
+                            <i class="fas fa-lightbulb"></i>
+                        </div>
+                        <h3>Digital Solutions</h3>
+                        <p>Learn to build automation tools, custom systems, and digital products that solve real problems.</p>
+                        <div class="course-meta">
+                            <span class="course-status coming">Coming Soon</span>
+                            <span class="course-levels">3 Levels</span>
+                        </div>
+                        <div class="course-progress">
+                            <div class="course-progress-bar" style="width:0%;"></div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== WHY ACADEMY ========== -->
+        <section class="academy-why-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-tag">WHY SOLVATECH ACADEMY</span>
+                    <h2 class="section-title gradient">Learn Smarter, Not Harder</h2>
+                </div>
+
+                <div class="academy-why-grid">
+                    <div class="academy-why-item">
+                        <div class="academy-why-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h4>AI-Assisted Learning</h4>
+                        <p>Get personalized support with AI that adapts to your learning pace and style.</p>
+                    </div>
+                    <div class="academy-why-item">
+                        <div class="academy-why-icon">
+                            <i class="fas fa-project-diagram"></i>
+                        </div>
+                        <h4>Project-Based</h4>
+                        <p>Build real projects that prepare you for the digital economy. Learn by doing.</p>
+                    </div>
+                    <div class="academy-why-item">
+                        <div class="academy-why-icon">
+                            <i class="fas fa-certificate"></i>
+                        </div>
+                        <h4>Certification</h4>
+                        <p>Earn a certificate after completing all levels. Showcase your skills to employers.</p>
+                    </div>
+                    <div class="academy-why-item">
+                        <div class="academy-why-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h4>Community Support</h4>
+                        <p>Join a community of learners. Get help, share ideas, and grow together.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== GET STARTED (Register / Login) ========== -->
+        <section class="academy-cta-section" id="get-started">
+            <div class="container">
+                <div class="academy-cta-content">
+                    <h2>Ready to Start Your Learning Journey?</h2>
+                    <p>Create an account and begin your path to mastery.</p>
+                    <div class="academy-cta-buttons">
+                        <a href="register.html" class="btn-academy btn-large">
+                            <i class="fas fa-user-plus"></i> Register
+                        </a>
+                        <a href="login.html" class="btn-secondary btn-large" style="border-color:rgba(255,255,255,0.3); color:#FFFFFF;">
+                            <i class="fas fa-sign-in-alt"></i> Login
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    </a>
+                    <p>Turning Ideas Into Digital Solutions.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="academy.html">Academy</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> solvatech@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +234 904 997 9183</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nigeria</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <p>&copy; 2026 SOLVATECH. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- end page-content -->
+
+</body>
+</html>

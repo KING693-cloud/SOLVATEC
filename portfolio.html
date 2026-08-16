@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
+============================================================ -->
+<meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+<meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+<meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
+<meta property="og:url" content="https://solvatech.name.ng" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SOLVATECH" />
+<meta property="og:locale" content="en_US" />
+
+<!-- ============================================================
+TWITTER CARDS
+============================================================ -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+<meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+<meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- ===== CSS (Modular) ===== -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/portfolio.css" />
+
+    <!-- ===== JS (Modular) ===== -->
+    <script src="js/config.js"></script>
+    <script src="js/head-config.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/portfolio.js"></script>
+</head>
+<body>
+
+    <!-- ============================================================
+    GLOBAL LOADING OVERLAY
+    ============================================================ -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-ring">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+        <h3 id="loadingTitle">SOLVATECH</h3>
+        <p id="loadingMessage">Loading your request...</p>
+        <div class="loader-progress">
+            <div class="bar" id="loaderBar"></div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    TOAST NOTIFICATION
+    ============================================================ -->
+    <div class="toast-notification" id="customToast">
+        <i class="fa-solid fa-circle-check"></i>
+        <div class="toast-msg" id="toastMsg">Ready.</div>
+    </div>
+
+    <!-- ============================================================
+    PROJECT DETAIL MODAL (NO CLOSE BUTTON)
+    ============================================================ -->
+    <div class="project-modal-overlay" id="projectModal">
+        <div class="project-modal">
+            <div class="project-modal-content">
+                <div class="project-modal-image">
+                    <img id="modalProjectImage" src="assets/project-1.png" alt="Project" />
+                </div>
+                <div class="project-modal-body">
+                    <span class="modal-project-category" id="modalProjectCategory">Category</span>
+                    <h2 id="modalProjectTitle">Project Title</h2>
+                    <div class="modal-project-meta">
+                        <div class="modal-meta-item">
+                            <i class="fas fa-user"></i>
+                            <span><strong>Client:</strong> <span id="modalProjectClient">Client Name</span></span>
+                        </div>
+                        <div class="modal-meta-item">
+                            <i class="fas fa-calendar"></i>
+                            <span><strong>Year:</strong> <span id="modalProjectDate">2025</span></span>
+                        </div>
+                        <div class="modal-meta-item">
+                            <i class="fas fa-clock"></i>
+                            <span><strong>Duration:</strong> <span id="modalProjectDuration">4 weeks</span></span>
+                        </div>
+                        <div class="modal-meta-item">
+                            <i class="fas fa-industry"></i>
+                            <span><strong>Industry:</strong> <span id="modalProjectIndustry">Tech</span></span>
+                        </div>
+                        <div class="modal-meta-item">
+                            <i class="fas fa-users"></i>
+                            <span><strong>Team:</strong> <span id="modalProjectTeam">2 people</span></span>
+                        </div>
+                        <div class="modal-meta-item">
+                            <i class="fas fa-tools"></i>
+                            <span><strong>Tech:</strong> <span id="modalProjectTech">React, Firebase</span></span>
+                        </div>
+                    </div>
+                    <div class="modal-project-desc">
+                        <h4>The Challenge</h4>
+                        <p id="modalProjectChallenge">The client needed a digital solution that would streamline their operations and improve customer engagement.</p>
+                        <h4>The Solution</h4>
+                        <p id="modalProjectSolution">We built a custom platform that integrated seamlessly with their existing workflow, resulting in a 40% increase in efficiency.</p>
+                        <h4>The Result</h4>
+                        <p id="modalProjectResult">The project delivered measurable results, including higher customer satisfaction and reduced operational costs.</p>
+                    </div>
+                    <div class="modal-project-actions">
+                        <a href="contact.html" class="btn-primary btn-large" style="width:100%; text-align:center; justify-content:center;">
+                            <i class="fas fa-paper-plane"></i> Start a Project
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    PAGE CONTENT
+    ============================================================ -->
+    <div class="page-content">
+
+        <!-- ========== NAVIGATION ========== -->
+        <header class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    <span class="logo-icon">◆</span> SOLVATECH
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html" class="active">Portfolio</a></li>
+                        <li><a href="academy.html">Academy</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <div class="drawer-footer">
+                        <p>© 2026 SOLVATECH</p>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- ========== HERO ========== -->
+        <section class="hero-short">
+            <div class="hero-bg-image">
+                <img src="assets/hero-portfolio.png" alt="SOLVATECH Portfolio" />
+            </div>
+            <div class="container hero-short-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Our work</span>
+                </div>
+                <h1 class="hero-short-title">Our Portfolio</h1>
+                <p class="hero-short-tagline">Real projects, real results. See what we've built.</p>
+            </div>
+        </section>
+
+        <!-- ========== FILTER TABS ========== -->
+        <section class="portfolio-filter-section">
+            <div class="container">
+                <div class="filter-tabs">
+                    <button class="filter-tab active" data-filter="all">All</button>
+                    <button class="filter-tab" data-filter="website">Websites</button>
+                    <button class="filter-tab" data-filter="app">Apps</button>
+                    <button class="filter-tab" data-filter="branding">Branding</button>
+                    <button class="filter-tab" data-filter="ai">AI Creative</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== PORTFOLIO GRID ========== -->
+        <section class="portfolio-grid-section">
+            <div class="container">
+                <div class="portfolio-grid">
+
+                    <!-- ===== Project 1 ===== -->
+                    <div class="portfolio-item" data-category="website" 
+                         data-title="E-Commerce Platform"
+                         data-client="TechStore NG"
+                         data-date="2025"
+                         data-duration="6 weeks"
+                         data-industry="Retail / E-commerce"
+                         data-team="2 people"
+                         data-tech="React, Firebase, Flutterwave"
+                         data-challenge="The client needed a full-featured online store that could handle hundreds of products, process secure payments, and manage inventory in real-time. They needed a solution that was scalable and easy to maintain."
+                         data-solution="We built a custom e-commerce platform with a clean, modern interface. The system includes automated inventory management, secure payment processing via Flutterwave, order tracking, and an admin dashboard for managing products and orders."
+                         data-result="The platform launched successfully and has processed over 500 orders in its first month. The client reported a 35% increase in sales and a 50% reduction in order processing time."
+                         data-img="assets/project-1.png">
+                        <div class="portfolio-image-wrapper">
+                            <img src="assets/project-1.png" alt="E-Commerce Platform" />
+                            <div class="portfolio-overlay">
+                                <span class="portfolio-view-btn">View Details</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-content">
+                            <h3>E-Commerce Platform</h3>
+                            <span class="portfolio-category">Website</span>
+                            <p>Full-featured online store with payment integration.</p>
+                        </div>
+                    </div>
+
+                    <!-- ===== Project 2 ===== -->
+                    <div class="portfolio-item" data-category="branding"
+                         data-title="Brand Identity Design"
+                         data-client="Zuri Labs"
+                         data-date="2025"
+                         data-duration="3 weeks"
+                         data-industry="Technology / SaaS"
+                         data-team="1 person"
+                         data-tech="Adobe Suite, Figma"
+                         data-challenge="Zuri Labs needed a complete brand identity that would position them as a modern, innovative technology company. They needed to stand out in a competitive market."
+                         data-solution="We developed a comprehensive brand identity including a distinctive logo, a cohesive color palette, custom typography, and detailed brand guidelines. The design focused on conveying innovation, trust, and professionalism."
+                         data-result="The new brand identity was launched successfully, with positive feedback from stakeholders. The client reported increased brand recognition and a stronger market presence."
+                         data-img="assets/project-2.png">
+                        <div class="portfolio-image-wrapper">
+                            <img src="assets/project-2.png" alt="Brand Identity Design" />
+                            <div class="portfolio-overlay">
+                                <span class="portfolio-view-btn">View Details</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-content">
+                            <h3>Brand Identity Design</h3>
+                            <span class="portfolio-category">Branding</span>
+                            <p>Complete visual identity for a modern tech startup.</p>
+                        </div>
+                    </div>
+
+                    <!-- ===== Project 3 ===== -->
+                    <div class="portfolio-item" data-category="app"
+                         data-title="Delivery Mobile App"
+                         data-client="SwiftEats"
+                         data-date="2025"
+                         data-duration="8 weeks"
+                         data-industry="Food Delivery / Logistics"
+                         data-team="3 people"
+                         data-tech="Flutter, Firebase, Google Maps API"
+                         data-challenge="SwiftEats needed a mobile app that would allow customers to order food from local restaurants with real-time tracking. The app needed to be fast, reliable, and user-friendly."
+                         data-solution="We built a cross-platform mobile app using Flutter. The app features real-time GPS tracking, secure payments, order management, and a restaurant dashboard. The design focused on simplicity and speed."
+                         data-result="The app has been downloaded over 1,000 times in the first month. Customer satisfaction is high, with an average rating of 4.8 stars on the app stores."
+                         data-img="assets/project-3.png">
+                        <div class="portfolio-image-wrapper">
+                            <img src="assets/project-3.png" alt="Delivery Mobile App" />
+                            <div class="portfolio-overlay">
+                                <span class="portfolio-view-btn">View Details</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-content">
+                            <h3>Delivery Mobile App</h3>
+                            <span class="portfolio-category">App</span>
+                            <p>On-demand delivery app with real-time tracking.</p>
+                        </div>
+                    </div>
+
+                    <!-- ===== Project 4 ===== -->
+                    <div class="portfolio-item" data-category="ai"
+                         data-title="AI Video Production"
+                         data-client="Creative Hub"
+                         data-date="2025"
+                         data-duration="2 weeks"
+                         data-industry="Media / Marketing"
+                         data-team="1 person"
+                         data-tech="Runway ML, Adobe Premiere"
+                         data-challenge="Creative Hub needed high-quality promotional videos for their social media campaigns but had limited budget and time. They needed a cost-effective solution."
+                         data-solution="We leveraged AI video generation tools to create professional, engaging videos in a fraction of the time. The videos were optimized for social media platforms and tailored to the client's brand voice."
+                         data-result="The AI-generated videos were delivered within 2 weeks, saving the client over 70% of traditional production costs. Engagement rates on social media increased by 45%."
+                         data-img="assets/project-4.png">
+                        <div class="portfolio-image-wrapper">
+                            <img src="assets/project-4.png" alt="AI Video Production" />
+                            <div class="portfolio-overlay">
+                                <span class="portfolio-view-btn">View Details</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-content">
+                            <h3>AI Video Production</h3>
+                            <span class="portfolio-category">AI Creative</span>
+                            <p>AI-generated promotional videos for social media.</p>
+                        </div>
+                    </div>
+
+                    <!-- ===== Project 5 ===== -->
+                    <div class="portfolio-item" data-category="website"
+                         data-title="Business Dashboard"
+                         data-client="SalesPro NG"
+                         data-date="2025"
+                         data-duration="5 weeks"
+                         data-industry="Business / Analytics"
+                         data-team="2 people"
+                         data-tech="React, Node.js, MongoDB"
+                         data-challenge="SalesPro NG needed a real-time analytics dashboard to help business owners track sales, customer behavior, and performance metrics. They needed a tool that was both powerful and easy to use."
+                         data-solution="We built a custom dashboard with interactive charts, real-time data updates, and customizable reports. The platform integrates with existing data sources and provides actionable insights."
+                         data-result="The dashboard has been adopted by over 50 businesses. Users report improved decision-making and a 20% increase in operational efficiency."
+                         data-img="assets/project-5.png">
+                        <div class="portfolio-image-wrapper">
+                            <img src="assets/project-5.png" alt="Business Dashboard" />
+                            <div class="portfolio-overlay">
+                                <span class="portfolio-view-btn">View Details</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-content">
+                            <h3>Business Dashboard</h3>
+                            <span class="portfolio-category">Website</span>
+                            <p>Real-time analytics dashboard for business owners.</p>
+                        </div>
+                    </div>
+
+                    <!-- ===== Project 6 ===== -->
+                    <div class="portfolio-item" data-category="branding"
+                         data-title="Complete Branding Package"
+                         data-client="PayWave Fintech"
+                         data-date="2025"
+                         data-duration="4 weeks"
+                         data-industry="Finance / Fintech"
+                         data-team="1 person"
+                         data-tech="Adobe Suite, Illustrator"
+                         data-challenge="PayWave needed a complete brand identity that would build trust and convey professionalism. The fintech industry requires a brand that inspires confidence."
+                         data-solution="We designed a comprehensive brand package including logo, business cards, stationery, digital assets, and brand guidelines. The design focused on modern professionalism with a touch of warmth."
+                         data-result="The brand was successfully launched and has helped PayWave attract significant investment and partnerships. The brand is now recognized as one of the most trusted in the fintech space."
+                         data-img="assets/project-6.png">
+                        <div class="portfolio-image-wrapper">
+                            <img src="assets/project-6.png" alt="Complete Branding Package" />
+                            <div class="portfolio-overlay">
+                                <span class="portfolio-view-btn">View Details</span>
+                            </div>
+                        </div>
+                        <div class="portfolio-item-content">
+                            <h3>Complete Branding Package</h3>
+                            <span class="portfolio-category">Branding</span>
+                            <p>Logo, guidelines, and full brand identity for a fintech company.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== CTA ========== -->
+        <section class="cta-section">
+            <div class="container cta-content">
+                <h2>Ready to Build Your Digital Solution?</h2>
+                <p>Let's turn your idea into reality. Start your project today.</p>
+                <div class="cta-buttons">
+                    <a href="services.html" class="btn-primary btn-large">
+                        <i class="fas fa-rocket"></i> Start a Project
+                    </a>
+                    <a href="contact.html" class="btn-secondary btn-large">
+                        <i class="fas fa-comment"></i> Get in Touch
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- ========== FOOTER ========== -->
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    </a>
+                    <p>Turning Ideas Into Digital Solutions.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="academy.html">Academy</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> solvatech@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +234 904 997 9183</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nigeria</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <p>&copy; 2026 SOLVATECH. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- end page-content -->
+
+</body>
+</html>

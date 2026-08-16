@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- ============================================================
+OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
+============================================================ -->
+<meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+<meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+<meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
+<meta property="og:url" content="https://solvatech.name.ng" />
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="SOLVATECH" />
+<meta property="og:locale" content="en_US" />
+
+<!-- ============================================================
+TWITTER CARDS
+============================================================ -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+<meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+<meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/global.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/auth.css" />
+
+    <!-- Firebase SDK (Compat – Realtime Database) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+    <!-- JS -->
+    <script src="js/config.js"></script>
+    <script src="js/head-config.js"></script>
+    <script src="js/global.js"></script>
+    <script src="js/auth.js"></script>
+</head>
+<body>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner-ring">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+        <h3 id="loadingTitle">SOLVATECH</h3>
+        <p id="loadingMessage">Loading your request...</p>
+        <div class="loader-progress">
+            <div class="bar" id="loaderBar"></div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div class="toast-notification" id="customToast">
+        <i class="fa-solid fa-circle-check"></i>
+        <div class="toast-msg" id="toastMsg">Ready.</div>
+    </div>
+
+    <!-- ============================================================
+    FORGOT PASSWORD MODAL
+    ============================================================ -->
+    <div class="forgot-modal-overlay" id="forgotModal">
+        <div class="forgot-modal">
+            <button class="forgot-modal-close" id="forgotModalClose">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="forgot-modal-content">
+                <div class="forgot-modal-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <h2>Reset Password</h2>
+                <p>Enter your email address and we'll send you a password reset link if you have an account.</p>
+                <form id="forgotPasswordForm" autocomplete="off">
+                    <div class="form-group">
+                        <label for="resetEmail"><i class="fas fa-envelope"></i> Email Address</label>
+                        <input type="email" id="resetEmail" placeholder="you@example.com" required />
+                        <div class="form-error" id="resetEmailError">Please enter a valid email address</div>
+                    </div>
+                    <button type="submit" class="btn-primary btn-auth" id="resetPasswordBtn">
+                        <i class="fas fa-paper-plane"></i> Send Reset Link
+                    </button>
+                </form>
+                <!-- Success State -->
+                <div class="success-state" style="display:none;">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Check Your Email</h3>
+                    <p id="successMessage">We've sent a password reset link to your email address. Please check your inbox (and spam folder).</p>
+                </div>
+                <!-- Email not found state -->
+                <div class="email-notfound-state" style="display:none;">
+                    <i class="fas fa-exclamation-circle" style="color:#f59e0b;"></i>
+                    <h3 style="color:#0B1A2E;">No Account Found</h3>
+                    <p style="color:#555;">We couldn't find an account with that email address. Please check and try again.</p>
+                </div>
+                <p class="forgot-modal-back">
+                    <a href="#" id="forgotModalBack">Back to Login</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ============================================================
+    PAGE CONTENT
+    ============================================================ -->
+    <div class="page-content">
+
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="logo">
+                    <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    <span class="logo-icon">◆</span> SOLVATECH
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="academy.html">Academy</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <div class="drawer-footer">
+                        <p>© 2026 SOLVATECH</p>
+                    </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="auth-hero">
+            <div class="auth-hero-bg">
+                <img src="assets/hero-academy.png" alt="SOLVATECH Academy" />
+            </div>
+            <div class="container auth-hero-content">
+                <div class="hero-badge">
+                    <span class="badge-dot"></span>
+                    <span>Welcome back</span>
+                </div>
+                <h1 class="auth-hero-title">Log In</h1>
+                <p class="auth-hero-tagline">Sign in to your account and continue your learning journey.</p>
+            </div>
+        </section>
+
+        <!-- Login Form -->
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-card">
+                    <div class="auth-card-header">
+                        <h2>Welcome Back</h2>
+                        <p>Enter your credentials to access your account.</p>
+                    </div>
+
+                    <form id="loginForm" autocomplete="off">
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address <span class="required">*</span></label>
+                            <input type="email" id="loginEmail" placeholder="you@example.com" required />
+                            <div class="form-error" id="loginEmailError">Please enter a valid email address</div>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="loginPassword"><i class="fas fa-lock"></i> Password <span class="required">*</span></label>
+                            <div class="password-wrapper">
+                                <input type="password" id="loginPassword" placeholder="Enter your password" required />
+                                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('loginPassword', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="form-error" id="loginPasswordError">Please enter your password</div>
+                        </div>
+
+                        <!-- Forgot Password -->
+                        <div class="form-group" style="text-align:right; margin-bottom:1.5rem;">
+                            <a href="#" id="forgotPasswordLink" style="font-size:0.85rem; color:#1E88E5; font-weight:600;">Forgot Password?</a>
+                        </div>
+
+                        <!-- Submit -->
+                        <button type="submit" class="btn-primary btn-auth" id="loginBtn">
+                            <i class="fas fa-sign-in-alt"></i> Log In
+                        </button>
+
+                        <p class="auth-switch">
+                            Don't have an account? <a href="register.html">Sign up here</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo">
+                        <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    </a>
+                    <p>Turning Ideas Into Digital Solutions.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="services.html">Services</a></li>
+                        <li><a href="portfolio.html">Portfolio</a></li>
+                        <li><a href="academy.html">Academy</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contact</h4>
+                    <p><i class="fas fa-envelope"></i> solvatech@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +234 904 997 9183</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nigeria</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="container">
+                    <p>&copy; <span id="copyright-year">2026</span> SOLVATECH. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- end page-content -->
+
+</body>
+</html>
