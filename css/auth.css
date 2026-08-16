@@ -1,1 +1,603 @@
+/* ============================================================
+   SOLVATECH - AUTH CSS
+   For login.html and register.html
+   ============================================================ */
 
+/* ---------- AUTH HERO (Academy Style) ---------- */
+.auth-hero {
+    padding: 3rem 0 2.5rem;
+    text-align: center;
+    background: linear-gradient(145deg, #0B1A2E 0%, #1E3A5F 60%, #1E88E5 100%);
+    color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    min-height: 35vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.auth-hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+.auth-hero-bg img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.15;
+}
+.auth-hero-content {
+    position: relative;
+    z-index: 2;
+}
+.auth-hero-title {
+    font-size: 3rem;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+.auth-hero-tagline {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    margin-top: 0.3rem;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* ---------- AUTH SECTION ---------- */
+.auth-section {
+    padding: 2.5rem 0 4rem;
+    background: linear-gradient(180deg, #F5F8FC 0%, #FFFFFF 100%);
+}
+.auth-card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: #FFFFFF;
+    padding: 2.5rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+}
+.auth-card-header {
+    text-align: center;
+    margin-bottom: 1.8rem;
+}
+.auth-card-header h2 {
+    font-size: 1.8rem;
+    color: #0B1A2E;
+}
+.auth-card-header p {
+    color: #555;
+    font-size: 0.95rem;
+}
+
+/* ---------- FORM GROUP ---------- */
+.form-group {
+    margin-bottom: 1.2rem;
+}
+.form-group label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #0B1A2E;
+    margin-bottom: 0.3rem;
+}
+.form-group label .required {
+    color: #ef4444;
+}
+.form-group input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border: 2px solid #dce4f0;
+    border-radius: 12px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #FAFCFE;
+    color: #1E1E1E;
+}
+.form-group input:focus {
+    outline: none;
+    border-color: #1E88E5;
+    box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.08);
+}
+.form-group input.invalid {
+    border-color: #ef4444;
+}
+.form-group input.valid {
+    border-color: #10b981;
+}
+.form-error {
+    display: none;
+    font-size: 0.75rem;
+    color: #ef4444;
+    margin-top: 0.3rem;
+}
+
+/* ---------- PASSWORD TOGGLE ---------- */
+.password-wrapper {
+    position: relative;
+}
+.password-wrapper input {
+    padding-right: 3rem;
+}
+.toggle-password {
+    position: absolute;
+    right: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    color: #8aaabc;
+    cursor: pointer;
+    padding: 0.3rem;
+}
+.toggle-password:hover {
+    color: #1E88E5;
+}
+
+/* ---------- FORGOT PASSWORD LINK ---------- */
+#forgotPasswordLink {
+    transition: color 0.3s ease;
+}
+#forgotPasswordLink:hover {
+    text-decoration: underline;
+    color: #1565C0 !important;
+}
+
+/* ---------- SUBMIT BUTTON ---------- */
+.btn-auth {
+    width: 100%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 12px;
+}
+
+/* ---------- SWITCH LINK ---------- */
+.auth-switch {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #555;
+    margin-top: 1.2rem;
+}
+.auth-switch a {
+    color: #1E88E5;
+    font-weight: 600;
+}
+.auth-switch a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   CHECKBOX (Register)
+   ============================================================ */
+.checkbox-group {
+    margin-bottom: 1.5rem;
+}
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.9rem;
+    color: #555;
+    cursor: pointer;
+}
+.checkbox-label input[type="checkbox"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #dce4f0;
+    border-radius: 4px;
+    flex-shrink: 0;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.checkbox-label input[type="checkbox"]:checked {
+    background: #1E88E5;
+    border-color: #1E88E5;
+}
+.checkbox-label input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+    font-size: 12px;
+}
+.checkbox-label a {
+    color: #1E88E5;
+    font-weight: 600;
+    cursor: pointer;
+}
+.checkbox-label a:hover {
+    text-decoration: underline;
+}
+
+/* ============================================================
+   FORGOT PASSWORD MODAL
+   ============================================================ */
+.forgot-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+.forgot-modal-overlay.active {
+    display: flex;
+}
+.forgot-modal {
+    background: #FFFFFF;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    animation: modalPop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    overflow: hidden;
+}
+.forgot-modal-close {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    color: #0B1A2E;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.forgot-modal-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+}
+.forgot-modal-content {
+    padding: 2.2rem 2rem 2rem;
+    text-align: center;
+}
+.forgot-modal-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(30, 136, 229, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: #1E88E5;
+    margin: 0 auto 0.8rem;
+}
+.forgot-modal-content h2 {
+    font-size: 1.5rem;
+    color: #0B1A2E;
+    margin-bottom: 0.3rem;
+}
+.forgot-modal-content p {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+}
+.forgot-modal-content .form-group {
+    text-align: left;
+    margin-bottom: 1.2rem;
+}
+.forgot-modal-content .form-group label {
+    font-size: 0.85rem;
+}
+.forgot-modal-content .form-group input {
+    font-size: 0.95rem;
+}
+.forgot-modal-content .btn-auth {
+    margin-top: 0.3rem;
+}
+.forgot-modal-back {
+    margin-top: 1rem;
+    font-size: 0.85rem;
+}
+.forgot-modal-back a {
+    color: #1E88E5;
+    font-weight: 600;
+}
+.forgot-modal-back a:hover {
+    text-decoration: underline;
+}
+
+/* ---------- SUCCESS STATE ---------- */
+.success-state {
+    padding: 0.5rem 0;
+}
+.success-state i {
+    font-size: 3.5rem;
+    color: #10b981;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.success-state h3 {
+    font-size: 1.3rem;
+    color: #0B1A2E;
+    margin-bottom: 0.3rem;
+}
+.success-state p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ---------- EMAIL NOT FOUND STATE ---------- */
+.email-notfound-state {
+    padding: 0.5rem 0;
+}
+.email-notfound-state i {
+    font-size: 3.5rem;
+    color: #f59e0b;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+.email-notfound-state h3 {
+    font-size: 1.3rem;
+    color: #0B1A2E;
+    margin-bottom: 0.3rem;
+}
+.email-notfound-state p {
+    color: #555;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+/* ============================================================
+   TERMS & PRIVACY MODAL (Register)
+   ============================================================ */
+.terms-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99998;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+.terms-modal-overlay.active {
+    display: flex;
+}
+.terms-modal {
+    background: #FFFFFF;
+    border-radius: 20px;
+    max-width: 520px;
+    width: 100%;
+    max-height: 85vh;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    animation: modalPop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+}
+.terms-modal-close {
+    position: absolute;
+    top: 0.8rem;
+    right: 0.8rem;
+    background: rgba(0, 0, 0, 0.05);
+    border: none;
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    font-size: 1.2rem;
+    color: #0B1A2E;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.terms-modal-close:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: rotate(90deg);
+}
+.terms-modal-content {
+    padding: 2rem 2rem 1.8rem;
+}
+.terms-modal-content h2 {
+    font-size: 1.5rem;
+    color: #0B1A2E;
+    margin-bottom: 1rem;
+}
+.terms-modal-body {
+    max-height: 50vh;
+    overflow-y: auto;
+    padding-right: 0.5rem;
+}
+.terms-modal-body::-webkit-scrollbar {
+    width: 4px;
+}
+.terms-modal-body::-webkit-scrollbar-track {
+    background: transparent;
+}
+.terms-modal-body::-webkit-scrollbar-thumb {
+    background: #1E88E5;
+    border-radius: 4px;
+}
+.terms-modal-body h3 {
+    font-size: 1rem;
+    color: #0B1A2E;
+    margin: 1rem 0 0.3rem;
+}
+.terms-modal-body p {
+    font-size: 0.9rem;
+    color: #444;
+    line-height: 1.6;
+    margin-bottom: 0.5rem;
+}
+.terms-modal-footer {
+    margin-top: 1.2rem;
+    padding-top: 1rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+.terms-modal-footer .btn-primary {
+    width: 100%;
+    justify-content: center;
+}
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+body.dark-mode .auth-hero {
+    background: linear-gradient(145deg, #0B1A2E 0%, #1E3A5F 60%, #1E88E5 100%);
+}
+body.dark-mode .auth-section {
+    background: linear-gradient(180deg, #0a1a2a 0%, #0f1f2f 100%);
+}
+body.dark-mode .auth-card {
+    background: #122a3a;
+    border-color: rgba(255, 255, 255, 0.04);
+}
+body.dark-mode .auth-card-header h2 {
+    color: #eef4ff;
+}
+body.dark-mode .auth-card-header p {
+    color: #8aaabc;
+}
+body.dark-mode .form-group label {
+    color: #eef4ff;
+}
+body.dark-mode .form-group input {
+    background: #0a1a2a;
+    border-color: #2a4a5a;
+    color: #eef4ff;
+}
+body.dark-mode .form-group input:focus {
+    border-color: #1E88E5;
+}
+body.dark-mode .checkbox-label {
+    color: #8aaabc;
+}
+body.dark-mode .auth-switch {
+    color: #8aaabc;
+}
+body.dark-mode .auth-switch a {
+    color: #64B5F6;
+}
+body.dark-mode .toggle-password {
+    color: #8aaabc;
+}
+body.dark-mode .toggle-password:hover {
+    color: #64B5F6;
+}
+body.dark-mode #forgotPasswordLink {
+    color: #64B5F6;
+}
+body.dark-mode #forgotPasswordLink:hover {
+    color: #1E88E5 !important;
+}
+body.dark-mode .forgot-modal {
+    background: #122a3a;
+}
+body.dark-mode .forgot-modal-close {
+    background: rgba(255, 255, 255, 0.08);
+    color: #eef4ff;
+}
+body.dark-mode .forgot-modal-close:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+body.dark-mode .forgot-modal-content h2 {
+    color: #eef4ff;
+}
+body.dark-mode .forgot-modal-content p {
+    color: #8aaabc;
+}
+body.dark-mode .forgot-modal-icon {
+    background: rgba(30, 136, 229, 0.15);
+}
+body.dark-mode .success-state h3 {
+    color: #eef4ff;
+}
+body.dark-mode .success-state p {
+    color: #8aaabc;
+}
+body.dark-mode .email-notfound-state h3 {
+    color: #eef4ff;
+}
+body.dark-mode .email-notfound-state p {
+    color: #8aaabc;
+}
+body.dark-mode .terms-modal {
+    background: #122a3a;
+}
+body.dark-mode .terms-modal-close {
+    background: rgba(255, 255, 255, 0.08);
+    color: #eef4ff;
+}
+body.dark-mode .terms-modal-close:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+body.dark-mode .terms-modal-content h2 {
+    color: #eef4ff;
+}
+body.dark-mode .terms-modal-body h3 {
+    color: #eef4ff;
+}
+body.dark-mode .terms-modal-body p {
+    color: #8aaabc;
+}
+body.dark-mode .terms-modal-footer {
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 480px) {
+    .auth-card {
+        padding: 1.8rem 1.2rem;
+    }
+    .auth-hero-title {
+        font-size: 2.2rem;
+    }
+    .auth-hero-tagline {
+        font-size: 1rem;
+    }
+    .forgot-modal-content {
+        padding: 1.8rem 1.2rem;
+    }
+    .terms-modal-content {
+        padding: 1.5rem;
+    }
+    .forgot-modal {
+        max-width: 100%;
+        border-radius: 12px;
+    }
+    .terms-modal {
+        max-width: 100%;
+        border-radius: 12px;
+    }
+}

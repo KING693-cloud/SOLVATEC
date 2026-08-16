@@ -1,0 +1,569 @@
+/* ============================================================
+   SOLVATECH - ANIMATIONS CSS
+   Loads on EVERY page. Contains: Loading Overlay, Toast,
+   Keyframes, Transitions, and Smooth Page Entry.
+   ============================================================ */
+
+/* ============================================================
+   1. LOADING OVERLAY
+   ============================================================ */
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 99999;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInUp 0.3s ease;
+}
+
+.loading-overlay.active {
+    display: flex;
+}
+
+/* ---------- SPINNER RINGS ---------- */
+.loading-overlay .spinner-ring {
+    position: relative;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+}
+
+.loading-overlay .spinner-ring .ring {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid transparent;
+    border-top-color: #1E88E5;
+    animation: spin 1.2s cubic-bezier(0.6, 0, 0.4, 1) infinite;
+}
+
+.loading-overlay .spinner-ring .ring:nth-child(2) {
+    width: 80%;
+    height: 80%;
+    top: 10%;
+    left: 10%;
+    border-top-color: #10b981;
+    animation-duration: 0.9s;
+    animation-direction: reverse;
+}
+
+.loading-overlay .spinner-ring .ring:nth-child(3) {
+    width: 60%;
+    height: 60%;
+    top: 20%;
+    left: 20%;
+    border-top-color: #f59e0b;
+    animation-duration: 0.7s;
+}
+
+/* ---------- LOADING TEXT ---------- */
+.loading-overlay h3 {
+    color: #0B1A2E;
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-top: 8px;
+}
+
+.loading-overlay p {
+    color: #555;
+    font-size: 0.8rem;
+    margin-top: 4px;
+}
+
+/* ---------- LOADING PROGRESS BAR ---------- */
+.loading-overlay .loader-progress {
+    width: 200px;
+    height: 3px;
+    background: #dce4f0;
+    border-radius: 4px;
+    margin-top: 16px;
+    overflow: hidden;
+}
+
+.loading-overlay .loader-progress .bar {
+    height: 100%;
+    background: linear-gradient(90deg, #1E88E5, #10b981);
+    border-radius: 4px;
+    width: 0%;
+    background-size: 200% 100%;
+    animation: shimmer 1.5s ease-in-out infinite;
+}
+
+.loading-overlay.hiding {
+    animation: fadeOutDown 0.3s ease forwards;
+}
+
+/* ============================================================
+   2. TOAST NOTIFICATION
+   ============================================================ */
+
+.toast-notification {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-120px);
+    width: calc(100% - 32px);
+    max-width: 400px;
+    background: #1a2a3a;
+    border-left: 4px solid #1E88E5;
+    padding: 15px;
+    border-radius: 10px;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 9999;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.toast-notification.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+.toast-notification i {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.toast-notification .toast-msg {
+    font-size: 0.85rem;
+    font-weight: 600;
+    flex: 1;
+    color: #fff;
+}
+
+/* ============================================================
+   3. SMOOTH PAGE ENTRY
+   ============================================================ */
+
+.page-content {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+/* ============================================================
+   4. KEYFRAMES
+   ============================================================ */
+
+/* ---------- Spin (Loading) ---------- */
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* ---------- Shimmer (Progress Bar) ---------- */
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+/* ---------- Fade In Up (Page Entry, Cards) ---------- */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Fade Out Down (Loading Exit) ---------- */
+@keyframes fadeOutDown {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+}
+
+/* ---------- Slide Down (Dropdowns, Details) ---------- */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Pulse (Badge Dot, Icons) ---------- */
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+}
+
+/* ---------- Pulse Slow (Subtle Hover) ---------- */
+@keyframes pulseSlow {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.7;
+    }
+}
+
+/* ---------- Modal Pop (Modal Entry) ---------- */
+@keyframes modalPop {
+    from {
+        opacity: 0;
+        transform: scale(0.92) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* ---------- Card Fade (Card Entry) ---------- */
+@keyframes cardFade {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- Scale In (Hover Effects) ---------- */
+@keyframes scaleIn {
+    from {
+        transform: scale(0.95);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* ---------- Bounce In (Buttons, Elements) ---------- */
+@keyframes bounceIn {
+    0% {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    60% {
+        transform: scale(1.05);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* ---------- Float (Hero Elements) ---------- */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* ---------- Float Slow (Background Elements) ---------- */
+@keyframes floatSlow {
+    0%, 100% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-15px) rotate(2deg);
+    }
+}
+
+/* ---------- Glow Pulse (Buttons, Highlights) ---------- */
+@keyframes glowPulse {
+    0%, 100% {
+        box-shadow: 0 0 20px rgba(30, 136, 229, 0.2);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(30, 136, 229, 0.4);
+    }
+}
+
+/* ---------- Shake (Error Feedback) ---------- */
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    20% {
+        transform: translateX(-10px);
+    }
+    40% {
+        transform: translateX(10px);
+    }
+    60% {
+        transform: translateX(-6px);
+    }
+    80% {
+        transform: translateX(6px);
+    }
+}
+
+/* ---------- Slide In From Left (Drawer) ---------- */
+@keyframes slideInLeft {
+    from {
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ---------- Slide In From Right ---------- */
+@keyframes slideInRight {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* ---------- Rotate In (Icons) ---------- */
+@keyframes rotateIn {
+    from {
+        transform: rotate(-180deg);
+        opacity: 0;
+    }
+    to {
+        transform: rotate(0deg);
+        opacity: 1;
+    }
+}
+
+/* ============================================================
+   5. DARK MODE OVERRIDES
+   ============================================================ */
+
+body.dark-mode .loading-overlay {
+    background: rgba(10, 26, 42, 0.92);
+}
+
+body.dark-mode .loading-overlay h3 {
+    color: #eef4ff;
+}
+
+body.dark-mode .loading-overlay p {
+    color: #8aaabc;
+}
+
+body.dark-mode .loading-overlay .loader-progress {
+    background: #2a4a5a;
+}
+
+body.dark-mode .toast-notification {
+    background: #1a2a3a;
+    border-left-color: #1E88E5;
+}
+
+body.dark-mode .toast-notification .toast-msg {
+    color: #eef4ff;
+}
+
+/* ============================================================
+   6. ANIMATION UTILITY CLASSES
+   ============================================================ */
+
+/* ── Fade In ── */
+.anim-fade-in {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.anim-fade-in-fast {
+    animation: fadeInUp 0.3s ease forwards;
+}
+
+.anim-fade-in-slow {
+    animation: fadeInUp 1s ease forwards;
+}
+
+/* ── Scale In ── */
+.anim-scale-in {
+    animation: scaleIn 0.4s ease forwards;
+}
+
+/* ── Bounce In ── */
+.anim-bounce-in {
+    animation: bounceIn 0.5s ease forwards;
+}
+
+/* ── Float ── */
+.anim-float {
+    animation: float 3s ease-in-out infinite;
+}
+
+.anim-float-slow {
+    animation: floatSlow 5s ease-in-out infinite;
+}
+
+/* ── Pulse ── */
+.anim-pulse {
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.anim-pulse-slow {
+    animation: pulseSlow 3s ease-in-out infinite;
+}
+
+/* ── Glow ── */
+.anim-glow {
+    animation: glowPulse 2s ease-in-out infinite;
+}
+
+/* ── Slide In ── */
+.anim-slide-left {
+    animation: slideInLeft 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.anim-slide-right {
+    animation: slideInRight 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Rotate In ── */
+.anim-rotate-in {
+    animation: rotateIn 0.5s ease forwards;
+}
+
+/* ── Shake ── */
+.anim-shake {
+    animation: shake 0.5s ease forwards;
+}
+
+/* ── Card Fade ── */
+.anim-card-fade {
+    animation: cardFade 0.6s ease forwards;
+}
+
+/* ── Modal Pop ── */
+.anim-modal-pop {
+    animation: modalPop 0.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* ── Staggered Children ── */
+.anim-stagger > * {
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.anim-stagger > *:nth-child(1) { animation-delay: 0.05s; }
+.anim-stagger > *:nth-child(2) { animation-delay: 0.1s; }
+.anim-stagger > *:nth-child(3) { animation-delay: 0.15s; }
+.anim-stagger > *:nth-child(4) { animation-delay: 0.2s; }
+.anim-stagger > *:nth-child(5) { animation-delay: 0.25s; }
+.anim-stagger > *:nth-child(6) { animation-delay: 0.3s; }
+.anim-stagger > *:nth-child(7) { animation-delay: 0.35s; }
+.anim-stagger > *:nth-child(8) { animation-delay: 0.4s; }
+
+/* ── Hover Animations ── */
+.hover-lift {
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hover-lift:hover {
+    transform: translateY(-4px);
+}
+
+.hover-glow {
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.hover-glow:hover {
+    box-shadow: 0 8px 30px rgba(30, 136, 229, 0.2);
+    transform: translateY(-2px);
+}
+
+.hover-scale {
+    transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.03);
+}
+
+/* ============================================================
+   7. REDUCED MOTION PREFERENCE
+   ============================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .loading-overlay .spinner-ring .ring {
+        animation-duration: 0.01ms !important;
+    }
+    
+    .loading-overlay .loader-progress .bar {
+        animation: none !important;
+    }
+    
+    .page-content {
+        animation: none !important;
+    }
+    
+    .anim-fade-in,
+    .anim-fade-in-fast,
+    .anim-fade-in-slow,
+    .anim-scale-in,
+    .anim-bounce-in,
+    .anim-float,
+    .anim-float-slow,
+    .anim-pulse,
+    .anim-pulse-slow,
+    .anim-glow,
+    .anim-slide-left,
+    .anim-slide-right,
+    .anim-rotate-in,
+    .anim-shake,
+    .anim-card-fade,
+    .anim-modal-pop {
+        animation: none !important;
+    }
+    
+    .anim-stagger > * {
+        animation: none !important;
+        opacity: 1 !important;
+    }
+    
+    .hover-lift:hover,
+    .hover-glow:hover,
+    .hover-scale:hover {
+        transform: none !important;
+    }
+}

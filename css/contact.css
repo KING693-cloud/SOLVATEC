@@ -1,0 +1,422 @@
+/* ============================================================
+   SOLVATECH - CONTACT CSS
+   Specific to contact.html
+   Colorful, vibrant, and professional.
+   ============================================================ */
+
+/* ============================================================
+   1. CONTACT OPTIONS SECTION
+   ============================================================ */
+
+.contact-options-section {
+    padding: 3rem 0 4rem;
+    background: linear-gradient(180deg, #F5F8FC 0%, #FFFFFF 100%);
+}
+
+/* ============================================================
+   2. CONTACT CARDS GRID
+   ============================================================ */
+
+.contact-options-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto 2.5rem;
+}
+
+/* ============================================================
+   3. CONTACT CARD
+   ============================================================ */
+
+.contact-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    background: #FFFFFF;
+    padding: 1.8rem 2rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    text-decoration: none;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.contact-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+.contact-card:active {
+    transform: scale(0.97);
+}
+
+/* ============================================================
+   4. CARD ICON
+   ============================================================ */
+
+.contact-card-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.2rem;
+    flex-shrink: 0;
+}
+
+/* ============================================================
+   5. WHATSAPP CARD (Green)
+   ============================================================ */
+
+.contact-card-whatsapp .contact-card-icon {
+    background: rgba(37, 211, 102, 0.12);
+    color: #25D366;
+}
+
+.contact-card-whatsapp:hover {
+    border-color: #25D366;
+    background: #f0fdf4;
+}
+
+.contact-card-whatsapp .contact-card-action {
+    color: #25D366;
+}
+
+.contact-card-whatsapp:hover .contact-card-action {
+    color: #1da851;
+}
+
+/* ============================================================
+   6. EMAIL CARD (Blue)
+   ============================================================ */
+
+.contact-card-email .contact-card-icon {
+    background: rgba(30, 136, 229, 0.12);
+    color: #1E88E5;
+}
+
+.contact-card-email:hover {
+    border-color: #1E88E5;
+    background: #f0f7ff;
+}
+
+.contact-card-email .contact-card-action {
+    color: #1E88E5;
+}
+
+.contact-card-email:hover .contact-card-action {
+    color: #1565C0;
+}
+
+/* ============================================================
+   7. CARD CONTENT
+   ============================================================ */
+
+.contact-card-content {
+    flex: 1;
+}
+
+.contact-card-content h3 {
+    font-size: 1.3rem;
+    color: #0B1A2E;
+    margin-bottom: 0.2rem;
+    font-weight: 700;
+}
+
+.contact-card-content p {
+    color: #555;
+    font-size: 0.9rem;
+    margin-bottom: 0.3rem;
+}
+
+.contact-card-action {
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+/* ============================================================
+   8. WHY CONTACT US SECTION
+   ============================================================ */
+
+.contact-why-section {
+    max-width: 800px;
+    margin: 0 auto 2.5rem;
+    padding: 2rem;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    text-align: center;
+}
+
+.contact-why-section h3 {
+    font-size: 1.3rem;
+    color: #0B1A2E;
+    margin-bottom: 1.5rem;
+}
+
+/* ============================================================
+   9. WHY GRID
+   ============================================================ */
+
+.contact-why-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.contact-why-item {
+    text-align: center;
+    padding: 1rem;
+    border-radius: 12px;
+    background: #F5F8FC;
+    transition: transform 0.3s ease;
+}
+
+.contact-why-item:hover {
+    transform: translateY(-3px);
+}
+
+.contact-why-item i {
+    font-size: 2rem;
+    display: block;
+    margin-bottom: 0.3rem;
+}
+
+.contact-why-item:nth-child(1) i {
+    color: #f59e0b;
+}
+.contact-why-item:nth-child(2) i {
+    color: #10b981;
+}
+.contact-why-item:nth-child(3) i {
+    color: #1E88E5;
+}
+.contact-why-item:nth-child(4) i {
+    color: #8b5cf6;
+}
+
+.contact-why-item span {
+    font-weight: 700;
+    color: #0B1A2E;
+    display: block;
+    font-size: 0.95rem;
+}
+
+.contact-why-item p {
+    font-size: 0.8rem;
+    color: #555;
+    margin-top: 0.2rem;
+}
+
+/* ============================================================
+   10. EXTRA INFO
+   ============================================================ */
+
+.contact-extra-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1.5rem;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1.5rem 2rem;
+    background: #FFFFFF;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+}
+
+.contact-extra-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-align: left;
+}
+
+.contact-extra-item i {
+    font-size: 1.5rem;
+    color: #1E88E5;
+    width: 30px;
+    flex-shrink: 0;
+}
+
+.contact-extra-item h4 {
+    font-size: 0.85rem;
+    color: #0B1A2E;
+    margin-bottom: 0.1rem;
+}
+
+.contact-extra-item p {
+    font-size: 0.75rem;
+    color: #555;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* ============================================================
+   11. CTA SECTION
+   ============================================================ */
+
+.cta-section {
+    padding: 4rem 0;
+    background-color: #0B1A2E;
+    color: #FFFFFF;
+    text-align: center;
+}
+
+.cta-section .btn-primary {
+    background: #25D366;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.25);
+}
+
+.cta-section .btn-primary:hover {
+    background: #1da851;
+    box-shadow: 0 8px 28px rgba(37, 211, 102, 0.35);
+}
+
+/* ============================================================
+   12. HERO OVERRIDES (to match contact page)
+   ============================================================ */
+
+.hero {
+    min-height: 40vh;
+    height: 40vh;
+}
+
+.hero .hero-tagline {
+    font-size: 1.2rem;
+}
+
+.hero .hero-description {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ============================================================
+   13. DARK MODE
+   ============================================================ */
+
+body.dark-mode .contact-options-section {
+    background: linear-gradient(180deg, #0a1a2a 0%, #0f1f2f 100%);
+}
+
+body.dark-mode .contact-card {
+    background: #122a3a;
+}
+
+body.dark-mode .contact-card-content h3 {
+    color: #eef4ff;
+}
+
+body.dark-mode .contact-card-content p {
+    color: #8aaabc;
+}
+
+body.dark-mode .contact-card-whatsapp:hover {
+    background: #1a2a3a;
+}
+
+body.dark-mode .contact-card-email:hover {
+    background: #1a2a3a;
+}
+
+body.dark-mode .contact-why-section {
+    background: #122a3a;
+}
+
+body.dark-mode .contact-why-section h3 {
+    color: #eef4ff;
+}
+
+body.dark-mode .contact-why-item {
+    background: #0a1a2a;
+}
+
+body.dark-mode .contact-why-item span {
+    color: #eef4ff;
+}
+
+body.dark-mode .contact-why-item p {
+    color: #8aaabc;
+}
+
+body.dark-mode .contact-extra-info {
+    background: #122a3a;
+}
+
+body.dark-mode .contact-extra-item h4 {
+    color: #eef4ff;
+}
+
+body.dark-mode .contact-extra-item p {
+    color: #8aaabc;
+}
+
+body.dark-mode .cta-section {
+    background-color: #0B1A2E;
+}
+
+/* ============================================================
+   14. RESPONSIVE BREAKPOINTS
+   ============================================================ */
+
+/* ---------- Tablet ---------- */
+@media (min-width: 768px) {
+    .contact-options-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* ---------- Mobile ---------- */
+@media (max-width: 600px) {
+    .contact-card {
+        flex-direction: column;
+        text-align: center;
+        padding: 1.5rem;
+    }
+
+    .contact-card-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 1.8rem;
+    }
+
+    .contact-why-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .contact-extra-info {
+        grid-template-columns: 1fr;
+        padding: 1.5rem;
+        gap: 1rem;
+    }
+
+    .contact-extra-item {
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+    }
+
+    .hero {
+        min-height: 35vh;
+        height: 35vh;
+    }
+}
+
+/* ---------- Small Mobile ---------- */
+@media (max-width: 400px) {
+    .contact-why-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-title {
+        font-size: 2rem;
+    }
+
+    .hero-tagline {
+        font-size: 1rem;
+    }
+}

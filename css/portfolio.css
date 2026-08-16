@@ -1,0 +1,527 @@
+/* ============================================================
+   SOLVATECH - PORTFOLIO CSS
+   Specific to portfolio.html
+   ============================================================ */
+
+/* ============================================================
+   SHORT HERO
+   ============================================================ */
+
+.hero-short {
+    padding: 3rem 0 2rem;
+    text-align: center;
+    background: linear-gradient(145deg, #0B1A2E 0%, #1E3A5F 60%, #1E88E5 100%);
+    color: #FFFFFF;
+    position: relative;
+    overflow: hidden;
+    min-height: 35vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-short .hero-bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 0;
+}
+
+.hero-short .hero-bg-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.2;
+}
+
+.hero-short-content {
+    position: relative;
+    z-index: 2;
+}
+
+.hero-short-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+}
+
+.hero-short-tagline {
+    font-size: 1.2rem;
+    color: #64B5F6;
+    font-weight: 300;
+    margin-top: 0.3rem;
+}
+
+/* ============================================================
+   FILTER TABS
+   ============================================================ */
+
+.portfolio-filter-section {
+    padding: 2rem 0 1.5rem;
+    background: #FFFFFF;
+}
+
+.filter-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.filter-tab {
+    padding: 0.5rem 1.2rem;
+    border: 2px solid #dce4f0;
+    border-radius: 30px;
+    background: transparent;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #555;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.filter-tab:hover {
+    border-color: #1E88E5;
+    color: #1E88E5;
+}
+
+.filter-tab.active {
+    background: #1E88E5;
+    border-color: #1E88E5;
+    color: #FFFFFF;
+}
+
+/* ============================================================
+   PORTFOLIO GRID
+   ============================================================ */
+
+.portfolio-grid-section {
+    padding: 1.5rem 0 4rem;
+    background: linear-gradient(180deg, #F5F8FC 0%, #FFFFFF 100%);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2rem;
+}
+
+/* ============================================================
+   PORTFOLIO ITEM
+   ============================================================ */
+
+.portfolio-item {
+    background: #FFFFFF;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+}
+
+.portfolio-item:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* ---- Image ---- */
+.portfolio-image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+    background: #F5F8FC;
+}
+
+.portfolio-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+
+.portfolio-item:hover .portfolio-image-wrapper img {
+    transform: scale(1.05);
+}
+
+/* ---- Overlay ---- */
+.portfolio-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(11, 26, 46, 0.7);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.portfolio-item:hover .portfolio-overlay {
+    opacity: 1;
+}
+
+.portfolio-view-btn {
+    padding: 0.6rem 1.5rem;
+    background: #1E88E5;
+    color: #FFFFFF;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.portfolio-view-btn:hover {
+    background: #1565C0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(30, 136, 229, 0.3);
+}
+
+/* ---- Content ---- */
+.portfolio-item-content {
+    padding: 1.2rem 1.5rem 1.5rem;
+}
+
+.portfolio-item-content h3 {
+    font-size: 1.1rem;
+    color: #0B1A2E;
+    margin-bottom: 0.2rem;
+}
+
+.portfolio-category {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #1E88E5;
+    background: rgba(30, 136, 229, 0.08);
+    padding: 0.2rem 0.8rem;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.portfolio-item-content p {
+    color: #555;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* ============================================================
+   PROJECT MODAL (No Close Button)
+   ============================================================ */
+
+.project-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.project-modal-overlay.active {
+    display: flex;
+}
+
+.project-modal {
+    background: #FFFFFF;
+    border-radius: 20px;
+    max-width: 800px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    animation: modalPop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-modal::-webkit-scrollbar {
+    width: 4px;
+}
+.project-modal::-webkit-scrollbar-track {
+    background: transparent;
+}
+.project-modal::-webkit-scrollbar-thumb {
+    background: #1E88E5;
+    border-radius: 4px;
+}
+
+.project-modal-content {
+    background: #FFFFFF;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.project-modal-image {
+    width: 100%;
+    height: 300px;
+    background: #0B1A2E;
+    overflow: hidden;
+}
+
+.project-modal-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-modal-body {
+    padding: 2.5rem;
+}
+
+.modal-project-category {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #1E88E5;
+    background: rgba(30, 136, 229, 0.08);
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    margin-bottom: 0.5rem;
+}
+
+.project-modal-body h2 {
+    font-size: 2rem;
+    color: #0B1A2E;
+    margin-bottom: 1.2rem;
+}
+
+.modal-project-meta {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    background: #F5F8FC;
+    padding: 1.2rem 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.modal-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-size: 0.85rem;
+    color: #555;
+}
+
+.modal-meta-item i {
+    color: #1E88E5;
+    width: 18px;
+    font-size: 0.9rem;
+}
+
+.modal-meta-item strong {
+    color: #0B1A2E;
+    font-weight: 600;
+}
+
+.modal-project-desc h4 {
+    font-size: 1rem;
+    color: #0B1A2E;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+}
+
+.modal-project-desc h4:not(:first-child) {
+    margin-top: 1rem;
+}
+
+.modal-project-desc p {
+    color: #444;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0.5rem;
+}
+
+.modal-project-actions {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.modal-project-actions .btn-primary {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+}
+
+/* ============================================================
+   FILTER ANIMATION
+   ============================================================ */
+
+.portfolio-item {
+    transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.portfolio-item.hide {
+    display: none;
+}
+
+.portfolio-item.show {
+    display: block;
+    animation: fadeInUp 0.5s ease forwards;
+}
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+body.dark-mode .portfolio-filter-section {
+    background: #0a1a2a;
+}
+
+body.dark-mode .filter-tab {
+    border-color: #2a4a5a;
+    color: #8aaabc;
+}
+
+body.dark-mode .filter-tab:hover {
+    border-color: #1E88E5;
+    color: #64B5F6;
+}
+
+body.dark-mode .filter-tab.active {
+    background: #1E88E5;
+    border-color: #1E88E5;
+    color: #FFFFFF;
+}
+
+body.dark-mode .portfolio-grid-section {
+    background: linear-gradient(180deg, #0a1a2a 0%, #0f1f2f 100%);
+}
+
+body.dark-mode .portfolio-item {
+    background: #122a3a;
+    border-color: rgba(255, 255, 255, 0.04);
+}
+
+body.dark-mode .portfolio-item-content h3 {
+    color: #eef4ff;
+}
+
+body.dark-mode .portfolio-category {
+    background: rgba(30, 136, 229, 0.15);
+}
+
+body.dark-mode .portfolio-item-content p {
+    color: #8aaabc;
+}
+
+body.dark-mode .portfolio-overlay {
+    background: rgba(11, 26, 46, 0.85);
+}
+
+body.dark-mode .project-modal {
+    background: #122a3a;
+}
+
+body.dark-mode .project-modal-content {
+    background: #122a3a;
+}
+
+body.dark-mode .project-modal-body h2 {
+    color: #eef4ff;
+}
+
+body.dark-mode .modal-meta-item {
+    color: #8aaabc;
+}
+
+body.dark-mode .modal-meta-item i {
+    color: #64B5F6;
+}
+
+body.dark-mode .modal-meta-item strong {
+    color: #eef4ff;
+}
+
+body.dark-mode .modal-project-desc h4 {
+    color: #eef4ff;
+}
+
+body.dark-mode .modal-project-desc p {
+    color: #8aaabc;
+}
+
+body.dark-mode .modal-project-meta {
+    background: #0a1a2a;
+}
+
+body.dark-mode .modal-project-actions {
+    border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (min-width: 600px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .portfolio-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    .hero-short-title {
+        font-size: 4.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-short-title {
+        font-size: 2.5rem;
+    }
+    .hero-short-tagline {
+        font-size: 1rem;
+    }
+    .filter-tab {
+        padding: 0.4rem 1rem;
+        font-size: 0.7rem;
+    }
+    .portfolio-image-wrapper {
+        height: 180px;
+    }
+    .portfolio-item-content {
+        padding: 1rem 1.2rem 1.2rem;
+    }
+    .portfolio-item-content h3 {
+        font-size: 1rem;
+    }
+    .project-modal-body {
+        padding: 1.5rem;
+    }
+    .project-modal-image {
+        height: 200px;
+    }
+    .modal-project-meta {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    .project-modal-body h2 {
+        font-size: 1.4rem;
+    }
+}

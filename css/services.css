@@ -1,0 +1,458 @@
+/* ============================================================
+   SOLVATECH - SERVICES CSS
+   Specific to services.html
+   ============================================================ */
+
+/* ============================================================
+   SERVICES PAGE GRID
+   ============================================================ */
+
+.services-page-grid {
+    padding: 3rem 0 4rem;
+    background: linear-gradient(180deg, #F5F8FC 0%, #FFFFFF 100%);
+}
+
+/* ============================================================
+   SERVICE CARD (Clickable)
+   ============================================================ */
+
+.service-card-clickable {
+    background: #FFFFFF;
+    padding: 2rem 1.5rem 1.8rem;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    cursor: pointer;
+    border: 2px solid transparent;
+    border-top-width: 4px !important;
+    animation: cardFade 0.6s ease forwards;
+}
+
+.service-card-clickable:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.1);
+}
+
+.service-card-clickable:active {
+    transform: scale(0.96);
+}
+
+/* ---- Academy Card Link (No Modal) ---- */
+.service-card-clickable.academy-card-link {
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+}
+
+.service-card-clickable.academy-card-link:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 48px rgba(139, 92, 246, 0.15);
+}
+
+/* ---- Service Image ---- */
+.service-card-clickable .service-image-wrapper {
+    width: 100%;
+    max-width: 180px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 1rem;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #F5F8FC;
+    border: 2px solid rgba(0, 0, 0, 0.04);
+    transition: all 0.3s ease;
+}
+
+.service-card-clickable:hover .service-image-wrapper {
+    transform: scale(1.03);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+}
+
+.service-card-clickable .service-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+}
+
+.service-card-clickable:hover .service-image-wrapper img {
+    transform: scale(1.05);
+}
+
+/* ---- Service Text ---- */
+.service-card-clickable h3 {
+    font-size: 1.15rem;
+    color: #0B1A2E;
+    margin-bottom: 0.3rem;
+    font-weight: 700;
+}
+
+.service-card-clickable p {
+    color: #555;
+    font-size: 0.85rem;
+    margin: 0 0 0.5rem;
+    line-height: 1.4;
+}
+
+.service-hint {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #1E88E5;
+    display: inline-block;
+    transition: all 0.3s ease;
+}
+
+.service-card-clickable:hover .service-hint {
+    transform: translateX(4px);
+    color: #1565C0;
+}
+
+/* ---- Individual Card Colors on Hover ---- */
+.service-card-clickable[style*="border-top:4px solid #1E88E5"]:hover {
+    border-color: #1E88E5;
+    background: #f0f7ff;
+}
+
+.service-card-clickable[style*="border-top:4px solid #10b981"]:hover {
+    border-color: #10b981;
+    background: #f0fdf4;
+}
+
+.service-card-clickable[style*="border-top:4px solid #f59e0b"]:hover {
+    border-color: #f59e0b;
+    background: #fffbeb;
+}
+
+.service-card-clickable[style*="border-top:4px solid #8b5cf6"]:hover {
+    border-color: #8b5cf6;
+    background: #faf5ff;
+}
+
+/* ---- Academy Card Special ---- */
+.service-card-clickable.academy-card-link .btn-academy.btn-small {
+    background: linear-gradient(145deg, #8b5cf6 0%, #6d28d9 100%);
+    color: #FFFFFF;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.8rem;
+    border-radius: 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.service-card-clickable.academy-card-link .btn-academy.btn-small:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+}
+
+/* ============================================================
+   SERVICE MODAL
+   ============================================================ */
+
+.service-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    z-index: 99999;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+.service-modal-overlay.active {
+    display: flex;
+}
+
+.service-modal {
+    background: #FFFFFF;
+    border-radius: 24px;
+    max-width: 460px;
+    width: 100%;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.3);
+    animation: modalPop 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.service-modal-close {
+    position: absolute;
+    top: 0.7rem;
+    right: 0.7rem;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+.service-modal-close:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: rotate(90deg);
+}
+
+.service-modal-header {
+    text-align: center;
+    padding: 2rem 1.5rem 1.5rem;
+    background: linear-gradient(145deg, #0B1A2E 0%, #1E3A5F 60%, #1E88E5 100%);
+    color: #FFFFFF;
+}
+
+.modal-header-icon {
+    width: 56px;
+    height: 56px;
+    background: rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    color: #64B5F6;
+    margin: 0 auto 0.6rem;
+    border: 2px solid rgba(255, 255, 255, 0.08);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.service-modal-header h2 {
+    font-size: 1.3rem;
+    margin-bottom: 0.1rem;
+    font-weight: 800;
+}
+
+.service-modal-header p {
+    font-size: 0.8rem;
+    opacity: 0.75;
+    margin: 0;
+}
+
+.service-modal-body {
+    padding: 1.5rem 1.5rem 0.8rem;
+}
+
+.modal-field {
+    margin-bottom: 1rem;
+}
+
+.modal-field label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: #0B1A2E;
+    margin-bottom: 0.3rem;
+}
+
+.modal-field label i {
+    width: 18px;
+    font-size: 0.9rem;
+}
+
+.modal-field select,
+.modal-field input {
+    width: 100%;
+    padding: 0.6rem 0.9rem;
+    border: 2px solid #dce4f0;
+    border-radius: 12px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: #FAFCFE;
+    color: #1E1E1E;
+    appearance: auto;
+}
+
+.modal-field select:focus,
+.modal-field input:focus {
+    outline: none;
+    border-color: #1E88E5;
+    box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.08);
+}
+
+.service-modal-footer {
+    display: flex;
+    gap: 0.8rem;
+    padding: 0.5rem 1.5rem 1.5rem;
+}
+
+.btn-modal-cancel {
+    flex: 1;
+    padding: 0.7rem;
+    border: 2px solid #dce4f0;
+    border-radius: 12px;
+    background: transparent;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #555;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+}
+
+.btn-modal-cancel:hover {
+    background: #f5f5f5;
+    border-color: #bbb;
+}
+
+.btn-modal-send {
+    flex: 2;
+    padding: 0.7rem;
+    border: none;
+    border-radius: 12px;
+    background: linear-gradient(145deg, #25D366 0%, #1da851 100%);
+    color: #FFFFFF;
+    font-weight: 700;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 16px rgba(37, 211, 102, 0.25);
+}
+
+.btn-modal-send:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(37, 211, 102, 0.35);
+}
+
+.btn-modal-send:active {
+    transform: scale(0.97);
+}
+
+/* ============================================================
+   DARK MODE
+   ============================================================ */
+
+body.dark-mode .services-page-grid {
+    background: linear-gradient(180deg, #0a1a2a 0%, #0f1f2f 100%);
+}
+
+body.dark-mode .service-card-clickable {
+    background: #122a3a;
+}
+
+body.dark-mode .service-card-clickable h3 {
+    color: #eef4ff;
+}
+
+body.dark-mode .service-card-clickable p {
+    color: #8aaabc;
+}
+
+body.dark-mode .service-card-clickable .service-image-wrapper {
+    background: #0a1a2a;
+    border-color: #2a4a5a;
+}
+
+body.dark-mode .service-card-clickable[style*="border-top:4px solid #1E88E5"]:hover {
+    background: #1a2a3a;
+}
+
+body.dark-mode .service-card-clickable[style*="border-top:4px solid #10b981"]:hover {
+    background: #1a2a3a;
+}
+
+body.dark-mode .service-card-clickable[style*="border-top:4px solid #f59e0b"]:hover {
+    background: #1a2a3a;
+}
+
+body.dark-mode .service-card-clickable[style*="border-top:4px solid #8b5cf6"]:hover {
+    background: #1a2a3a;
+}
+
+body.dark-mode .service-card-clickable.academy-card-link {
+    background: linear-gradient(145deg, #1a1a3a, #2a1a4a);
+}
+
+body.dark-mode .service-card-clickable.academy-card-link h3 {
+    color: #a78bfa;
+}
+
+body.dark-mode .service-card-clickable.academy-card-link p {
+    color: #c4b5fd;
+}
+
+body.dark-mode .service-modal {
+    background: #122a3a;
+}
+
+body.dark-mode .modal-field label {
+    color: #eef4ff;
+}
+
+body.dark-mode .modal-field select,
+body.dark-mode .modal-field input {
+    background: #0a1a2a;
+    border-color: #2a4a5a;
+    color: #eef4ff;
+}
+
+body.dark-mode .btn-modal-cancel {
+    border-color: #2a4a5a;
+    color: #8aaabc;
+}
+
+body.dark-mode .btn-modal-cancel:hover {
+    background: #1a2a3a;
+}
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (min-width: 600px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .service-modal {
+        border-radius: 16px;
+        max-width: 100%;
+    }
+    .service-modal-header {
+        padding: 1.5rem 1rem 1.2rem;
+    }
+    .service-modal-body {
+        padding: 1.2rem 1rem 0.5rem;
+    }
+    .service-modal-footer {
+        flex-direction: column;
+        padding: 0.5rem 1rem 1rem;
+    }
+    .service-card-clickable .service-image-wrapper {
+        max-width: 120px;
+    }
+    .services-page-grid {
+        padding: 2rem 0 3rem;
+    }
+}
