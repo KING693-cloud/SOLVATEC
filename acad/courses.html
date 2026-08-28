@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -420,5 +421,543 @@
         window.toggleLevel = toggleLevel;
         window.toggleAllLevels = toggleAllLevels;
     </script>
+
+    <!-- ================= ACCESS KEY WIDGET (AUTO-ENABLE BASED ON COURSE) ================= -->
+    <style>
+        #accessKeyWidget {
+            position: fixed;
+            bottom: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            padding: 1rem;
+            width: 220px;
+            font-family: 'Segoe UI', sans-serif;
+            border: 1px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        #accessKeyWidget .key-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0B1A2E;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+        #accessKeyWidget .key-status {
+            font-size: 0.65rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 10px;
+            font-weight: 600;
+            margin-left: auto;
+        }
+        .status-enabled {
+            background: #e6f4ea;
+            color: #1e8e3e;
+        }
+        .status-disabled {
+            background: #fce8e6;
+            color: #d93025;
+        }
+        .key-display {
+            background: #f5f7fa;
+            border-radius: 6px;
+            padding: 0.5rem 0.6rem;
+            margin-bottom: 0.7rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.4rem;
+            font-size: 0.95rem;
+            letter-spacing: 1px;
+            color: #0B1A2E;
+            font-weight: 700;
+        }
+        .key-display span {
+            font-family: 'Courier New', monospace;
+            word-break: break-all;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .key-btn {
+            width: 100%;
+            padding: 0.5rem;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(145deg, #1E88E5, #1565C0);
+            color: #fff;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.4rem;
+            transition: background 0.3s;
+        }
+        .key-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        .key-btn .spinner {
+            width: 14px;
+            height: 14px;
+            border: 2px solid #fff;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .key-meta {
+            font-size: 0.65rem;
+            color: #666;
+            margin-top: 0.4rem;
+            text-align: center;
+        }
+        .key-actions {
+            display: flex;
+            gap: 0.4rem;
+            margin-top: 0.7rem;
+        }
+        .key-actions button {
+            flex: 1;
+            padding: 0.4rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            cursor: pointer;
+            background: #f0f0f0;
+            color: #333;
+            transition: background 0.2s;
+        }
+        .key-actions button:hover {
+            background: #e0e0e0;
+        }
+        .key-actions button:disabled {
+            background: #f9f9f9;
+            color: #aaa;
+            cursor: not-allowed;
+        }
+        .copy-icon-btn {
+            background: none;
+            border: none;
+            color: #1E88E5;
+            cursor: pointer;
+            font-size: 0.9rem;
+            padding: 0;
+            margin: 0;
+        }
+        .copy-icon-btn:hover {
+            color: #1565C0;
+        }
+    </style>
+
+    <div id="accessKeyWidget">
+        <div class="key-title">
+            <i class="fas fa-key"></i> ACCESS KEY
+            <span class="key-status" id="keyStatusBadge" style="display:none;"></span>
+        </div>
+        <div id="keyContent">
+            <!-- Dynamic content injected here -->
+        </div>
+    </div>
+
+    <script>
+    (function() {
+        // ------------------- CONFIGURATION -------------------
+        const KEY_LENGTH = 7;
+        const MAX_REVOKES_PER_MONTH = 2;
+        const DB_ROOT = 'accessKeys';
+        const USED_KEYS_ROOT = 'usedKeys';
+        const USERS_ROOT = 'users';
+        const CACHE_KEY_PREFIX = 'solvatech_access_key_';
+        const CACHE_USER_PREFIX = 'solvatech_user_course_';
+
+        // ------------------- ELEMENTS -------------------
+        const widget = document.getElementById('accessKeyWidget');
+        const keyContent = document.getElementById('keyContent');
+        const keyStatusBadge = document.getElementById('keyStatusBadge');
+
+        // ------------------- STATE -------------------
+        let currentUser = null;
+        let currentKeyData = null;
+        let userCourseData = null; // e.g., { completedLevels: [...] }
+        let isProcessing = false;
+        let keyListener = null;
+        let userListener = null;
+
+        // ------------------- UTILS -------------------
+        function getCacheKey(uid) {
+            return CACHE_KEY_PREFIX + uid;
+        }
+        function getUserCacheKey(uid) {
+            return CACHE_USER_PREFIX + uid;
+        }
+
+        function loadFromCache(key) {
+            const cached = localStorage.getItem(key);
+            if (cached) {
+                try {
+                    return JSON.parse(cached);
+                } catch (e) {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+        function saveToCache(key, data) {
+            if (data) {
+                localStorage.setItem(key, JSON.stringify(data));
+            } else {
+                localStorage.removeItem(key);
+            }
+        }
+
+        function generateRandomKey() {
+            const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let result = '';
+            for (let i = 0; i < KEY_LENGTH; i++) {
+                result += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return result;
+        }
+
+        function getCurrentMonthKey() {
+            const now = new Date();
+            return `${now.getFullYear()}-${now.getMonth() + 1}`;
+        }
+
+        async function isKeyUnique(key) {
+            const snapshot = await firebase.database().ref(`${USED_KEYS_ROOT}/${key}`).once('value');
+            return !snapshot.exists();
+        }
+
+        async function generateUniqueKey() {
+            let key = generateRandomKey();
+            while (!(await isKeyUnique(key))) {
+                key = generateRandomKey();
+            }
+            return key;
+        }
+
+        function revokeCountThisMonth() {
+            if (!currentKeyData) return 0;
+            const currentMonth = getCurrentMonthKey();
+            if (currentKeyData.lastRevokeMonth !== currentMonth) {
+                return 0;
+            }
+            return currentKeyData.revokeCount || 0;
+        }
+
+        function canRevoke() {
+            return revokeCountThisMonth() < MAX_REVOKES_PER_MONTH;
+        }
+
+        function remainingRevokes() {
+            return Math.max(0, MAX_REVOKES_PER_MONTH - revokeCountThisMonth());
+        }
+
+        // Determine if user has at least one completed course (100%)
+        function hasCompletedCourse() {
+            if (!userCourseData) return false;
+            const completed = userCourseData.completedLevels || [];
+            return completed.length > 0;
+        }
+
+        // Compute the automatic enabled state based on course completion
+        function computeAutoEnabled() {
+            return hasCompletedCourse();
+        }
+
+        // Update the key's enabled field if auto mode and value changed
+        async function syncAutoEnabled() {
+            if (!currentUser || !currentKeyData || !currentKeyData.key) return;
+
+            // If admin has set override, we do not change
+            if (currentKeyData.enabledOverride === true) return;
+
+            const autoEnabled = computeAutoEnabled();
+            if (currentKeyData.enabled !== autoEnabled) {
+                // Update in DB
+                try {
+                    await firebase.database().ref(`${DB_ROOT}/${currentUser.uid}`).update({ enabled: autoEnabled });
+                    // Update local state to reflect change (listener will also fire)
+                    currentKeyData.enabled = autoEnabled;
+                    render();
+                } catch (error) {
+                    console.error('Auto-enable sync failed:', error);
+                }
+            }
+        }
+
+        // ------------------- RENDER -------------------
+        function render() {
+            if (!currentUser) {
+                keyContent.innerHTML = '<p style="font-size:0.75rem; color:#888;">Loading user...</p>';
+                return;
+            }
+
+            // Load from cache if no data yet and not processing
+            if (!currentKeyData && !isProcessing) {
+                const cached = loadFromCache(getCacheKey(currentUser.uid));
+                if (cached) {
+                    currentKeyData = cached;
+                }
+            }
+
+            if (!currentKeyData || !currentKeyData.key) {
+                keyContent.innerHTML = `
+                    <button class="key-btn" id="generateBtn" ${isProcessing ? 'disabled' : ''}>
+                        ${isProcessing ? '<span class="spinner"></span> Generating...' : '<i class="fas fa-magic"></i> Generate Key'}
+                    </button>
+                    <div class="key-meta">Your unique 7‑character access key</div>
+                `;
+                document.getElementById('generateBtn')?.addEventListener('click', generateKey);
+            } else {
+                const isEnabled = currentKeyData.enabled === true;
+                const statusClass = isEnabled ? 'status-enabled' : 'status-disabled';
+                const statusText = isEnabled ? 'ENABLED' : 'DISABLED';
+                keyStatusBadge.style.display = 'inline-block';
+                keyStatusBadge.className = `key-status ${statusClass}`;
+                keyStatusBadge.textContent = statusText;
+
+                const revokeAllowed = canRevoke() && !isProcessing;
+                const remaining = remainingRevokes();
+
+                keyContent.innerHTML = `
+                    <div class="key-display">
+                        <span title="${currentKeyData.key}">${currentKeyData.key}</span>
+                        <button class="copy-icon-btn" id="copyKeyBtn" title="Copy key">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <div class="key-actions">
+                        <button id="revokeBtn" ${revokeAllowed ? '' : 'disabled'}>
+                            ${isProcessing ? '<span class="spinner"></span> Revoking...' : '<i class="fas fa-sync-alt"></i> Revoke'}
+                        </button>
+                    </div>
+                    <div class="key-meta">
+                        ${remaining > 0 ? `${remaining} revoke${remaining > 1 ? 's' : ''} left this month` : 'Revoke limit reached this month'}
+                    </div>
+                `;
+
+                document.getElementById('copyKeyBtn')?.addEventListener('click', () => copyKey(currentKeyData.key));
+                document.getElementById('revokeBtn')?.addEventListener('click', revokeKey);
+            }
+        }
+
+        function copyKey(key) {
+            navigator.clipboard.writeText(key).then(() => {
+                if (typeof showToast === 'function') showToast('Key copied!');
+                else alert('Key copied!');
+            }).catch(() => {
+                alert('Failed to copy. Please copy manually: ' + key);
+            });
+        }
+
+        // ------------------- DATABASE OPERATIONS -------------------
+        async function fetchKeyData() {
+            if (!currentUser) return;
+            const snapshot = await firebase.database().ref(`${DB_ROOT}/${currentUser.uid}`).once('value');
+            const data = snapshot.val() || null;
+            currentKeyData = data;
+            saveToCache(getCacheKey(currentUser.uid), data);
+            render();
+        }
+
+        async function fetchUserCourseData() {
+            if (!currentUser) return;
+            const snapshot = await firebase.database().ref(`${USERS_ROOT}/${currentUser.uid}`).once('value');
+            const data = snapshot.val() || {};
+            userCourseData = data;
+            saveToCache(getUserCacheKey(currentUser.uid), data);
+            // After user data loaded, we may need to sync auto enable
+            syncAutoEnabled();
+        }
+
+        async function saveKeyData(data) {
+            if (!currentUser) return;
+            const userRef = firebase.database().ref(`${DB_ROOT}/${currentUser.uid}`);
+            await userRef.set(data);
+            saveToCache(getCacheKey(currentUser.uid), data);
+        }
+
+        async function generateKey() {
+            if (isProcessing || !currentUser) return;
+            isProcessing = true;
+            render();
+
+            try {
+                const key = await generateUniqueKey();
+                const monthKey = getCurrentMonthKey();
+                const autoEnabled = computeAutoEnabled(); // based on current userCourseData
+                const keyData = {
+                    key: key,
+                    enabled: autoEnabled,
+                    enabledOverride: false, // allow auto updates
+                    revokeCount: 0,
+                    lastRevokeMonth: monthKey,
+                    createdAt: firebase.database.ServerValue.TIMESTAMP
+                };
+
+                await saveKeyData(keyData);
+                await firebase.database().ref(`${USED_KEYS_ROOT}/${key}`).set(true);
+
+                currentKeyData = keyData;
+                saveToCache(getCacheKey(currentUser.uid), keyData);
+                isProcessing = false;
+                render();
+                if (typeof showToast === 'function') showToast('Access key generated!');
+            } catch (error) {
+                console.error('Generate key error:', error);
+                isProcessing = false;
+                render();
+                alert('Failed to generate key. Please try again.');
+            }
+        }
+
+        async function revokeKey() {
+            if (isProcessing || !currentUser || !currentKeyData || !currentKeyData.key) return;
+            if (!canRevoke()) {
+                alert('You have reached the maximum revoke limit for this month.');
+                return;
+            }
+
+            isProcessing = true;
+            render();
+
+            try {
+                const oldKey = currentKeyData.key;
+
+                await firebase.database().ref(`${USED_KEYS_ROOT}/${oldKey}`).remove();
+
+                const newKey = await generateUniqueKey();
+
+                const currentMonth = getCurrentMonthKey();
+                const newRevokeCount = (currentKeyData.lastRevokeMonth === currentMonth) 
+                    ? (currentKeyData.revokeCount || 0) + 1 
+                    : 1;
+
+                const autoEnabled = computeAutoEnabled();
+                const updatedData = {
+                    ...currentKeyData,
+                    key: newKey,
+                    enabled: autoEnabled,
+                    enabledOverride: false, // reset override on revoke? or keep? better keep existing override if set
+                    revokeCount: newRevokeCount,
+                    lastRevokeMonth: currentMonth,
+                    updatedAt: firebase.database.ServerValue.TIMESTAMP
+                };
+                // Preserve override flag if it was set
+                if (currentKeyData.enabledOverride === true) {
+                    updatedData.enabledOverride = true;
+                    updatedData.enabled = currentKeyData.enabled; // keep admin's choice
+                }
+
+                await saveKeyData(updatedData);
+                await firebase.database().ref(`${USED_KEYS_ROOT}/${newKey}`).set(true);
+
+                currentKeyData = updatedData;
+                saveToCache(getCacheKey(currentUser.uid), updatedData);
+                isProcessing = false;
+                render();
+                if (typeof showToast === 'function') showToast('Key revoked and new key generated!');
+            } catch (error) {
+                console.error('Revoke key error:', error);
+                isProcessing = false;
+                render();
+                alert('Failed to revoke key. Please try again.');
+            }
+        }
+
+        // ------------------- REALTIME LISTENERS -------------------
+        function startRealtimeListeners() {
+            if (!currentUser) return;
+
+            // Key data listener
+            if (keyListener) {
+                firebase.database().ref(`${DB_ROOT}/${currentUser.uid}`).off('value', keyListener);
+            }
+            const keyRef = firebase.database().ref(`${DB_ROOT}/${currentUser.uid}`);
+            keyListener = (snapshot) => {
+                const data = snapshot.val() || null;
+                currentKeyData = data;
+                saveToCache(getCacheKey(currentUser.uid), data);
+                // Attempt auto sync (but avoid infinite loops; syncAutoEnabled checks if update needed)
+                syncAutoEnabled();
+                render();
+            };
+            keyRef.on('value', keyListener);
+
+            // User course data listener
+            if (userListener) {
+                firebase.database().ref(`${USERS_ROOT}/${currentUser.uid}`).off('value', userListener);
+            }
+            const userRef = firebase.database().ref(`${USERS_ROOT}/${currentUser.uid}`);
+            userListener = (snapshot) => {
+                const data = snapshot.val() || {};
+                userCourseData = data;
+                saveToCache(getUserCacheKey(currentUser.uid), data);
+                syncAutoEnabled();
+                // No need to render here unless we display course info (we don't)
+            };
+            userRef.on('value', userListener);
+        }
+
+        function stopRealtimeListeners() {
+            if (currentUser) {
+                if (keyListener) {
+                    firebase.database().ref(`${DB_ROOT}/${currentUser.uid}`).off('value', keyListener);
+                    keyListener = null;
+                }
+                if (userListener) {
+                    firebase.database().ref(`${USERS_ROOT}/${currentUser.uid}`).off('value', userListener);
+                    userListener = null;
+                }
+            }
+        }
+
+        // ------------------- AUTH LISTENER -------------------
+        firebase.auth().onAuthStateChanged((user) => {
+            stopRealtimeListeners();
+            currentUser = user;
+            if (user) {
+                // Load caches immediately
+                const cachedKey = loadFromCache(getCacheKey(user.uid));
+                if (cachedKey) {
+                    currentKeyData = cachedKey;
+                } else {
+                    currentKeyData = null;
+                }
+                const cachedUser = loadFromCache(getUserCacheKey(user.uid));
+                if (cachedUser) {
+                    userCourseData = cachedUser;
+                } else {
+                    userCourseData = null;
+                }
+                render();
+                // Fetch fresh data from Firebase
+                fetchKeyData();
+                fetchUserCourseData();
+                // Start realtime listeners
+                startRealtimeListeners();
+            } else {
+                currentKeyData = null;
+                userCourseData = null;
+                render();
+            }
+        });
+
+        // Initial render
+        render();
+    })();
+    </script>
+    <!-- ================= END ACCESS KEY WIDGET ================= -->
 </body>
-</html>
+    </html>
