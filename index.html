@@ -4,440 +4,1280 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Google AdSense -->
+    <!-- ================= SEO ================= -->
+    <title>SOLVATECH – Learn Coding, AI & Digital Skills</title>
+
+    <meta name="description"
+        content="SOLVATECH helps you learn coding, AI and digital skills while providing websites, apps, graphic design and digital solutions.">
+
+    <meta name="keywords"
+        content="SOLVATECH, coding, web development, AI, digital skills, website development, app development, graphic design">
+
+    <meta name="author" content="SOLVATECH">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="https://solvatech.name.ng/">
+
+    <!-- ================= FAVICON ================= -->
+    <!-- Change favicon.png only if your actual favicon has a different filename -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+
+    <!-- ================= OPEN GRAPH ================= -->
+    <!-- Used for WhatsApp, Facebook, Telegram, LinkedIn previews -->
+    <meta property="og:title"
+        content="SOLVATECH – Learn Coding, AI & Digital Skills">
+
+    <meta property="og:description"
+        content="Learn coding, AI and digital skills. We also build websites, apps, designs and digital solutions.">
+
+    <meta property="og:image"
+        content="https://solvatech.name.ng/assets/logo-img.png">
+
+    <meta property="og:url"
+        content="https://solvatech.name.ng/">
+
+    <meta property="og:type" content="website">
+
+    <meta property="og:site_name"
+        content="SOLVATECH">
+
+    <meta property="og:locale"
+        content="en_US">
+
+    <!-- ================= TWITTER / X ================= -->
+    <meta name="twitter:card"
+        content="summary_large_image">
+
+    <meta name="twitter:title"
+        content="SOLVATECH – Learn Coding, AI & Digital Skills">
+
+    <meta name="twitter:description"
+        content="Learn coding, AI and digital skills with SOLVATECH.">
+
+    <meta name="twitter:image"
+        content="https://solvatech.name.ng/assets/logo-img.png">
+
+    <!-- ================= GOOGLE ADSENSE ================= -->
     <script async
         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4735091807839425"
         crossorigin="anonymous"></script>
 
-<!-- ============================================================
-OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
-============================================================ -->
-<meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
-<meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
-<meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
-<meta property="og:url" content="https://solvatech.name.ng" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="SOLVATECH" />
-<meta property="og:locale" content="en_US" />
+    <!-- ================= FONT AWESOME ================= -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
-<!-- ============================================================
-TWITTER CARDS
-============================================================ -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
-<meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
-<meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    
-    <!-- ===== CSS (Modular) ===== -->
-    <link rel="stylesheet" href="css/global.css" />
-    <link rel="stylesheet" href="css/animations.css" />
-    <link rel="stylesheet" href="css/home.css" />
+    <!-- ================= CSS ================= -->
+    <link rel="stylesheet" href="css/global.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/home.css">
 
-    <!-- ===== JS (Modular) ===== -->
+    <!-- ================= JAVASCRIPT ================= -->
     <script src="js/config.js"></script>
     <script src="js/head-config.js"></script>
     <script src="js/global.js"></script>
     <script src="js/home.js"></script>
 </head>
+
 <body>
+
     <!-- ============================================================
     GLOBAL LOADING OVERLAY
     ============================================================ -->
     <div class="loading-overlay" id="loadingOverlay">
+
         <div class="spinner-ring">
             <div class="ring"></div>
             <div class="ring"></div>
             <div class="ring"></div>
         </div>
+
         <h3 id="loadingTitle">SOLVATECH</h3>
-        <p id="loadingMessage">Loading your request...</p>
+
+        <p id="loadingMessage">
+            Loading your request...
+        </p>
+
         <div class="loader-progress">
             <div class="bar" id="loaderBar"></div>
         </div>
+
     </div>
+
 
     <!-- ============================================================
     TOAST NOTIFICATION
     ============================================================ -->
     <div class="toast-notification" id="customToast">
+
         <i class="fa-solid fa-circle-check"></i>
-        <div class="toast-msg" id="toastMsg">Ready.</div>
+
+        <div class="toast-msg" id="toastMsg">
+            Ready.
+        </div>
+
     </div>
+
 
     <!-- ============================================================
     PAGE CONTENT
     ============================================================ -->
     <div class="page-content">
 
-        <!-- ========== NAVIGATION ========== -->
+
+        <!-- ========================================================
+        NAVIGATION
+        ======================================================== -->
         <header class="navbar">
+
             <div class="container nav-container">
+
                 <a href="index.html" class="logo">
-                    <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
-                    <span class="logo-icon">◆</span> SOLVATECH
+
+                    <!-- Website logo -->
+                    <img
+                        src="assets/logo.png"
+                        alt="SOLVATECH Logo"
+                        class="logo-img"
+                    >
+
+                    <span class="logo-icon">◆</span>
+
+                    SOLVATECH
+
                 </a>
-                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+
+
+                <button
+                    class="nav-toggle"
+                    id="navToggle"
+                    aria-label="Toggle navigation"
+                >
                     <i class="fas fa-bars"></i>
                 </button>
+
+
                 <nav class="nav-menu" id="navMenu">
+
                     <ul>
-                        <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="academy.html">Academy</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="services.html" class="btn-primary nav-cta">Start a Project</a></li>
+
+                        <li>
+                            <a href="index.html" class="active">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="services.html">
+                                Services
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="portfolio.html">
+                                Portfolio
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="academy.html">
+                                Academy
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
+                            </a>
+                        </li>
+
+                        <li>
+                            <a
+                                href="services.html"
+                                class="btn-primary nav-cta"
+                            >
+                                Start a Project
+                            </a>
+                        </li>
+
                     </ul>
+
+
                     <div class="drawer-footer">
-                        <p>© 2026 SOLVATECH</p>
+
+                        <p>
+                            © 2026 SOLVATECH
+                        </p>
+
                     </div>
+
                 </nav>
+
             </div>
+
         </header>
 
-        <!-- ========== HERO (Half Screen with Background Image) ========== -->
+
+        <!-- ========================================================
+        HERO
+        ======================================================== -->
         <section class="hero">
+
             <div class="hero-bg-image">
-                <img src="assets/hero-home.png" alt="SOLVATECH Hero" />
+
+                <img
+                    src="assets/hero-home.png"
+                    alt="SOLVATECH Digital Solutions"
+                >
+
             </div>
+
+
             <div class="container hero-content">
+
                 <div class="hero-badge">
+
                     <span class="badge-dot"></span>
-                    <span>Digital solutions for everyone</span>
+
+                    <span>
+                        Digital solutions for everyone
+                    </span>
+
                 </div>
-                <h1 class="hero-title">SOLVATECH</h1>
-                <p class="hero-tagline">Turning Ideas Into Digital Solutions.</p>
+
+
+                <h1 class="hero-title">
+                    SOLVATECH
+                </h1>
+
+
+                <p class="hero-tagline">
+                    Turning Ideas Into Digital Solutions.
+                </p>
+
+
                 <p class="hero-description">
                     Websites, apps, designs, AI-powered solutions – built for you.
                 </p>
+
+
                 <div class="hero-buttons">
-                    <a href="services.html" class="btn-primary btn-hero">
-                        <i class="fas fa-rocket"></i> Start a Project
+
+                    <a
+                        href="services.html"
+                        class="btn-primary btn-hero"
+                    >
+                        <i class="fas fa-rocket"></i>
+                        Start a Project
                     </a>
-                    <a href="academy.html" class="btn-secondary btn-hero">
-                        <i class="fas fa-graduation-cap"></i> Start Academy
+
+
+                    <a
+                        href="academy.html"
+                        class="btn-secondary btn-hero"
+                    >
+                        <i class="fas fa-graduation-cap"></i>
+                        Start Academy
                     </a>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- ========== SERVICES PREVIEW ========== -->
-        <section class="services-preview" id="services">
+
+        <!-- ========================================================
+        SERVICES PREVIEW
+        ======================================================== -->
+        <section
+            class="services-preview"
+            id="services"
+        >
+
             <div class="container">
+
                 <div class="section-header">
-                    <span class="section-tag">WHAT WE DO</span>
-                    <h2 class="section-title gradient">Explore Our Services</h2>
+
+                    <span class="section-tag">
+                        WHAT WE DO
+                    </span>
+
+                    <h2 class="section-title gradient">
+                        Explore Our Services
+                    </h2>
+
                     <p class="section-subtitle">
                         Tap any service below to learn more.
                     </p>
+
                 </div>
+
+
                 <div class="services-grid">
 
-                    <!-- 1: Website Development -->
-                    <div class="service-card expandable" onclick="toggleExpand(this)">
+
+                    <!-- WEBSITE DEVELOPMENT -->
+                    <div
+                        class="service-card expandable"
+                        onclick="toggleExpand(this)"
+                    >
+
                         <div class="service-image-wrapper">
-                            <img src="assets/service-webdev.png" alt="Website Development" />
+
+                            <img
+                                src="assets/service-webdev.png"
+                                alt="Website Development"
+                            >
+
                         </div>
-                        <h3>Website Development</h3>
-                        <p class="service-short">Custom websites that drive engagement.</p>
+
+                        <h3>
+                            Website Development
+                        </h3>
+
+                        <p class="service-short">
+                            Custom websites that drive engagement.
+                        </p>
+
+
                         <div class="service-detail">
-                            <p>Fast, responsive websites that represent your brand and convert visitors into customers. From business sites to e-commerce platforms, we create digital experiences that deliver results.</p>
+
+                            <p>
+                                Fast, responsive websites that represent your
+                                brand and convert visitors into customers.
+                                From business sites to e-commerce platforms,
+                                we create digital experiences that deliver results.
+                            </p>
+
+
                             <div class="service-features">
-                                <span>✔ Business Websites</span>
-                                <span>✔ E-commerce Stores</span>
-                                <span>✔ Portfolio Sites</span>
-                                <span>✔ Landing Pages</span>
+
+                                <span>
+                                    ✔ Business Websites
+                                </span>
+
+                                <span>
+                                    ✔ E-commerce Stores
+                                </span>
+
+                                <span>
+                                    ✔ Portfolio Sites
+                                </span>
+
+                                <span>
+                                    ✔ Landing Pages
+                                </span>
+
                             </div>
-                            <a href="services.html" class="btn-primary btn-small">Learn More →</a>
+
+
+                            <a
+                                href="services.html"
+                                class="btn-primary btn-small"
+                            >
+                                Learn More →
+                            </a>
+
                         </div>
+
                     </div>
 
-                    <!-- 2: App Development -->
-                    <div class="service-card expandable" onclick="toggleExpand(this)">
+
+                    <!-- APP DEVELOPMENT -->
+                    <div
+                        class="service-card expandable"
+                        onclick="toggleExpand(this)"
+                    >
+
                         <div class="service-image-wrapper">
-                            <img src="assets/service-appdev.png" alt="App Development" />
+
+                            <img
+                                src="assets/service-appdev.png"
+                                alt="App Development"
+                            >
+
                         </div>
-                        <h3>App Development</h3>
-                        <p class="service-short">User-friendly mobile apps for Android.</p>
+
+
+                        <h3>
+                            App Development
+                        </h3>
+
+
+                        <p class="service-short">
+                            User-friendly mobile apps for Android.
+                        </p>
+
+
                         <div class="service-detail">
-                            <p>Functional, user-friendly Android apps – from utility tools to full-featured platforms. We deliver quality apps that work smoothly and solve real problems.</p>
+
+                            <p>
+                                Functional, user-friendly Android apps – from
+                                utility tools to full-featured platforms.
+                                We deliver quality apps that work smoothly
+                                and solve real problems.
+                            </p>
+
+
                             <div class="service-features">
-                                <span>✔ Android Apps</span>
-                                <span>✔ Utility Tools</span>
-                                <span>✔ Business Apps</span>
-                                <span>✔ Custom Solutions</span>
+
+                                <span>
+                                    ✔ Android Apps
+                                </span>
+
+                                <span>
+                                    ✔ Utility Tools
+                                </span>
+
+                                <span>
+                                    ✔ Business Apps
+                                </span>
+
+                                <span>
+                                    ✔ Custom Solutions
+                                </span>
+
                             </div>
-                            <a href="services.html" class="btn-primary btn-small">Learn More →</a>
+
+
+                            <a
+                                href="services.html"
+                                class="btn-primary btn-small"
+                            >
+                                Learn More →
+                            </a>
+
                         </div>
+
                     </div>
 
-                    <!-- 3: Graphic Design -->
-                    <div class="service-card expandable" onclick="toggleExpand(this)">
+
+                    <!-- GRAPHIC DESIGN -->
+                    <div
+                        class="service-card expandable"
+                        onclick="toggleExpand(this)"
+                    >
+
                         <div class="service-image-wrapper">
-                            <img src="assets/service-graphic.png" alt="Graphic Design" />
+
+                            <img
+                                src="assets/service-graphic.png"
+                                alt="Graphic Design"
+                            >
+
                         </div>
-                        <h3>Graphic Design</h3>
-                        <p class="service-short">Professional visual identities.</p>
+
+
+                        <h3>
+                            Graphic Design
+                        </h3>
+
+
+                        <p class="service-short">
+                            Professional visual identities.
+                        </p>
+
+
                         <div class="service-detail">
-                            <p>Logos, flyers, posters, social media graphics – complete brand identities that stand out. Your brand deserves to look professional and memorable.</p>
+
+                            <p>
+                                Logos, flyers, posters, social media graphics –
+                                complete brand identities that stand out.
+                                Your brand deserves to look professional
+                                and memorable.
+                            </p>
+
+
                             <div class="service-features">
-                                <span>✔ Logo Design</span>
-                                <span>✔ Brand Identity</span>
-                                <span>✔ Flyers &amp; Posters</span>
-                                <span>✔ Social Media Graphics</span>
+
+                                <span>
+                                    ✔ Logo Design
+                                </span>
+
+                                <span>
+                                    ✔ Brand Identity
+                                </span>
+
+                                <span>
+                                    ✔ Flyers &amp; Posters
+                                </span>
+
+                                <span>
+                                    ✔ Social Media Graphics
+                                </span>
+
                             </div>
-                            <a href="services.html" class="btn-primary btn-small">Learn More →</a>
+
+
+                            <a
+                                href="services.html"
+                                class="btn-primary btn-small"
+                            >
+                                Learn More →
+                            </a>
+
                         </div>
+
                     </div>
 
-                    <!-- 4: AI Creative Services -->
-                    <div class="service-card expandable" onclick="toggleExpand(this)">
+
+                    <!-- AI CREATIVE SERVICES -->
+                    <div
+                        class="service-card expandable"
+                        onclick="toggleExpand(this)"
+                    >
+
                         <div class="service-image-wrapper">
-                            <img src="assets/service-ai.png" alt="AI Creative Services" />
+
+                            <img
+                                src="assets/service-ai.png"
+                                alt="AI Creative Services"
+                            >
+
                         </div>
-                        <h3>AI Creative Services</h3>
-                        <p class="service-short">AI-powered video, music, and content.</p>
+
+
+                        <h3>
+                            AI Creative Services
+                        </h3>
+
+
+                        <p class="service-short">
+                            AI-powered video, music, and content.
+                        </p>
+
+
                         <div class="service-detail">
-                            <p>AI-generated videos, music, voice projects, and automated content that saves time and delivers professional results. Stay ahead with AI-powered creativity.</p>
+
+                            <p>
+                                AI-generated videos, music, voice projects,
+                                and automated content that saves time and
+                                delivers professional results.
+                            </p>
+
+
                             <div class="service-features">
-                                <span>✔ AI Video Production</span>
-                                <span>✔ AI Music &amp; Audio</span>
-                                <span>✔ AI Voice Projects</span>
-                                <span>✔ Content Automation</span>
+
+                                <span>
+                                    ✔ AI Video Production
+                                </span>
+
+                                <span>
+                                    ✔ AI Music &amp; Audio
+                                </span>
+
+                                <span>
+                                    ✔ AI Voice Projects
+                                </span>
+
+                                <span>
+                                    ✔ Content Automation
+                                </span>
+
                             </div>
-                            <a href="services.html" class="btn-primary btn-small">Learn More →</a>
+
+
+                            <a
+                                href="services.html"
+                                class="btn-primary btn-small"
+                            >
+                                Learn More →
+                            </a>
+
                         </div>
+
                     </div>
 
-                    <!-- 5: Academy (Special Purple Card) -->
-                    <div class="service-card expandable academy-card" onclick="toggleExpand(this)">
+
+                    <!-- ACADEMY -->
+                    <div
+                        class="service-card expandable academy-card"
+                        onclick="toggleExpand(this)"
+                    >
+
                         <div class="service-image-wrapper">
-                            <img src="assets/service-academy.png" alt="SOLVATECH Academy" />
+
+                            <img
+                                src="assets/service-academy.png"
+                                alt="SOLVATECH Academy"
+                            >
+
                         </div>
-                        <h3>SOLVATECH Academy</h3>
-                        <p class="service-short">Learn everything we offer – web, apps, design, AI, and more.</p>
+
+
+                        <h3>
+                            SOLVATECH Academy
+                        </h3>
+
+
+                        <p class="service-short">
+                            Learn everything we offer – web, apps, design,
+                            AI, and more.
+                        </p>
+
+
                         <div class="service-detail">
-                            <p><strong>Master all the skills we provide as a service.</strong> Our Academy covers Website Development, App Development, Graphic Design, AI Creative, Digital Solutions, and Branding – all in one structured, project-based learning path.</p>
-                            <p>With <strong>AI-assisted learning</strong>, you'll progress from beginner to advanced, building real projects that prepare you for the digital economy.</p>
+
+                            <p>
+                                <strong>
+                                    Master all the skills we provide as a service.
+                                </strong>
+
+                                Our Academy covers Website Development,
+                                App Development, Graphic Design, AI Creative,
+                                Digital Solutions, and Branding – all in one
+                                structured, project-based learning path.
+                            </p>
+
+
+                            <p>
+                                With
+                                <strong>
+                                    AI-assisted learning
+                                </strong>,
+                                you'll progress from beginner to advanced,
+                                building real projects that prepare you
+                                for the digital economy.
+                            </p>
+
+
                             <div class="service-features">
-                                <span>✔ Web Development</span>
-                                <span>✔ App Development</span>
-                                <span>✔ Graphic Design</span>
-                                <span>✔ AI &amp; Automation</span>
-                                <span>✔ Branding</span>
-                                <span>✔ Digital Solutions</span>
+
+                                <span>
+                                    ✔ Web Development
+                                </span>
+
+                                <span>
+                                    ✔ App Development
+                                </span>
+
+                                <span>
+                                    ✔ Graphic Design
+                                </span>
+
+                                <span>
+                                    ✔ AI &amp; Automation
+                                </span>
+
+                                <span>
+                                    ✔ Branding
+                                </span>
+
+                                <span>
+                                    ✔ Digital Solutions
+                                </span>
+
                             </div>
-                            <a href="academy.html" class="btn-academy btn-small">Start Academy →</a>
+
+
+                            <a
+                                href="academy.html"
+                                class="btn-academy btn-small"
+                            >
+                                Start Academy →
+                            </a>
+
                         </div>
+
                     </div>
 
                 </div>
+
             </div>
+
         </section>
 
-        <!-- ========== PORTFOLIO PREVIEW ========== -->
-        <section class="portfolio-preview" id="portfolio">
+
+        <!-- ========================================================
+        PORTFOLIO PREVIEW
+        ======================================================== -->
+        <section
+            class="portfolio-preview"
+            id="portfolio"
+        >
+
             <div class="container">
+
                 <div class="section-header">
-                    <span class="section-tag">OUR WORK</span>
-                    <h2 class="section-title gradient">Recent Projects</h2>
+
+                    <span class="section-tag">
+                        OUR WORK
+                    </span>
+
+                    <h2 class="section-title gradient">
+                        Recent Projects
+                    </h2>
+
                     <p class="section-subtitle">
                         Real projects that show what we can deliver.
                     </p>
+
                 </div>
+
+
                 <div class="portfolio-grid">
 
-                    <!-- Project 1 -->
+
                     <div class="portfolio-item">
+
                         <div class="portfolio-image-wrapper">
-                            <img src="assets/project-1.png" alt="Project 1" />
+
+                            <img
+                                src="assets/project-1.png"
+                                alt="E-Commerce Platform"
+                            >
+
                         </div>
-                        <h3>E-Commerce Platform</h3>
-                        <p class="portfolio-category">Website Development</p>
-                        <a href="portfolio.html" class="portfolio-link">View Case Study →</a>
+
+                        <h3>
+                            E-Commerce Platform
+                        </h3>
+
+                        <p class="portfolio-category">
+                            Website Development
+                        </p>
+
+                        <a
+                            href="portfolio.html"
+                            class="portfolio-link"
+                        >
+                            View Case Study →
+                        </a>
+
                     </div>
 
-                    <!-- Project 2 -->
+
                     <div class="portfolio-item">
+
                         <div class="portfolio-image-wrapper">
-                            <img src="assets/project-2.png" alt="Project 2" />
+
+                            <img
+                                src="assets/project-2.png"
+                                alt="Brand Identity Design"
+                            >
+
                         </div>
-                        <h3>Brand Identity Design</h3>
-                        <p class="portfolio-category">Branding &amp; Design</p>
-                        <a href="portfolio.html" class="portfolio-link">View Case Study →</a>
+
+                        <h3>
+                            Brand Identity Design
+                        </h3>
+
+                        <p class="portfolio-category">
+                            Branding &amp; Design
+                        </p>
+
+                        <a
+                            href="portfolio.html"
+                            class="portfolio-link"
+                        >
+                            View Case Study →
+                        </a>
+
                     </div>
 
-                    <!-- Project 3 -->
+
                     <div class="portfolio-item">
+
                         <div class="portfolio-image-wrapper">
-                            <img src="assets/project-3.png" alt="Project 3" />
+
+                            <img
+                                src="assets/project-3.png"
+                                alt="Delivery Mobile App"
+                            >
+
                         </div>
-                        <h3>Delivery Mobile App</h3>
-                        <p class="portfolio-category">App Development</p>
-                        <a href="portfolio.html" class="portfolio-link">View Case Study →</a>
+
+                        <h3>
+                            Delivery Mobile App
+                        </h3>
+
+                        <p class="portfolio-category">
+                            App Development
+                        </p>
+
+                        <a
+                            href="portfolio.html"
+                            class="portfolio-link"
+                        >
+                            View Case Study →
+                        </a>
+
                     </div>
 
                 </div>
+
             </div>
+
         </section>
 
-        <!-- ========== WHY SOLVATECH ========== -->
-        <section class="why-solvatech" id="about">
+
+        <!-- ========================================================
+        WHY SOLVATECH
+        ======================================================== -->
+        <section
+            class="why-solvatech"
+            id="about"
+        >
+
             <div class="container">
+
                 <div class="section-header">
-                    <span class="section-tag">WHY CHOOSE US</span>
-                    <h2 class="section-title gradient">Built to Deliver Excellence</h2>
+
+                    <span class="section-tag">
+                        WHY CHOOSE US
+                    </span>
+
+                    <h2 class="section-title gradient">
+                        Built to Deliver Excellence
+                    </h2>
+
                     <p class="section-subtitle">
-                        Creative, technology-focused, client-centered, and results-driven.
+                        Creative, technology-focused, client-centered,
+                        and results-driven.
                     </p>
+
                 </div>
+
+
                 <div class="why-grid">
+
+
                     <div class="why-item">
+
                         <div class="why-icon-wrapper">
                             <i class="fas fa-lightbulb"></i>
                         </div>
-                        <h4>Creative &amp; Innovative</h4>
-                        <p>Fresh ideas that make your solution stand out from the competition.</p>
+
+                        <h4>
+                            Creative &amp; Innovative
+                        </h4>
+
+                        <p>
+                            Fresh ideas that make your solution stand out
+                            from the competition.
+                        </p>
+
                     </div>
+
+
                     <div class="why-item">
+
                         <div class="why-icon-wrapper">
                             <i class="fas fa-cogs"></i>
                         </div>
-                        <h4>Technology-Focused</h4>
-                        <p>Modern tools and best practices for building reliable, scalable solutions.</p>
+
+                        <h4>
+                            Technology-Focused
+                        </h4>
+
+                        <p>
+                            Modern tools and best practices for building
+                            reliable, scalable solutions.
+                        </p>
+
                     </div>
+
+
                     <div class="why-item">
+
                         <div class="why-icon-wrapper">
                             <i class="fas fa-handshake"></i>
                         </div>
-                        <h4>Client-Centered</h4>
-                        <p>Your goals drive our process from start to finish. We collaborate closely with you.</p>
+
+                        <h4>
+                            Client-Centered
+                        </h4>
+
+                        <p>
+                            Your goals drive our process from start to finish.
+                            We collaborate closely with you.
+                        </p>
+
                     </div>
+
+
                     <div class="why-item">
+
                         <div class="why-icon-wrapper">
                             <i class="fas fa-rocket"></i>
                         </div>
-                        <h4>Results-Driven</h4>
-                        <p>Practical digital products that drive real business growth and success.</p>
+
+                        <h4>
+                            Results-Driven
+                        </h4>
+
+                        <p>
+                            Practical digital products that drive real
+                            business growth and success.
+                        </p>
+
                     </div>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- ========== ACADEMY PREVIEW ========== -->
-        <section class="academy-preview" id="academy">
+
+        <!-- ========================================================
+        ACADEMY PREVIEW
+        ======================================================== -->
+        <section
+            class="academy-preview"
+            id="academy"
+        >
+
             <div class="academy-bg-image">
-                <img src="assets/academy-bg.png" alt="SOLVATECH Academy" />
+
+                <img
+                    src="assets/academy-bg.png"
+                    alt="SOLVATECH Academy"
+                >
+
             </div>
+
+
             <div class="container academy-content-overlay">
+
                 <div class="academy-content">
+
                     <div class="academy-icon">
                         <i class="fas fa-graduation-cap"></i>
                     </div>
-                    <h2>SOLVATECH Academy</h2>
+
+
+                    <h2>
+                        SOLVATECH Academy
+                    </h2>
+
+
                     <p>
-                        Learn <strong>all the skills we offer</strong> with <strong>AI-assisted learning</strong>
-                        that adapts to your pace. From beginner to expert, we guide you every step of the way.
+                        Learn
+                        <strong>all the skills we offer</strong>
+                        with
+                        <strong>AI-assisted learning</strong>
+                        that adapts to your pace. From beginner to expert,
+                        we guide you every step of the way.
                     </p>
+
+
                     <div class="academy-features">
-                        <span><i class="fas fa-check-circle"></i> Web Development</span>
-                        <span><i class="fas fa-check-circle"></i> App Development</span>
-                        <span><i class="fas fa-check-circle"></i> Graphic Design</span>
-                        <span><i class="fas fa-check-circle"></i> AI &amp; Automation</span>
-                        <span><i class="fas fa-check-circle"></i> Branding</span>
-                        <span><i class="fas fa-check-circle"></i> Digital Solutions</span>
+
+                        <span>
+                            <i class="fas fa-check-circle"></i>
+                            Web Development
+                        </span>
+
+                        <span>
+                            <i class="fas fa-check-circle"></i>
+                            App Development
+                        </span>
+
+                        <span>
+                            <i class="fas fa-check-circle"></i>
+                            Graphic Design
+                        </span>
+
+                        <span>
+                            <i class="fas fa-check-circle"></i>
+                            AI &amp; Automation
+                        </span>
+
+                        <span>
+                            <i class="fas fa-check-circle"></i>
+                            Branding
+                        </span>
+
+                        <span>
+                            <i class="fas fa-check-circle"></i>
+                            Digital Solutions
+                        </span>
+
                     </div>
-                    <a href="academy.html" class="btn-academy btn-large">Start Academy →</a>
+
+
+                    <a
+                        href="academy.html"
+                        class="btn-academy btn-large"
+                    >
+                        Start Academy →
+                    </a>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- ========== CTA SECTION ========== -->
-        <section class="cta-section" id="contact">
+
+        <!-- ========================================================
+        CTA SECTION
+        ======================================================== -->
+        <section
+            class="cta-section"
+            id="contact"
+        >
+
             <div class="container cta-content">
-                <h2>Ready to Build Your Digital Solution?</h2>
-                <p>Let's turn your idea into reality. Start your project today.</p>
+
+                <h2>
+                    Ready to Build Your Digital Solution?
+                </h2>
+
+                <p>
+                    Let's turn your idea into reality.
+                    Start your project today.
+                </p>
+
+
                 <div class="cta-buttons">
-                    <a href="services.html" class="btn-primary btn-large">
-                        <i class="fas fa-paper-plane"></i> Start a Project
+
+                    <a
+                        href="services.html"
+                        class="btn-primary btn-large"
+                    >
+                        <i class="fas fa-paper-plane"></i>
+                        Start a Project
                     </a>
-                    <a href="contact.html" class="btn-secondary btn-large">
-                        <i class="fas fa-comment"></i> Get in Touch
+
+
+                    <a
+                        href="contact.html"
+                        class="btn-secondary btn-large"
+                    >
+                        <i class="fas fa-comment"></i>
+                        Get in Touch
                     </a>
+
                 </div>
+
             </div>
+
         </section>
 
-        <!-- ========== FOOTER ========== -->
+
+        <!-- ========================================================
+        FOOTER
+        ======================================================== -->
         <footer class="footer">
+
             <div class="container footer-grid">
+
+
                 <div class="footer-brand">
-                    <a href="index.html" class="logo">SOLVATECH</a>
-                    <p>Turning Ideas Into Digital Solutions.</p>
+
+                    <a
+                        href="index.html"
+                        class="logo"
+                    >
+                        SOLVATECH
+                    </a>
+
+                    <p>
+                        Turning Ideas Into Digital Solutions.
+                    </p>
+
+
                     <div class="social-links">
-                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+
+                        <a
+                            href="#"
+                            aria-label="Facebook"
+                        >
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="Twitter"
+                        >
+                            <i class="fab fa-twitter"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="Instagram"
+                        >
+                            <i class="fab fa-instagram"></i>
+                        </a>
+
+                        <a
+                            href="#"
+                            aria-label="LinkedIn"
+                        >
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+
                     </div>
+
                 </div>
+
+
                 <div class="footer-links">
-                    <h4>Quick Links</h4>
+
+                    <h4>
+                        Quick Links
+                    </h4>
+
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="academy.html">Academy</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+
+                        <li>
+                            <a href="index.html">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="services.html">
+                                Services
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="portfolio.html">
+                                Portfolio
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="academy.html">
+                                Academy
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="about.html">
+                                About
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="contact.html">
+                                Contact
+                            </a>
+                        </li>
+
                     </ul>
+
                 </div>
+
+
                 <div class="footer-contact">
-                    <h4>Contact</h4>
-                    <p><i class="fas fa-envelope"></i> solvatech@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> +234 904 997 9183</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Nigeria</p>
+
+                    <h4>
+                        Contact
+                    </h4>
+
+                    <p>
+                        <i class="fas fa-envelope"></i>
+                        solvatech@gmail.com
+                    </p>
+
+                    <p>
+                        <i class="fas fa-phone"></i>
+                        +234 904 997 9183
+                    </p>
+
+                    <p>
+                        <i class="fas fa-map-marker-alt"></i>
+                        Nigeria
+                    </p>
+
                 </div>
+
             </div>
+
+
             <div class="footer-bottom">
+
                 <div class="container">
-                    <p>&copy; 2026 SOLVATECH. All rights reserved.</p>
+
+                    <p>
+                        &copy; 2026 SOLVATECH.
+                        All rights reserved.
+                    </p>
+
                 </div>
+
             </div>
+
         </footer>
 
     </div>
-    <!-- end page-content -->
+
 
     <!-- ============================================================
-    JAVASCRIPT (Homepage Only)
+    JAVASCRIPT - SERVICE CARD EXPANSION
     ============================================================ -->
     <script>
-    // ============================================================
-    // TAP TO EXPAND - Service Cards
-    // ============================================================
-    function toggleExpand(card) {
-        var openCards = document.querySelectorAll('.service-card.expandable.open');
-        for (var i = 0; i < openCards.length; i++) {
-            if (openCards[i] !== card) {
-                openCards[i].classList.remove('open');
-            }
-        }
-        card.classList.toggle('open');
-    }
 
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.service-card.expandable')) {
-            var openCards = document.querySelectorAll('.service-card.expandable.open');
-            for (var i = 0; i < openCards.length; i++) {
-                openCards[i].classList.remove('open');
+        function toggleExpand(card) {
+
+            var openCards =
+                document.querySelectorAll(
+                    '.service-card.expandable.open'
+                );
+
+            for (
+                var i = 0;
+                i < openCards.length;
+                i++
+            ) {
+
+                if (openCards[i] !== card) {
+
+                    openCards[i].classList.remove('open');
+
+                }
+
             }
+
+            card.classList.toggle('open');
+
         }
-    });
+
+
+        document.addEventListener(
+            'click',
+            function(e) {
+
+                if (
+                    !e.target.closest(
+                        '.service-card.expandable'
+                    )
+                ) {
+
+                    var openCards =
+                        document.querySelectorAll(
+                            '.service-card.expandable.open'
+                        );
+
+                    for (
+                        var i = 0;
+                        i < openCards.length;
+                        i++
+                    ) {
+
+                        openCards[i]
+                            .classList
+                            .remove('open');
+
+                    }
+
+                }
+
+            }
+        );
+
     </script>
 
 </body>
-</html>
+                        </html>
