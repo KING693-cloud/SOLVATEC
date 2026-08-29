@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,6 +20,52 @@
     <script src="../js/global.js"></script>
     <script src="../js/services.js"></script>
     <script src="acad.js"></script>
+
+    <style>
+        /* Rainbow animated button */
+        .rainbow-button-container {
+            text-align: center;
+            margin: 1rem 0 2rem;
+        }
+        .rainbow-button {
+            display: inline-block;
+            background: linear-gradient(45deg, #ff6b6b, #feca57, #48dbfb, #ff9ff3, #54a0ff, #5f27cd, #01a3a4, #f368e0);
+            background-size: 400% 400%;
+            animation: rainbowShift 3s ease infinite;
+            color: #fff;
+            border: none;
+            border-radius: 50px;
+            padding: 1rem 2.5rem;
+            font-size: 1.2rem;
+            font-weight: 900;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .rainbow-button:hover {
+            transform: scale(1.05);
+            background-size: 400% 400%;
+        }
+        .rainbow-button i {
+            font-size: 1.5rem;
+        }
+        @keyframes rainbowShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @media (max-width: 480px) {
+            .rainbow-button {
+                padding: 0.8rem 1.8rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <!-- Loading Overlay -->
@@ -48,6 +93,8 @@
                         <li><a href="acad.html">HOME</a></li>
                         <li><a href="courses.html" class="active">COURSES</a></li>
                         <li><a href="settings.html">SETTINGS</a></li>
+                        <!-- Student Tools link (also in nav) -->
+                        <li><a href="https://solvatechofficial.github.io/SOLVATECH-TOOLS/" target="_blank" rel="noopener noreferrer">STUDENT TOOLS</a></li>
                         <li><a href="#" id="logoutLink">LOGOUT</a></li>
                     </ul>
                     <div class="drawer-footer"><p>© 2026 SOLVATECH</p></div>
@@ -57,6 +104,15 @@
 
         <section class="services-page-grid">
             <div class="container" style="max-width: 700px; margin: 0 auto;">
+
+                <!-- ============================================================
+                RAINBOW STUDENT TOOLS BUTTON (BEAUTIFUL & ANIMATED)
+                ============================================================ -->
+                <div class="rainbow-button-container">
+                    <a href="https://solvatechofficial.github.io/SOLVATECH-TOOLS/" target="_blank" rel="noopener noreferrer" class="rainbow-button">
+                        <i class="fas fa-tools"></i> Student Tools
+                    </a>
+                </div>
 
                 <!-- ============================================================
                 PAGE HEADER (AVAILABLE COURSES)
@@ -586,7 +642,7 @@
         // ------------------- STATE -------------------
         let currentUser = null;
         let currentKeyData = null;
-        let userCourseData = null; // e.g., { completedLevels: [...] }
+        let userCourseData = null;
         let isProcessing = false;
         let keyListener = null;
         let userListener = null;
@@ -663,31 +719,23 @@
             return Math.max(0, MAX_REVOKES_PER_MONTH - revokeCountThisMonth());
         }
 
-        // Determine if user has at least one completed course (100%)
         function hasCompletedCourse() {
             if (!userCourseData) return false;
             const completed = userCourseData.completedLevels || [];
             return completed.length > 0;
         }
 
-        // Compute the automatic enabled state based on course completion
         function computeAutoEnabled() {
             return hasCompletedCourse();
         }
 
-        // Update the key's enabled field if auto mode and value changed
         async function syncAutoEnabled() {
             if (!currentUser || !currentKeyData || !currentKeyData.key) return;
-
-            // If admin has set override, we do not change
             if (currentKeyData.enabledOverride === true) return;
-
             const autoEnabled = computeAutoEnabled();
             if (currentKeyData.enabled !== autoEnabled) {
-                // Update in DB
                 try {
                     await firebase.database().ref(`${DB_ROOT}/${currentUser.uid}`).update({ enabled: autoEnabled });
-                    // Update local state to reflect change (listener will also fire)
                     currentKeyData.enabled = autoEnabled;
                     render();
                 } catch (error) {
@@ -696,14 +744,12 @@
             }
         }
 
-        // ------------------- RENDER -------------------
         function render() {
             if (!currentUser) {
                 keyContent.innerHTML = '<p style="font-size:0.75rem; color:#888;">Loading user...</p>';
                 return;
             }
 
-            // Load from cache if no data yet and not processing
             if (!currentKeyData && !isProcessing) {
                 const cached = loadFromCache(getCacheKey(currentUser.uid));
                 if (cached) {
@@ -761,7 +807,6 @@
             });
         }
 
-        // ------------------- DATABASE OPERATIONS -------------------
         async function fetchKeyData() {
             if (!currentUser) return;
             const snapshot = await firebase.database().ref(`${DB_ROOT}/${currentUser.uid}`).once('value');
@@ -777,7 +822,6 @@
             const data = snapshot.val() || {};
             userCourseData = data;
             saveToCache(getUserCacheKey(currentUser.uid), data);
-            // After user data loaded, we may need to sync auto enable
             syncAutoEnabled();
         }
 
@@ -796,11 +840,11 @@
             try {
                 const key = await generateUniqueKey();
                 const monthKey = getCurrentMonthKey();
-                const autoEnabled = computeAutoEnabled(); // based on current userCourseData
+                const autoEnabled = computeAutoEnabled();
                 const keyData = {
                     key: key,
                     enabled: autoEnabled,
-                    enabledOverride: false, // allow auto updates
+                    enabledOverride: false,
                     revokeCount: 0,
                     lastRevokeMonth: monthKey,
                     createdAt: firebase.database.ServerValue.TIMESTAMP
@@ -834,11 +878,8 @@
 
             try {
                 const oldKey = currentKeyData.key;
-
                 await firebase.database().ref(`${USED_KEYS_ROOT}/${oldKey}`).remove();
-
                 const newKey = await generateUniqueKey();
-
                 const currentMonth = getCurrentMonthKey();
                 const newRevokeCount = (currentKeyData.lastRevokeMonth === currentMonth) 
                     ? (currentKeyData.revokeCount || 0) + 1 
@@ -849,15 +890,14 @@
                     ...currentKeyData,
                     key: newKey,
                     enabled: autoEnabled,
-                    enabledOverride: false, // reset override on revoke? or keep? better keep existing override if set
+                    enabledOverride: false,
                     revokeCount: newRevokeCount,
                     lastRevokeMonth: currentMonth,
                     updatedAt: firebase.database.ServerValue.TIMESTAMP
                 };
-                // Preserve override flag if it was set
                 if (currentKeyData.enabledOverride === true) {
                     updatedData.enabledOverride = true;
-                    updatedData.enabled = currentKeyData.enabled; // keep admin's choice
+                    updatedData.enabled = currentKeyData.enabled;
                 }
 
                 await saveKeyData(updatedData);
@@ -876,11 +916,8 @@
             }
         }
 
-        // ------------------- REALTIME LISTENERS -------------------
         function startRealtimeListeners() {
             if (!currentUser) return;
-
-            // Key data listener
             if (keyListener) {
                 firebase.database().ref(`${DB_ROOT}/${currentUser.uid}`).off('value', keyListener);
             }
@@ -889,13 +926,11 @@
                 const data = snapshot.val() || null;
                 currentKeyData = data;
                 saveToCache(getCacheKey(currentUser.uid), data);
-                // Attempt auto sync (but avoid infinite loops; syncAutoEnabled checks if update needed)
                 syncAutoEnabled();
                 render();
             };
             keyRef.on('value', keyListener);
 
-            // User course data listener
             if (userListener) {
                 firebase.database().ref(`${USERS_ROOT}/${currentUser.uid}`).off('value', userListener);
             }
@@ -905,7 +940,6 @@
                 userCourseData = data;
                 saveToCache(getUserCacheKey(currentUser.uid), data);
                 syncAutoEnabled();
-                // No need to render here unless we display course info (we don't)
             };
             userRef.on('value', userListener);
         }
@@ -923,12 +957,10 @@
             }
         }
 
-        // ------------------- AUTH LISTENER -------------------
         firebase.auth().onAuthStateChanged((user) => {
             stopRealtimeListeners();
             currentUser = user;
             if (user) {
-                // Load caches immediately
                 const cachedKey = loadFromCache(getCacheKey(user.uid));
                 if (cachedKey) {
                     currentKeyData = cachedKey;
@@ -942,10 +974,8 @@
                     userCourseData = null;
                 }
                 render();
-                // Fetch fresh data from Firebase
                 fetchKeyData();
                 fetchUserCourseData();
-                // Start realtime listeners
                 startRealtimeListeners();
             } else {
                 currentKeyData = null;
@@ -954,10 +984,9 @@
             }
         });
 
-        // Initial render
         render();
     })();
     </script>
     <!-- ================= END ACCESS KEY WIDGET ================= -->
 </body>
-    </html>
+</html>
