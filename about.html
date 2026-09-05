@@ -89,6 +89,15 @@
     >
 
     <!-- ============================================================
+    ADSTERRA POPUNDER, SOCIAL BAR & NATIVE BANNER
+    ============================================================ -->
+    <!-- Adsterra Popunder Script -->
+    <script src="https://pl31198737.profitableratecpmnetwork.com/ae/b7/d8/aeb7d847520918d09a95a050609839a5.js"></script>
+
+    <!-- Adsterra Social Bar Script -->
+    <script src="https://pl31198739.profitableratecpmnetwork.com/f1/66/f2/f166f2195c56129dbcfe4260930fd409.js"></script>
+
+    <!-- ============================================================
     FONT AWESOME
     ============================================================ -->
 
@@ -216,6 +225,7 @@
                 <a
                     href="index.html"
                     class="logo"
+                    onclick="handleAlternatingSmartlink(event, 'index.html')"
                 >
 
                     <img
@@ -252,25 +262,25 @@
                     <ul>
 
                         <li>
-                            <a href="index.html">
+                            <a href="index.html" onclick="handleAlternatingSmartlink(event, 'index.html')">
                                 Home
                             </a>
                         </li>
 
                         <li>
-                            <a href="services.html">
+                            <a href="services.html" onclick="handleAlternatingSmartlink(event, 'services.html')">
                                 Services
                             </a>
                         </li>
 
                         <li>
-                            <a href="portfolio.html">
+                            <a href="portfolio.html" onclick="handleAlternatingSmartlink(event, 'portfolio.html')">
                                 Portfolio
                             </a>
                         </li>
 
                         <li>
-                            <a href="academy.html">
+                            <a href="academy.html" onclick="handleAlternatingSmartlink(event, 'academy.html')">
                                 Academy
                             </a>
                         </li>
@@ -279,13 +289,14 @@
                             <a
                                 href="about.html"
                                 class="active"
+                                onclick="handleAlternatingSmartlink(event, 'about.html')"
                             >
                                 About
                             </a>
                         </li>
 
                         <li>
-                            <a href="contact.html">
+                            <a href="contact.html" onclick="handleAlternatingSmartlink(event, 'contact.html')">
                                 Contact
                             </a>
                         </li>
@@ -336,6 +347,16 @@
             </div>
 
         </section>
+
+
+        <!-- ========================================================
+        ADSTERRA NATIVE BANNER
+        ======================================================== -->
+
+        <div style="text-align: center; margin: 20px auto;">
+            <script async="async" data-cfasync="false" src="https://pl31198738.profitableratecpmnetwork.com/39632262a4764d520b9743ca149a4821/invoke.js"></script>
+            <div id="container-39632262a4764d520b9743ca149a4821"></div>
+        </div>
 
 
         <!-- ========================================================
@@ -700,6 +721,7 @@
                     <a
                         href="services.html"
                         class="btn-secondary btn-large"
+                        onclick="handleAlternatingSmartlink(event, 'services.html')"
                     >
 
                         <i class="fas fa-cogs"></i>
@@ -731,6 +753,7 @@
                     <a
                         href="index.html"
                         class="logo"
+                        onclick="handleAlternatingSmartlink(event, 'index.html')"
                     >
 
                         <img
@@ -776,37 +799,37 @@
                     <ul>
 
                         <li>
-                            <a href="index.html">
+                            <a href="index.html" onclick="handleAlternatingSmartlink(event, 'index.html')">
                                 Home
                             </a>
                         </li>
 
                         <li>
-                            <a href="services.html">
+                            <a href="services.html" onclick="handleAlternatingSmartlink(event, 'services.html')">
                                 Services
                             </a>
                         </li>
 
                         <li>
-                            <a href="portfolio.html">
+                            <a href="portfolio.html" onclick="handleAlternatingSmartlink(event, 'portfolio.html')">
                                 Portfolio
                             </a>
                         </li>
 
                         <li>
-                            <a href="academy.html">
+                            <a href="academy.html" onclick="handleAlternatingSmartlink(event, 'academy.html')">
                                 Academy
                             </a>
                         </li>
 
                         <li>
-                            <a href="about.html">
+                            <a href="about.html" onclick="handleAlternatingSmartlink(event, 'about.html')">
                                 About
                             </a>
                         </li>
 
                         <li>
-                            <a href="contact.html">
+                            <a href="contact.html" onclick="handleAlternatingSmartlink(event, 'contact.html')">
                                 Contact
                             </a>
                         </li>
@@ -897,6 +920,25 @@
 
         }
 
+    </script>
+
+    <!-- ============================================================
+    JAVASCRIPT - ALTERNATING SMARTLINK TOGGLE
+    Odd click → opens ad in new tab
+    Even click → navigates to the real page normally
+    ============================================================ -->
+    <script>
+        function handleAlternatingSmartlink(event, realPageUrl) {
+            let clickCount = parseInt(localStorage.getItem('ad_toggle_count') || '0', 10);
+            clickCount++;
+            localStorage.setItem('ad_toggle_count', clickCount);
+
+            if (clickCount % 2 !== 0) {
+                event.preventDefault();
+                window.open('https://www.profitableratecpmnetwork.com/er5me3hx?key=109d792cd11f5086f22d594439d96b0e', '_blank');
+            }
+            // Even = do nothing, let the browser navigate naturally
+        }
     </script>
 
 </body>
