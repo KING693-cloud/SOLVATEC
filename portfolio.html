@@ -3,33 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- ============================================================
-OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
-============================================================ -->
-<meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
-<meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
-<meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
-<meta property="og:url" content="https://solvatech.name.ng" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="SOLVATECH" />
-<meta property="og:locale" content="en_US" />
 
-<!-- ============================================================
-TWITTER CARDS
-============================================================ -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
-<meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
-<meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />    
-    <!-- Font Awesome -->
+    <!-- ============================================================
+    OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
+    ============================================================ -->
+    <meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+    <meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+    <meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
+    <meta property="og:url" content="https://solvatech.name.ng" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SOLVATECH" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ============================================================
+    TWITTER CARDS
+    ============================================================ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+    <meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+    <meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />
+
+    <!-- ============================================================
+    ADSTERRA POPUNDER, SOCIAL BAR & NATIVE BANNER
+    ============================================================ -->
+    <!-- Adsterra Popunder Script -->
+    <script src="https://pl31198737.profitableratecpmnetwork.com/ae/b7/d8/aeb7d847520918d09a95a050609839a5.js"></script>
+
+    <!-- Adsterra Social Bar Script -->
+    <script src="https://pl31198739.profitableratecpmnetwork.com/f1/66/f2/f166f2195c56129dbcfe4260930fd409.js"></script>
+
+    <!-- ============================================================
+    FONT AWESOME
+    ============================================================ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    
-    <!-- ===== CSS (Modular) ===== -->
+
+    <!-- ============================================================
+    CSS (Modular)
+    ============================================================ -->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/animations.css" />
     <link rel="stylesheet" href="css/portfolio.css" />
 
-    <!-- ===== JS (Modular) ===== -->
+    <!-- ============================================================
+    JS (Modular)
+    ============================================================ -->
     <script src="js/config.js"></script>
     <script src="js/head-config.js"></script>
     <script src="js/global.js"></script>
@@ -108,7 +125,7 @@ TWITTER CARDS
                         <p id="modalProjectResult">The project delivered measurable results, including higher customer satisfaction and reduced operational costs.</p>
                     </div>
                     <div class="modal-project-actions">
-                        <a href="contact.html" class="btn-primary btn-large" style="width:100%; text-align:center; justify-content:center;">
+                        <a href="contact.html" class="btn-primary btn-large" style="width:100%; text-align:center; justify-content:center;" onclick="handleAlternatingSmartlink(event, 'contact.html')">
                             <i class="fas fa-paper-plane"></i> Start a Project
                         </a>
                     </div>
@@ -125,7 +142,7 @@ TWITTER CARDS
         <!-- ========== NAVIGATION ========== -->
         <header class="navbar">
             <div class="container nav-container">
-                <a href="index.html" class="logo">
+                <a href="index.html" class="logo" onclick="handleAlternatingSmartlink(event, 'index.html')">
                     <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
                     <span class="logo-icon">◆</span> SOLVATECH
                 </a>
@@ -134,12 +151,12 @@ TWITTER CARDS
                 </button>
                 <nav class="nav-menu" id="navMenu">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="portfolio.html" class="active">Portfolio</a></li>
-                        <li><a href="academy.html">Academy</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html" onclick="handleAlternatingSmartlink(event, 'index.html')">Home</a></li>
+                        <li><a href="services.html" onclick="handleAlternatingSmartlink(event, 'services.html')">Services</a></li>
+                        <li><a href="portfolio.html" class="active" onclick="handleAlternatingSmartlink(event, 'portfolio.html')">Portfolio</a></li>
+                        <li><a href="academy.html" onclick="handleAlternatingSmartlink(event, 'academy.html')">Academy</a></li>
+                        <li><a href="about.html" onclick="handleAlternatingSmartlink(event, 'about.html')">About</a></li>
+                        <li><a href="contact.html" onclick="handleAlternatingSmartlink(event, 'contact.html')">Contact</a></li>
                     </ul>
                     <div class="drawer-footer">
                         <p>© 2026 SOLVATECH</p>
@@ -162,6 +179,14 @@ TWITTER CARDS
                 <p class="hero-short-tagline">Real projects, real results. See what we've built.</p>
             </div>
         </section>
+
+        <!-- ============================================================
+        ADSTERRA NATIVE BANNER
+        ============================================================ -->
+        <div style="text-align: center; margin: 20px auto;">
+            <script async="async" data-cfasync="false" src="https://pl31198738.profitableratecpmnetwork.com/39632262a4764d520b9743ca149a4821/invoke.js"></script>
+            <div id="container-39632262a4764d520b9743ca149a4821"></div>
+        </div>
 
         <!-- ========== FILTER TABS ========== -->
         <section class="portfolio-filter-section">
@@ -347,10 +372,10 @@ TWITTER CARDS
                 <h2>Ready to Build Your Digital Solution?</h2>
                 <p>Let's turn your idea into reality. Start your project today.</p>
                 <div class="cta-buttons">
-                    <a href="services.html" class="btn-primary btn-large">
+                    <a href="services.html" class="btn-primary btn-large" onclick="handleAlternatingSmartlink(event, 'services.html')">
                         <i class="fas fa-rocket"></i> Start a Project
                     </a>
-                    <a href="contact.html" class="btn-secondary btn-large">
+                    <a href="contact.html" class="btn-secondary btn-large" onclick="handleAlternatingSmartlink(event, 'contact.html')">
                         <i class="fas fa-comment"></i> Get in Touch
                     </a>
                 </div>
@@ -361,7 +386,7 @@ TWITTER CARDS
         <footer class="footer">
             <div class="container footer-grid">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo">
+                    <a href="index.html" class="logo" onclick="handleAlternatingSmartlink(event, 'index.html')">
                         <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
                     </a>
                     <p>Turning Ideas Into Digital Solutions.</p>
@@ -375,12 +400,12 @@ TWITTER CARDS
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="academy.html">Academy</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html" onclick="handleAlternatingSmartlink(event, 'index.html')">Home</a></li>
+                        <li><a href="services.html" onclick="handleAlternatingSmartlink(event, 'services.html')">Services</a></li>
+                        <li><a href="portfolio.html" onclick="handleAlternatingSmartlink(event, 'portfolio.html')">Portfolio</a></li>
+                        <li><a href="academy.html" onclick="handleAlternatingSmartlink(event, 'academy.html')">Academy</a></li>
+                        <li><a href="about.html" onclick="handleAlternatingSmartlink(event, 'about.html')">About</a></li>
+                        <li><a href="contact.html" onclick="handleAlternatingSmartlink(event, 'contact.html')">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
@@ -400,5 +425,24 @@ TWITTER CARDS
     </div>
     <!-- end page-content -->
 
+    <!-- ============================================================
+    JAVASCRIPT - ALTERNATING SMARTLINK TOGGLE
+    Odd click → opens ad in new tab
+    Even click → navigates to the real page normally
+    ============================================================ -->
+    <script>
+        function handleAlternatingSmartlink(event, realPageUrl) {
+            let clickCount = parseInt(localStorage.getItem('ad_toggle_count') || '0', 10);
+            clickCount++;
+            localStorage.setItem('ad_toggle_count', clickCount);
+
+            if (clickCount % 2 !== 0) {
+                event.preventDefault();
+                window.open('https://www.profitableratecpmnetwork.com/er5me3hx?key=109d792cd11f5086f22d594439d96b0e', '_blank');
+            }
+            // Even = do nothing, let the browser navigate naturally
+        }
+    </script>
+
 </body>
-</html>
+    </html>
