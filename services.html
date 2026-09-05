@@ -3,10 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- ============================================================
-    OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
-    ============================================================ -->
+    <!-- OG, Twitter -->
     <meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
     <meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
     <meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
@@ -14,45 +11,156 @@
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="SOLVATECH" />
     <meta property="og:locale" content="en_US" />
-
-    <!-- ============================================================
-    TWITTER CARDS
-    ============================================================ -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
     <meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
     <meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />
 
-    <!-- ============================================================
-    ADSTERRA POPUNDER, SOCIAL BAR & NATIVE BANNER
-    ============================================================ -->
-    <!-- Adsterra Popunder Script -->
+    <!-- ADSTERRA SCRIPTS -->
     <script src="https://pl31198737.profitableratecpmnetwork.com/ae/b7/d8/aeb7d847520918d09a95a050609839a5.js"></script>
-
-    <!-- Adsterra Social Bar Script -->
     <script src="https://pl31198739.profitableratecpmnetwork.com/f1/66/f2/f166f2195c56129dbcfe4260930fd409.js"></script>
 
-    <!-- ============================================================
-    FONT AWESOME
-    ============================================================ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-
-    <!-- ============================================================
-    CSS (Modular)
-    ============================================================ -->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/animations.css" />
-    <link rel="stylesheet" href="css/services.css" />
-
-    <!-- ============================================================
-    JS (Modular)
-    ============================================================ -->
+    <link rel="stylesheet" href="css/auth.css" />
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
     <script src="js/config.js"></script>
     <script src="js/head-config.js"></script>
     <script src="js/global.js"></script>
-    <script src="js/services.js"></script>
+    <script src="js/auth.js"></script>
 </head>
 <body>
+    <!-- Loading, Toast -->
+    <div class="loading-overlay" id="loadingOverlay">...</div>
+    <div class="toast-notification" id="customToast">...</div>
+
+    <!-- PAGE CONTENT -->
+    <div class="page-content">
+        <!-- Navbar -->
+        <header class="navbar">
+            <div class="container nav-container">
+                <a href="index.html" class="logo" onclick="handleAlternatingSmartlink(event, 'index.html')">
+                    <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    <span class="logo-icon">◆</span> SOLVATECH
+                </a>
+                <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <nav class="nav-menu" id="navMenu">
+                    <ul>
+                        <li><a href="index.html" onclick="handleAlternatingSmartlink(event, 'index.html')">Home</a></li>
+                        <li><a href="services.html" onclick="handleAlternatingSmartlink(event, 'services.html')">Services</a></li>
+                        <li><a href="portfolio.html" onclick="handleAlternatingSmartlink(event, 'portfolio.html')">Portfolio</a></li>
+                        <li><a href="academy.html" onclick="handleAlternatingSmartlink(event, 'academy.html')">Academy</a></li>
+                        <li><a href="about.html" onclick="handleAlternatingSmartlink(event, 'about.html')">About</a></li>
+                        <li><a href="contact.html" onclick="handleAlternatingSmartlink(event, 'contact.html')">Contact</a></li>
+                    </ul>
+                    <div class="drawer-footer"><p>© 2026 SOLVATECH</p></div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Hero -->
+        <section class="auth-hero">
+            <div class="auth-hero-bg"><img src="assets/hero-academy.png" alt="SOLVATECH Academy" /></div>
+            <div class="container auth-hero-content">
+                <div class="hero-badge"><span class="badge-dot"></span><span>Join the Academy</span></div>
+                <h1 class="auth-hero-title">Create Your Account</h1>
+                <p class="auth-hero-tagline">Start your journey with just an email and password.</p>
+            </div>
+        </section>
+
+        <!-- Native Banner -->
+        <div style="text-align: center; margin: 20px auto;">
+            <script async="async" data-cfasync="false" src="https://pl31198738.profitableratecpmnetwork.com/39632262a4764d520b9743ca149a4821/invoke.js"></script>
+            <div id="container-39632262a4764d520b9743ca149a4821"></div>
+        </div>
+
+        <!-- Register Form -->
+        <section class="auth-section">
+            <div class="container">
+                <div class="auth-card">
+                    <div class="auth-card-header">
+                        <h2>Register</h2>
+                        <p>Enter your email and a strong password to get started.</p>
+                    </div>
+                    <form id="registerForm" autocomplete="off">
+                        <!-- Email -->
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-envelope"></i> Email Address <span class="required">*</span></label>
+                            <input type="email" id="email" placeholder="you@example.com" required />
+                            <div class="form-error" id="emailError">Please enter a valid email address.</div>
+                        </div>
+                        <!-- Password -->
+                        <div class="form-group">
+                            <label for="password"><i class="fas fa-lock"></i> Password <span class="required">*</span></label>
+                            <div class="password-wrapper">
+                                <input type="password" id="password" placeholder="Min. 8 characters" required />
+                                <button type="button" class="toggle-password" onclick="togglePasswordVisibility('password', this)">
+                                    <i class="fa-regular fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="form-error" id="passwordError">Password must be at least 8 characters, include uppercase, lowercase, number, and special character.</div>
+                            <div style="font-size:0.7rem; color:#888; margin-top:0.3rem;">
+                                <i class="fas fa-info-circle"></i> Use at least one uppercase, one lowercase, one number, and one special character (!@#$%^&*).
+                            </div>
+                        </div>
+                        <!-- Submit -->
+                        <button type="submit" class="btn-primary btn-auth" id="registerBtn">
+                            <i class="fas fa-user-plus"></i> Create Account
+                        </button>
+                        <p class="auth-switch">
+                            Already have an account? <a href="login.html" onclick="handleAlternatingSmartlink(event, 'login.html')">Log in here</a>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <div class="container footer-grid">
+                <div class="footer-brand">
+                    <a href="index.html" class="logo" onclick="handleAlternatingSmartlink(event, 'index.html')">
+                        <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
+                    </a>
+                    <p>Turning Ideas Into Digital Solutions.</p>
+                    <div class="social-links">...</div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html" onclick="handleAlternatingSmartlink(event, 'index.html')">Home</a></li>
+                        <li><a href="services.html" onclick="handleAlternatingSmartlink(event, 'services.html')">Services</a></li>
+                        <li><a href="portfolio.html" onclick="handleAlternatingSmartlink(event, 'portfolio.html')">Portfolio</a></li>
+                        <li><a href="academy.html" onclick="handleAlternatingSmartlink(event, 'academy.html')">Academy</a></li>
+                        <li><a href="about.html" onclick="handleAlternatingSmartlink(event, 'about.html')">About</a></li>
+                        <li><a href="contact.html" onclick="handleAlternatingSmartlink(event, 'contact.html')">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">...</div>
+            </div>
+            <div class="footer-bottom"><div class="container"><p>&copy; <span id="copyright-year">2026</span> SOLVATECH. All rights reserved.</p></div></div>
+        </footer>
+    </div>
+
+    <!-- ALTERNATING SMARTLINK -->
+    <script>
+        function handleAlternatingSmartlink(event, realPageUrl) {
+            let clickCount = parseInt(localStorage.getItem('ad_toggle_count') || '0', 10);
+            clickCount++;
+            localStorage.setItem('ad_toggle_count', clickCount);
+            if (clickCount % 2 !== 0) {
+                event.preventDefault();
+                window.open('https://www.profitableratecpmnetwork.com/er5me3hx?key=109d792cd11f5086f22d594439d96b0e', '_blank');
+            }
+        }
+    </script>
+</body>
+</html>
 
     <!-- ============================================================
     GLOBAL LOADING OVERLAY
