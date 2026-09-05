@@ -3,27 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- ============================================================
-OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
-============================================================ -->
-<meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
-<meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
-<meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
-<meta property="og:url" content="https://solvatech.name.ng" />
-<meta property="og:type" content="website" />
-<meta property="og:site_name" content="SOLVATECH" />
-<meta property="og:locale" content="en_US" />
 
-<!-- ============================================================
-TWITTER CARDS
-============================================================ -->
-<meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
-<meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
-<meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />    
-    <!-- Font Awesome -->
+    <!-- ============================================================
+    OPEN GRAPH (WhatsApp, Facebook, Telegram, LinkedIn)
+    ============================================================ -->
+    <meta property="og:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+    <meta property="og:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+    <meta property="og:image" content="https://solvatech.name.ng/assets/logo-img.png" />
+    <meta property="og:url" content="https://solvatech.name.ng" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="SOLVATECH" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- ============================================================
+    TWITTER CARDS
+    ============================================================ -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="SOLVATECH – Learn Coding, AI & Digital Skills" />
+    <meta name="twitter:description" content="Learn coding, AI, and digital skills. We also build websites, apps, bots, and more." />
+    <meta name="twitter:image" content="https://solvatech.name.ng/assets/logo-img.png" />
+
+    <!-- ============================================================
+    ADSTERRA POPUNDER, SOCIAL BAR & NATIVE BANNER
+    ============================================================ -->
+    <!-- Adsterra Popunder Script -->
+    <script src="https://pl31198737.profitableratecpmnetwork.com/ae/b7/d8/aeb7d847520918d09a95a050609839a5.js"></script>
+
+    <!-- Adsterra Social Bar Script -->
+    <script src="https://pl31198739.profitableratecpmnetwork.com/f1/66/f2/f166f2195c56129dbcfe4260930fd409.js"></script>
+
+    <!-- ============================================================
+    FONT AWESOME
+    ============================================================ -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-    
+
     <!-- ===== CSS (Modular) ===== -->
     <link rel="stylesheet" href="css/global.css" />
     <link rel="stylesheet" href="css/animations.css" />
@@ -113,7 +126,7 @@ TWITTER CARDS
         <!-- ========== NAVIGATION ========== -->
         <header class="navbar">
             <div class="container nav-container">
-                <a href="index.html" class="logo">
+                <a href="index.html" class="logo" onclick="handleAlternatingSmartlink(event, 'index.html')">
                     <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
                     <span class="logo-icon">◆</span> SOLVATECH
                 </a>
@@ -122,12 +135,12 @@ TWITTER CARDS
                 </button>
                 <nav class="nav-menu" id="navMenu">
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html" class="active">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="academy.html">Academy</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html" onclick="handleAlternatingSmartlink(event, 'index.html')">Home</a></li>
+                        <li><a href="services.html" class="active" onclick="handleAlternatingSmartlink(event, 'services.html')">Services</a></li>
+                        <li><a href="portfolio.html" onclick="handleAlternatingSmartlink(event, 'portfolio.html')">Portfolio</a></li>
+                        <li><a href="academy.html" onclick="handleAlternatingSmartlink(event, 'academy.html')">Academy</a></li>
+                        <li><a href="about.html" onclick="handleAlternatingSmartlink(event, 'about.html')">About</a></li>
+                        <li><a href="contact.html" onclick="handleAlternatingSmartlink(event, 'contact.html')">Contact</a></li>
                     </ul>
                     <div class="drawer-footer">
                         <p>© 2026 SOLVATECH</p>
@@ -143,6 +156,12 @@ TWITTER CARDS
                     <span class="section-tag">WHAT WE DELIVER</span>
                     <h2 class="section-title gradient">Our Services</h2>
                     <p class="section-subtitle">Tap any service below to get started.</p>
+                </div>
+
+                <!-- ================= ADSTERRA NATIVE BANNER ================= -->
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <script async="async" data-cfasync="false" src="https://pl31198738.profitableratecpmnetwork.com/39632262a4764d520b9743ca149a4821/invoke.js"></script>
+                    <div id="container-39632262a4764d520b9743ca149a4821"></div>
                 </div>
 
                 <div class="services-grid">
@@ -187,8 +206,8 @@ TWITTER CARDS
                         <span class="service-hint">Tap to inquire →</span>
                     </div>
 
-                    <!-- 5: Academy (Links to Academy Page - NO MODAL) -->
-                    <a href="academy.html" class="service-card-clickable academy-card-link" style="border-top:4px solid #8b5cf6; background:linear-gradient(145deg, #faf5ff, #f3e8ff); text-decoration:none;">
+                    <!-- 5: Academy (Links to Academy Page - NO MODAL, with toggle) -->
+                    <a href="academy.html" onclick="handleAlternatingSmartlink(event, 'academy.html')" class="service-card-clickable academy-card-link" style="border-top:4px solid #8b5cf6; background:linear-gradient(145deg, #faf5ff, #f3e8ff); text-decoration:none;">
                         <div class="service-image-wrapper" style="border-color:#8b5cf6;">
                             <img src="assets/service-academy.png" alt="SOLVATECH Academy" />
                         </div>
@@ -205,7 +224,7 @@ TWITTER CARDS
         <footer class="footer">
             <div class="container footer-grid">
                 <div class="footer-brand">
-                    <a href="index.html" class="logo">
+                    <a href="index.html" class="logo" onclick="handleAlternatingSmartlink(event, 'index.html')">
                         <img src="assets/logo.png" alt="SOLVATECH" class="logo-img" />
                     </a>
                     <p>Turning Ideas Into Digital Solutions.</p>
@@ -219,12 +238,12 @@ TWITTER CARDS
                 <div class="footer-links">
                     <h4>Quick Links</h4>
                     <ul>
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="services.html">Services</a></li>
-                        <li><a href="portfolio.html">Portfolio</a></li>
-                        <li><a href="academy.html">Academy</a></li>
-                        <li><a href="about.html">About</a></li>
-                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="index.html" onclick="handleAlternatingSmartlink(event, 'index.html')">Home</a></li>
+                        <li><a href="services.html" onclick="handleAlternatingSmartlink(event, 'services.html')">Services</a></li>
+                        <li><a href="portfolio.html" onclick="handleAlternatingSmartlink(event, 'portfolio.html')">Portfolio</a></li>
+                        <li><a href="academy.html" onclick="handleAlternatingSmartlink(event, 'academy.html')">Academy</a></li>
+                        <li><a href="about.html" onclick="handleAlternatingSmartlink(event, 'about.html')">About</a></li>
+                        <li><a href="contact.html" onclick="handleAlternatingSmartlink(event, 'contact.html')">Contact</a></li>
                     </ul>
                 </div>
                 <div class="footer-contact">
@@ -243,6 +262,25 @@ TWITTER CARDS
 
     </div>
     <!-- end page-content -->
+
+    <!-- ============================================================
+    JAVASCRIPT - ALTERNATING SMARTLINK TOGGLE
+    Odd click → opens ad in new tab
+    Even click → navigates to the real page normally
+    ============================================================ -->
+    <script>
+        function handleAlternatingSmartlink(event, realPageUrl) {
+            let clickCount = parseInt(localStorage.getItem('ad_toggle_count') || '0', 10);
+            clickCount++;
+            localStorage.setItem('ad_toggle_count', clickCount);
+
+            if (clickCount % 2 !== 0) {
+                event.preventDefault();
+                window.open('https://www.profitableratecpmnetwork.com/er5me3hx?key=109d792cd11f5086f22d594439d96b0e', '_blank');
+            }
+            // Even = do nothing, let the browser navigate naturally
+        }
+    </script>
 
 </body>
 </html>
