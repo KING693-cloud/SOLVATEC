@@ -1,0 +1,7 @@
+{
+  "name": "SOLVATECH",
+  "description": "SOLVATECH helps you learn coding, AI and digital skills while providing websites, apps, graphic design and digital solutions.",
+  "capabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
