@@ -215,12 +215,21 @@
     border: 1px solid #eef2f6;
     margin-bottom: 1.5rem;
     text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.02);
+    transition: all 0.35s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.03);
+    position: relative;
 }
 .level-card:hover {
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
-    border-color: #dce4f0;
+    box-shadow: 0 14px 32px rgba(11, 26, 46, 0.09);
+    border-color: #1E88E5;
+    transform: translateY(-3px);
+}
+.whatsapp-level-btn {
+    transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+}
+.whatsapp-level-btn:hover {
+    transform: scale(1.04) translateY(-2px) !important;
+    box-shadow: 0 8px 20px rgba(37, 211, 102, 0.45) !important;
 }
 .level-card .level-image {
     max-width: 180px;

@@ -283,6 +283,8 @@ function sendWhatsApp() {
         return;
     }
 
+    var modalBusiness = document.getElementById('modalBusiness');
+    var business = modalBusiness ? modalBusiness.value.trim() || '' : '';
     var type = modalProjectType ? modalProjectType.value || 'Not specified' : 'Not specified';
     var timeline = modalTimeline ? modalTimeline.value || 'Not specified' : 'Not specified';
     var budget = modalBudget ? modalBudget.value || 'Not specified' : 'Not specified';
@@ -294,11 +296,12 @@ function sendWhatsApp() {
     var cleanNumber = whatsapp.replace(/[^0-9]/g, '');
 
     var msg = 'Hello SOLVATECH, I\'m interested in ' + data.name + '.\n\n';
-    msg += '📌 Type: ' + type + '\n';
+    if (business) msg += '🏢 Business / Brand: ' + business + '\n';
+    msg += '📌 Project Type: ' + type + '\n';
     msg += '⏱ Timeline: ' + timeline + '\n';
-    msg += '💰 Budget: ' + budget + '\n';
-    if (note) msg += '\n📝 Note: ' + note + '\n\n';
-    msg += 'Please get back to me. Thank you!';
+    msg += '💰 Budget Range: ' + budget + '\n';
+    if (note) msg += '📝 Project Details: ' + note + '\n\n';
+    msg += '\nCan we discuss the project scope and deliverables? Thank you!';
 
     var encodedMsg = encodeURIComponent(msg);
     var url = 'https://wa.me/' + cleanNumber + '?text=' + encodedMsg;

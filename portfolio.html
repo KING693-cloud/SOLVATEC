@@ -124,9 +124,12 @@
                         <h4>The Result</h4>
                         <p id="modalProjectResult">The project delivered measurable results, including higher customer satisfaction and reduced operational costs.</p>
                     </div>
-                    <div class="modal-project-actions">
-                        <a href="contact.html" class="btn-primary btn-large" style="width:100%; text-align:center; justify-content:center;" onclick="handleAlternatingSmartlink(event, 'contact.html')">
-                            <i class="fas fa-paper-plane"></i> Start a Project
+                    <div class="modal-project-actions" style="display:flex; flex-direction:column; gap:10px;">
+                        <a id="modalWhatsAppHireBtn" href="https://wa.me/2349049979183?text=Hello%20SOLVATECH%2C%20I%20want%20to%20hire%20you%20to%20build%20a%20project%20similar%20to%20this." target="_blank" rel="noopener noreferrer" class="btn-primary btn-large" style="width:100%; text-align:center; justify-content:center; background:linear-gradient(135deg, #25D366, #128C7E); border:none; box-shadow:0 4px 14px rgba(37,211,102,0.35);">
+                            <i class="fab fa-whatsapp" style="font-size:1.2rem;"></i> Want a Project Like This? Chat on WhatsApp
+                        </a>
+                        <a href="services.html" class="btn-secondary btn-large" style="width:100%; text-align:center; justify-content:center;" onclick="handleAlternatingSmartlink(event, 'services.html')">
+                            <i class="fas fa-layer-group"></i> View All Services &amp; Pricing
                         </a>
                     </div>
                 </div>
@@ -444,5 +447,13 @@
         }
     </script>
 
+    <!-- ============================================================
+    FLOATING WHATSAPP BUTTON (FOR LEADS, JOBS & STUDENTS)
+    ============================================================ -->
+    <a href="https://wa.me/2349049979183?text=Hello%20SOLVATECH%2C%20I%20am%20looking%20through%20your%20portfolio%20and%20want%20to%20hire%20you%20for%20a%20project." class="floating-whatsapp-btn" target="_blank" rel="noopener noreferrer" aria-label="Hire on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+        <span class="wa-text">Hire on WhatsApp</span>
+    </a>
+
 </body>
-    </html>
+</html>

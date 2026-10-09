@@ -74,6 +74,14 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('modalProjectResult').textContent = result;
             document.getElementById('modalProjectImage').src = imgSrc;
 
+            // Update WhatsApp Hire button with pre-filled message
+            var waBtn = document.getElementById('modalWhatsAppHireBtn');
+            if (waBtn) {
+                var waNumber = '2349049979183';
+                var msg = "Hello SOLVATECH, I saw your '" + title + "' project (" + category + ") in your portfolio. I want to hire you to build something similar for my business. Can we discuss requirements and pricing?";
+                waBtn.href = "https://wa.me/" + waNumber + "?text=" + encodeURIComponent(msg);
+            }
+
             // Show modal
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
